@@ -8,10 +8,12 @@ return {
   config = function()
     -- Switch for controlling whether you want autoformatting.
     --  Use :KickstartFormatToggle to toggle autoformatting on or off
-    local format_is_enabled = true
+    if vim.g.kickstart_autoformat_enabled == nil then
+      vim.g.kickstart_autoformat_enabled = true
+    end
     vim.api.nvim_create_user_command('KickstartFormatToggle', function()
-      format_is_enabled = not format_is_enabled
-      print('Setting autoformatting to: ' .. tostring(format_is_enabled))
+      vim.g.kickstart_autoformat_enabled = not vim.g.kickstart_autoformat_enabled
+      print('Setting autoformatting to: ' .. tostring(vim.g.kickstart_autoformat_enabled))
     end, {})
 
     -- Create an augroup that is used for managing our formatting autocmds.
@@ -56,7 +58,7 @@ return {
           group = get_augroup(client),
           buffer = bufnr,
           callback = function()
-            if not format_is_enabled then
+            if not vim.g.kickstart_autoformat_enabled then
               return
             end
 

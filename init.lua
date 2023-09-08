@@ -86,7 +86,7 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
+      { 'j-hui/fidget.nvim',       tag = 'legacy', opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -110,7 +110,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  { 'folke/which-key.nvim',  opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -124,20 +124,42 @@ require('lazy').setup({
         changedelete = { text = '~' },
       },
       on_attach = function(bufnr)
-        vim.keymap.set('n', '<leader>hp', require('gitsigns').preview_hunk, { buffer = bufnr, desc = 'Preview git hunk' })
+        local function map(mode, lhs, rhs, desc, expr)
+          if expr == nil then
+            expr = false
+          end
+          vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc, expr = expr })
+        end
 
-        -- don't override the built-in and fugitive keymaps
         local gs = package.loaded.gitsigns
-        vim.keymap.set({'n', 'v'}, ']c', function()
-          if vim.wo.diff then return ']c' end
-          vim.schedule(function() gs.next_hunk() end)
-          return '<Ignore>'
-        end, {expr=true, buffer = bufnr, desc = "Jump to next hunk"})
-        vim.keymap.set({'n', 'v'}, '[c', function()
-          if vim.wo.diff then return '[c' end
-          vim.schedule(function() gs.prev_hunk() end)
-          return '<Ignore>'
-        end, {expr=true, buffer = bufnr, desc = "Jump to previous hunk"})
+        map("n", "<Leader>hb", function() gs.blame_line({ full = true }) end, "[hb] Show git blame for hunk")
+        map('n', '<leader>hp', gs.preview_hunk, '[H]unk [P]review')
+        map({ "n", "v" }, "<Leader>hs", ":Gitsigns stage_hunk<CR>", "[hs] Stage Hunk")
+        map({ "n", "v" }, "<Leader>hu", gs.undo_stage_hunk, "[hu] Undo Stage Hunk")
+        map({ "n", "v" }, "<Leader>hr", ":Gitsigns reset_hunk<CR>", "[hr] Reset Hunk")
+        map(
+          { 'n', 'v' },
+          'hn',
+          function()
+            if vim.wo.diff then return ']c' end
+            vim.schedule(function() gs.next_hunk() end)
+            return '<Ignore>'
+          end,
+          "[hn] Jump to next hunk",
+          true
+        )
+        map(
+          { 'n', 'v' },
+          'hN',
+          function()
+            if vim.wo.diff then return '[c' end
+            vim.schedule(function() gs.next_hunk() end)
+            return '<Ignore>'
+          end,
+          "[hN] Jump to previous hunk",
+          true
+        )
+        map("n", "<Leader>tb", gs.toggle_current_line_blame, "[T]oggle git [blame] on current line")
       end,
     },
   },
@@ -412,6 +434,7 @@ local on_attach = function(_, bufnr)
 
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+  nmap('<leader>fo', ":Format<CR>", '[Fo]rmat')
 
   nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
@@ -446,6 +469,8 @@ end
 --
 --  If you want to override the default filetypes that your language server will attach to you can
 --  define the property 'filetypes' to the map in question.
+
+
 local servers = {
   -- clangd = {},
   -- gopls = {},
@@ -454,6 +479,7 @@ local servers = {
   -- tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
+  efm = require("custom.efm"),
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
