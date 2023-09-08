@@ -291,6 +291,9 @@ vim.o.termguicolors = true
 -- Don't let Vim do unsafe stuff
 vim.o.modelines = 0
 
+-- See whitespace when list is on
+vim.o.listchars = "tab:> ,trail:⋅,extends:>,precedes:<"
+
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
@@ -571,3 +574,5 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
+
+require("custom.mappings")
