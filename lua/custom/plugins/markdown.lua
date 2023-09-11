@@ -8,5 +8,6 @@ return {
     keys = {
       { "<leader>gp", ":Glow<CR>", desc = "[G]low [P]review" },
     },
+    config = true,
   }
 }
