@@ -608,4 +608,5 @@ cmp.setup {
   },
 }
 
+require("custom.settings")
 require("custom.mappings")
