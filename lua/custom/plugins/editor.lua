@@ -23,7 +23,22 @@ return {
   },
   {
     'echasnovski/mini.surround',
-    config = true,
+    config = function()
+      require("mini.surround").setup({
+        mappings = {
+          add = '<Leader>sa',      -- Add surrounding in Normal and Visual modes
+          delete = '<Leader>sd',   -- Delete surrounding
+          replace = '<Leader>sc',  -- Replace surrounding
+          find = '<Leader>sf',     -- Find surrounding (to the right)
+          find_left = '<Leader>sF', -- Find surrounding (to the left)
+          highlight = '<Leader>sh', -- Highlight surrounding
+          update_n_lines = '<Leader>sn', -- Update `n_lines`
+
+          suffix_last = 'l', -- Suffix to search with "prev" method
+          suffix_next = 'n', -- Suffix to search with "next" method
+        },
+      })
+    end,
     version = false,
     lazy = false,
   },
@@ -36,6 +51,7 @@ return {
     event = "VeryLazy",
     opts = { labels = "arstdhneioplvm" },
     keys = {
+      { "s", mode = { "n", "o", "x" }, function() require("flash").jump() end, desc = "[s] Flash" },
       {
         "S",
         mode = { "n", "o", "x" },
