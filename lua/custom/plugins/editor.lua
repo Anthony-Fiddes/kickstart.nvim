@@ -11,9 +11,7 @@ return {
   {
     'echasnovski/mini.bufremove',
     version = false,
-    config = function()
-      require('mini.bufremove').setup()
-    end,
+    config = true,
     keys = {
       { "<leader>bd", function() require("mini.bufremove").delete(0, false) end, desc = "[B]uffer [D]elete" },
       {
@@ -25,27 +23,47 @@ return {
   },
   {
     'echasnovski/mini.surround',
+    config = true,
     version = false,
     lazy = false,
-    config = function()
-      require('mini.surround').setup({
-        mappings = {
-          add = 'S',      -- Add surrounding in Normal and Visual modes
-          delete = 'ds',   -- Delete surrounding
-          replace = 'cs',  -- Replace surrounding
-          find = 'gsf',     -- Find surrounding (to the right)
-          find_left = 'gsF', -- Find surrounding (to the left)
-          highlight = 'gsh', -- Highlight surrounding
-          update_n_lines = 'gsn', -- Update `n_lines`
-
-          suffix_last = 'l', -- Suffix to search with "prev" method
-          suffix_next = 'n', -- Suffix to search with "next" method
-        },
-      })
-    end,
   },
   {
     'folke/todo-comments.nvim',
     dependencies = { "nvim-lua/plenary.nvim" },
   },
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    opts = { labels = "arstdhneioplvm" },
+    keys = {
+      {
+        "S",
+        mode = { "n", "o", "x" },
+        function() require("flash").treesitter() end,
+        desc =
+        "[S] Flash Treesitter"
+      },
+      {
+        "r",
+        mode = "o",
+        function() require("flash").remote() end,
+        desc =
+        "[r] Remote Flash"
+      },
+      {
+        "R",
+        mode = { "o", "x" },
+        function() require("flash").treesitter_search() end,
+        desc =
+        "Treesitter Search"
+      },
+      {
+        "<C-s>",
+        mode = { "c" },
+        function() require("flash").toggle() end,
+        desc =
+        "Toggle Flash Search"
+      },
+    },
+  }
 }
