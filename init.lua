@@ -307,12 +307,6 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
--- Don't let Vim do unsafe stuff
-vim.o.modelines = 0
-
--- See whitespace when list is on
-vim.o.listchars = "tab:> ,trail:⋅,extends:>,precedes:<"
-
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
@@ -603,7 +597,7 @@ cmp.setup {
     end, { 'i', 's' }),
   },
   sources = {
-    { name = 'copilot.lua' },
+    { name = 'copilot' },
     { name = 'nvim_lsp' },
     { name = 'nvim_lsp_signature_help' },
     { name = 'luasnip' },
