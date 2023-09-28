@@ -8,4 +8,4 @@ vim.o.modelines = 0
 vim.o.listchars = "tab:> ,trail:⋅,extends:>,precedes:<"
 
 -- Hard wrap text at this col
-vim.o.textwidth = 120
+vim.o.textwidth = 80
