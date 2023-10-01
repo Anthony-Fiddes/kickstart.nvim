@@ -1,13 +1,13 @@
 return {
   {
-    'ixru/nvim-markdown',
-    ft = "markdown"
+    "ixru/nvim-markdown",
+    ft = "markdown",
   },
   {
-    'ellisonleao/glow.nvim',
+    "ellisonleao/glow.nvim",
     keys = {
       { "<leader>gp", ":Glow<CR>", desc = "[G]low [P]review" },
     },
     config = true,
-  }
+  },
 }

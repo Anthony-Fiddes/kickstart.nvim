@@ -489,7 +489,11 @@ local on_attach = function(_, bufnr)
 
   -- Create a command `:Format` local to the LSP buffer
   vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
-    vim.lsp.buf.format()
+    vim.lsp.buf.format({
+      filter = function(client)
+        return not vim.g.banned_formatters[client.name]
+      end,
+    })
   end, { desc = "Format current buffer with LSP" })
 end
 
@@ -619,4 +623,3 @@ cmp.setup({
 
 require("custom.settings")
 require("custom.mappings")
-
