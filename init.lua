@@ -43,7 +43,7 @@ P.S. You can delete this when you're done too. It's your config now :)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-require("custom.globals")
+require('custom.globals')
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
@@ -111,7 +111,11 @@ require('lazy').setup({
       'rafamadriz/friendly-snippets',
 
       -- Automatically close symbols like ", ', (, etc.
-      'windwp/nvim-autopairs'
+      'windwp/nvim-autopairs',
+
+      -- Add completion from buffer contents / nearby file paths
+      'hrsh7th/cmp-buffer',
+      'FelipeLema/cmp-async-path',
     },
   },
 
@@ -138,34 +142,32 @@ require('lazy').setup({
         end
 
         local gs = package.loaded.gitsigns
-        map("n", "<Leader>hb", function() gs.blame_line({ full = true }) end, "[hb] Show git blame for hunk")
+        map('n', '<Leader>hb', function()
+          gs.blame_line { full = true }
+        end, '[hb] Show git blame for hunk')
         map('n', '<leader>hp', gs.preview_hunk, '[H]unk [P]review')
-        map({ "n", "v" }, "<Leader>hs", ":Gitsigns stage_hunk<CR>", "[hs] Stage Hunk")
-        map({ "n", "v" }, "<Leader>hu", gs.undo_stage_hunk, "[hu] Undo Stage Hunk")
-        map({ "n", "v" }, "<Leader>hr", ":Gitsigns reset_hunk<CR>", "[hr] Reset Hunk")
-        map(
-          { 'n', 'v' },
-          'hn',
-          function()
-            if vim.wo.diff then return ']c' end
-            vim.schedule(function() gs.next_hunk() end)
-            return '<Ignore>'
-          end,
-          "[hn] Jump to next hunk",
-          true
-        )
-        map(
-          { 'n', 'v' },
-          'hN',
-          function()
-            if vim.wo.diff then return '[c' end
-            vim.schedule(function() gs.next_hunk() end)
-            return '<Ignore>'
-          end,
-          "[hN] Jump to previous hunk",
-          true
-        )
-        map("n", "<Leader>tb", gs.toggle_current_line_blame, "[T]oggle git [blame] on current line")
+        map({ 'n', 'v' }, '<Leader>hs', ':Gitsigns stage_hunk<CR>', '[hs] Stage Hunk')
+        map({ 'n', 'v' }, '<Leader>hu', gs.undo_stage_hunk, '[hu] Undo Stage Hunk')
+        map({ 'n', 'v' }, '<Leader>hr', ':Gitsigns reset_hunk<CR>', '[hr] Reset Hunk')
+        map({ 'n', 'v' }, 'hn', function()
+          if vim.wo.diff then
+            return ']c'
+          end
+          vim.schedule(function()
+            gs.next_hunk()
+          end)
+          return '<Ignore>'
+        end, '[hn] Jump to next hunk', true)
+        map({ 'n', 'v' }, 'hN', function()
+          if vim.wo.diff then
+            return '[c'
+          end
+          vim.schedule(function()
+            gs.next_hunk()
+          end)
+          return '<Ignore>'
+        end, '[hN] Jump to previous hunk', true)
+        map('n', '<Leader>tb', gs.toggle_current_line_blame, '[T]oggle git [blame] on current line')
       end,
     },
   },
@@ -198,7 +200,7 @@ require('lazy').setup({
     'lukas-reineke/indent-blankline.nvim',
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help indent_blankline.txt`
-    main = "ibl",
+    main = 'ibl',
     opts = {},
   },
 
@@ -210,11 +212,11 @@ require('lazy').setup({
     },
     config = function()
       require('Comment').setup({
-        pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook()
+        pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
       })
     end,
 
-    opts = {}
+    opts = {},
   },
 
   -- Fuzzy Finder (files, lsp, etc)
@@ -341,7 +343,7 @@ require('telescope').setup {
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
-local telescope = require("telescope.builtin")
+local telescope = require 'telescope.builtin'
 
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>hh', telescope.oldfiles, { desc = '[hh] Find recently opened files' })
@@ -370,7 +372,7 @@ vim.keymap.set('n', '<leader>f"', telescope.registers, { desc = '[F]ind in regis
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
-require('nvim-treesitter.configs').setup {
+require('nvim-treesitter.configs').setup({
   -- Add languages to be installed here that you want installed for treesitter
   ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim' },
 
@@ -437,7 +439,7 @@ require('nvim-treesitter.configs').setup {
       },
     },
   },
-}
+})
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
@@ -464,7 +466,7 @@ local on_attach = function(_, bufnr)
 
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-  nmap('<leader>fo', ":Format<CR>", '[Fo]rmat')
+  nmap('<leader>fo', ':Format<CR>', '[Fo]rmat')
 
   nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
   nmap('gr', telescope.lsp_references, '[G]oto [R]eferences')
@@ -511,7 +513,6 @@ require('which-key').register({
 --  If you want to override the default filetypes that your language server will attach to you can
 --  define the property 'filetypes' to the map in question.
 
-
 local servers = {
   -- clangd = {},
   -- gopls = {},
@@ -520,16 +521,19 @@ local servers = {
   -- tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
-  efm = require("custom.efm"),
+  -- I can't get efm working with this config :(
+  -- efm = require 'custom.efm',
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
       telemetry = { enable = false },
       diagnostics = {
-        disable = { "missing-fields" },
+        disable = { 'missing-fields', 'inject-field' },
       },
     },
   },
+  -- pylsp handles linting if you have flake8 installed
+  pylsp = {},
 }
 
 -- Setup neovim lua configuration
@@ -553,19 +557,17 @@ mason_lspconfig.setup_handlers {
       on_attach = on_attach,
       settings = servers[server_name],
       filetypes = (servers[server_name] or {}).filetypes,
+      init_options = (servers[server_name] or {}).init_options,
     }
-  end
+  end,
 }
 
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
 local cmp = require 'cmp'
-require("nvim-autopairs").setup({})
-local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-cmp.event:on(
-  'confirm_done',
-  cmp_autopairs.on_confirm_done()
-)
+require('nvim-autopairs').setup {}
+local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
+cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 local luasnip = require 'luasnip'
 require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
@@ -611,8 +613,10 @@ cmp.setup {
     { name = 'nvim_lsp_signature_help' },
     { name = 'luasnip' },
     { name = 'fish' },
+    { name = 'buffer' },
+    { name = 'async_path' },
   },
 }
 
-require("custom.settings")
-require("custom.mappings")
+require('custom.settings')
+require('custom.mappings')
