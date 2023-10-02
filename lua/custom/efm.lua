@@ -7,6 +7,7 @@ local black = require("efmls-configs.formatters.black")
 local yamllint = require("efmls-configs.linters.yamllint")
 local fish = require("efmls-configs.linters.fish")
 local fish_indent = require("efmls-configs.formatters.fish_indent")
+local sql_formatter = require("custom.sql-formatter")
 
 local languages = {
   fish = { fish, fish_indent },
@@ -16,6 +17,7 @@ local languages = {
   typescript = { eslint, prettier },
   javascript = { eslint, prettier },
   json = { prettier },
+  sql = { sql_formatter },
   yaml = { yamllint },
 }
 
