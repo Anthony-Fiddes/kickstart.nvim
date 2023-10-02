@@ -9,3 +9,6 @@ vim.o.listchars = "tab:> ,trail:⋅,extends:>,precedes:<"
 
 -- Hard wrap text at this col
 vim.o.textwidth = 80
+
+-- Relative line numbers are fun
+vim.wo.relativenumber = true
