@@ -54,7 +54,6 @@ require("lazy").setup({
       -- Additional lua configuration, makes nvim stuff amazing!
       "folke/neodev.nvim",
     },
-    cmd = { "Mason", "MasonInstall", "MasonUninstall", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
   },
 
   {
