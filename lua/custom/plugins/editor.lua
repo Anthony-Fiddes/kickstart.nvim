@@ -58,6 +58,9 @@ return {
     "folke/flash.nvim",
     event = "VeryLazy",
     opts = { labels = "arstdhneioplvm" },
+    config = function()
+      require("flash").toggle(false)
+    end,
     keys = {
       {
         "s",
