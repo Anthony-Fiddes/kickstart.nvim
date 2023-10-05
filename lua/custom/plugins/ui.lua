@@ -13,4 +13,11 @@ return {
       vim.keymap.set("n", "<Leader>of", ":NvimTreeFindFile!<CR>", opts) --  'open file explorer'
     end,
   },
+  {
+    "echasnovski/mini.indentscope",
+    version = "*",
+    opts = {
+      draw = { delay = 10 },
+    },
+  },
 }
