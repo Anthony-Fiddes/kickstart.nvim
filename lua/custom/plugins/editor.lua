@@ -113,7 +113,7 @@ return {
       vim.keymap.set({ "n", "o", "x" }, "b", "<cmd>lua require('spider').motion('b')<CR>", { desc = "Spider-b" })
       vim.keymap.set({ "n", "o", "x" }, "ge", "<cmd>lua require('spider').motion('ge')<CR>", { desc = "Spider-ge" })
     end,
-    opt = { skipInsignificantPunctuation = false },
+    opts = { skipInsignificantPunctuation = false },
     lazy = true,
   },
 }

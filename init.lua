@@ -458,6 +458,11 @@ require("which-key").register({
   ["<leader>w"] = { name = "[W]orkspace", _ = "which_key_ignore" },
 })
 
+-- It's very important to do these steps in this order before setting up servers
+-- using lspconfig.
+require("mason").setup()
+require("mason-lspconfig").setup()
+
 -- Enable the following language servers
 --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
 --
@@ -495,11 +500,6 @@ require("neodev").setup()
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
-
--- It's very important to do these steps in this order before setting up servers
--- using lspconfig.
-require("mason").setup()
-require("mason-lspconfig").setup()
 
 -- Ensure the servers above are installed
 local mason_lspconfig = require("mason-lspconfig")
