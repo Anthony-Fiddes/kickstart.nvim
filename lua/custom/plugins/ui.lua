@@ -28,6 +28,10 @@ return {
     version = "*",
     opts = {
       draw = { delay = 10 },
+      symbol = "│",
+      options = {
+        try_as_border = true,
+      },
     },
   },
 }
