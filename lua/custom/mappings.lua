@@ -31,9 +31,9 @@ vim.keymap.set("n", "<leader>tl", ":set list!<CR>", { desc = "[T]oggle [L]ist (s
 vim.keymap.set("n", "<leader>ts", ":set spell!<CR>", { desc = "[T]oggle [S]pellcheck" })
 
 -- Yank quotes without whitespace
-vim.keymap.set("n", "ya\"", "2yi\"", { desc = "Yank quote with \", without whitespace" })
-vim.keymap.set("n", "ya'", "2yi'", { desc = "Yank quote with ', without whitespace" })
-vim.keymap.set("n", "ya`", "2yi`", { desc = "Yank quote with `, without whitespace" })
+vim.keymap.set("o", "a\"", "2i\"", { desc = "Yank quote with \", without whitespace" })
+vim.keymap.set("o", "a'", "2i'", { desc = "Yank quote with ', without whitespace" })
+vim.keymap.set("o", "a`", "2i`", { desc = "Yank quote with `, without whitespace" })
 
 -- Misc
 vim.keymap.set("n", "<leader>cd", "<Cmd>cd %:p:h<CR>:pwd<CR>", { desc = "[C]hange [D]irectory to that of current file" })
