@@ -201,6 +201,7 @@ require("lazy").setup({
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
       "JoosepAlviste/nvim-ts-context-commentstring",
+      "windwp/nvim-ts-autotag",
     },
     build = ":TSUpdate",
   },
@@ -337,6 +338,9 @@ vim.defer_fn(function()
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
 
+    autotag = {
+      enable = true,
+    },
     highlight = { enable = true },
     indent = { enable = true },
     incremental_selection = {
