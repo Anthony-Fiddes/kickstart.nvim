@@ -9,5 +9,6 @@ return {
       { "<leader>gp", ":Glow<CR>", desc = "[G]low [P]review" },
     },
     config = true,
+    ft = "markdown",
   },
 }
