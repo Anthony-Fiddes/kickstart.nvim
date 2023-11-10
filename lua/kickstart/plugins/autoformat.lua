@@ -8,11 +8,6 @@ return {
   config = function()
     -- Switch for controlling whether you want autoformatting.
     --  Use :KickstartFormatToggle to toggle autoformatting on or off
-    if vim.g.kickstart_autoformat_enabled ~= nil then
-      vim.b.kickstart_autoformat_enabled = vim.g.kickstart_autoformat_enabled
-    else
-      vim.b.kickstart_autoformat_enabled = true
-    end
     vim.api.nvim_create_user_command("KickstartFormatToggle", function()
       vim.b.kickstart_autoformat_enabled = not vim.b.kickstart_autoformat_enabled
       print("Setting autoformatting to: " .. tostring(vim.b.kickstart_autoformat_enabled))
@@ -47,6 +42,13 @@ return {
         -- Only attach to clients that support document formatting
         if not client.server_capabilities.documentFormattingProvider then
           return
+        end
+
+        -- Determine autoformat default value
+        if vim.g.kickstart_autoformat_enabled ~= nil then
+          vim.b.kickstart_autoformat_enabled = vim.g.kickstart_autoformat_enabled
+        else
+          vim.b.kickstart_autoformat_enabled = true
         end
 
         -- Create an autocmd that will run *before* we save the buffer.
