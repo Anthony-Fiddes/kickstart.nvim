@@ -2,7 +2,16 @@
 local function windo(command)
   return function()
     local current_win = vim.fn.win_getid()
-    vim.cmd("windo " .. command)
+    local windows = vim.api.nvim_list_wins()
+    for _, window in pairs(windows) do
+      if vim.api.nvim_buf_get_name(0) == "" then
+        -- Ignore scratch buffers
+        goto continue
+      end
+      vim.api.nvim_set_current_win(window)
+      vim.cmd(command)
+      ::continue::
+    end
     vim.api.nvim_set_current_win(current_win)
   end
 end
@@ -31,9 +40,13 @@ vim.keymap.set("n", "<leader>tl", ":set list!<CR>", { desc = "[T]oggle [L]ist (s
 vim.keymap.set("n", "<leader>ts", ":set spell!<CR>", { desc = "[T]oggle [S]pellcheck" })
 
 -- Yank quotes without whitespace
-vim.keymap.set("o", "a\"", "2i\"", { desc = "Yank quote with \", without whitespace" })
-vim.keymap.set("o", "a'", "2i'", { desc = "Yank quote with ', without whitespace" })
-vim.keymap.set("o", "a`", "2i`", { desc = "Yank quote with `, without whitespace" })
+vim.keymap.set("o", 'a"', '2i"', { desc = 'Yank in " quote without whitespace' })
+vim.keymap.set("o", "a'", "2i'", { desc = "Yank in ' quote without whitespace" })
+vim.keymap.set("o", "a`", "2i`", { desc = "Yank in ` quote without whitespace" })
+
+-- Movement
+vim.keymap.set("n", "<C-d>", "<C-d>zz", { noremap = true })
+vim.keymap.set("n", "<C-u>", "<C-u>zz", { noremap = true })
 
 -- Misc
 vim.keymap.set("n", "<leader>cd", "<Cmd>cd %:p:h<CR>:pwd<CR>", { desc = "[C]hange [D]irectory to that of current file" })
