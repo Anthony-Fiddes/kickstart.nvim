@@ -94,6 +94,8 @@ require("lazy").setup({
         topdelete = { text = "‾" },
         changedelete = { text = "~" },
       },
+      sign_priority = 100,
+
       on_attach = function(bufnr)
         local function map(mode, lhs, rhs, desc, expr)
           if expr == nil then
