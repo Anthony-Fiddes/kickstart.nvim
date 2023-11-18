@@ -53,6 +53,9 @@ return {
   {
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {
+      sign_priority = 100,
+    },
   },
   {
     "folke/flash.nvim",
