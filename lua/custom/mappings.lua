@@ -1,18 +1,18 @@
 -- windo but it goes back to the original window
 local function windo(command)
   return function()
-    local current_win = vim.fn.win_getid()
+    local original_win = vim.fn.win_getid()
     local windows = vim.api.nvim_list_wins()
     for _, window in pairs(windows) do
-      if vim.api.nvim_buf_get_name(0) == "" then
+      vim.api.nvim_set_current_win(window)
+      if vim.bo.filetype == "" then
         -- Ignore scratch buffers
         goto continue
       end
-      vim.api.nvim_set_current_win(window)
       vim.cmd(command)
       ::continue::
     end
-    vim.api.nvim_set_current_win(current_win)
+    vim.api.nvim_set_current_win(original_win)
   end
 end
 
