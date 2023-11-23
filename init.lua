@@ -314,7 +314,8 @@ vim.keymap.set("n", "<leader>/", function()
     winblend = 10,
     previewer = false,
   }))
-end, { desc = "[/] Fuzzily search in current buffer" })
+end, { desc = "[/] Fuzzily search in current buffer", noremap = true })
+vim.keymap.set("n", "<C-f>", "<leader>/", { remap = true })
 
 vim.keymap.set("n", "<leader>gf", telescope.git_files, { desc = "Open [G]it [F]iles" })
 vim.keymap.set("n", "<leader>gs", telescope.git_status, { desc = "Show files changed in [G]it [S]tatus" })
@@ -329,6 +330,7 @@ vim.keymap.set("n", "<leader>fk", telescope.keymaps, { desc = "[F]ind [k]eymaps"
 vim.keymap.set("n", "<leader>f/", telescope.search_history, { desc = "[F]ind in search [/] history" })
 vim.keymap.set("n", "<leader>f:", telescope.command_history, { desc = "[F]ind in command [:] history" })
 vim.keymap.set("n", '<leader>f"', telescope.registers, { desc = '[F]ind in registers ["]' })
+vim.keymap.set("n", "<leader>fc", telescope.commands, { desc = "[F]ind [C]ommands" })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
@@ -336,7 +338,17 @@ vim.keymap.set("n", '<leader>f"', telescope.registers, { desc = '[F]ind in regis
 vim.defer_fn(function()
   require("nvim-treesitter.configs").setup({
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { "c", "cpp", "go", "lua", "python", "rust", "tsx", "javascript", "typescript", "vimdoc", "vim" },
+    ensure_installed = {
+      "go",
+      "lua",
+      "python",
+      "sql",
+      "tsx",
+      "javascript",
+      "typescript",
+      "vimdoc",
+      "vim",
+    },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
