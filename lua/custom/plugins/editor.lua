@@ -175,4 +175,9 @@ return {
       pcall(require("telescope").load_extension("persisted"))
     end,
   },
+  {
+    "chrisgrieser/nvim-early-retirement",
+    config = true,
+    event = "VeryLazy",
+  },
 }
