@@ -152,7 +152,7 @@ return {
         use_git_branch = true, -- create session files based on the branch of the git enabled repository
         autosave = true, -- automatically save session files when exiting Neovim
         autoload = true, -- automatically load the session for the cwd on Neovim startup
-        follow_cwd = false, -- change session file name to match current working directory if it changes
+        follow_cwd = true, -- change session file name to match current working directory if it changes
         allowed_dirs = nil, -- table of dirs that the plugin will auto-save and auto-load from
         ignored_dirs = nil, -- table of dirs that are ignored when auto-saving and auto-loading
         telescope = { -- options for the telescope extension
@@ -177,5 +177,18 @@ return {
     "chrisgrieser/nvim-early-retirement",
     config = true,
     event = "VeryLazy",
+  },
+  {
+    "echasnovski/mini.misc",
+    version = "*",
+    lazy = false,
+    config = function()
+      local mini_misc = require("mini.misc")
+      local fallback = function(buf_path)
+        -- Just cd to the parent folder if you can't find a root marker
+        return vim.fn.fnamemodify(buf_path, ":h")
+      end
+      mini_misc.setup_auto_root({ ".git", "package.json", "Makefile" }, fallback)
+    end,
   },
 }
