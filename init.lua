@@ -195,6 +195,9 @@ require("lazy").setup({
         end,
       },
     },
+    -- Weirdly I get nil errors without this. Maybe because I have telescope
+    -- config that isn't all set up here.
+    event = "VeryLazy",
     opts = {
       defaults = {
         mappings = {
