@@ -12,7 +12,7 @@ local telescope = require("telescope.builtin")
 -- because process creation is expensive in Windows, so this reduces latency
 local _is_inside_work_tree = {}
 
--- Returns false if not in a git project
+-- Returns nil if not in a git project
 local function get_git_root()
   -- I can just use the current directory since mini.misc handles auto changing
   -- it upon entering a new buffer.
@@ -22,7 +22,7 @@ local function get_git_root()
     _is_inside_work_tree[cwd] = vim.v.shell_error == 0
   end
   if not _is_inside_work_tree[cwd] then
-    return false
+    return nil
   end
 
   local dot_git_path = vim.fn.finddir(".git", ".;")
@@ -33,17 +33,6 @@ local function get_git_root()
   else
     local git_root = vim.fn.fnamemodify(dot_git_path, ":h")
     return git_root
-  end
-end
-
-local function live_grep_git_files()
-  local opts = {}
-  local git_root = get_git_root()
-  if not git_root then
-    telescope.live_grep(opts)
-  else
-    opts["cwd"] = get_git_root()
-    telescope.live_grep(opts)
   end
 end
 
@@ -77,7 +66,7 @@ vim.keymap.set("n", "<leader>gc", telescope.git_commits, { desc = "Show [G]it [C
 vim.keymap.set("n", "<leader>p", project_files, { desc = "Find [P]roject Files" })
 vim.keymap.set("n", "<leader>fh", telescope.help_tags, { desc = "[F]ind [H]elp" })
 vim.keymap.set("n", "<leader>fw", telescope.grep_string, { desc = "[F]ind current [W]ord" })
-vim.keymap.set("n", "<leader>ff", live_grep_git_files, { desc = "[F]ind in [f]iles (live_grep)" })
+vim.keymap.set("n", "<leader>ff", telescope.live_grep, { desc = "[F]ind in [f]iles (live_grep)" })
 vim.keymap.set("n", "<leader>fd", telescope.diagnostics, { desc = "[F]ind [D]iagnostics" })
 vim.keymap.set("n", "<leader>fr", telescope.resume, { desc = "[F]ind [R]resume" })
 vim.keymap.set("n", "<leader>fk", telescope.keymaps, { desc = "[F]ind [k]eymaps" })
