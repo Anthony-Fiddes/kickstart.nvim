@@ -49,6 +49,5 @@ vim.keymap.set("n", "<C-d>", "<C-d>zz", { noremap = true })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { noremap = true })
 
 -- Misc
-vim.keymap.set("n", "<leader>cd", "<Cmd>cd %:p:h<CR>:pwd<CR>", { desc = "[C]hange [D]irectory to that of current file" })
 vim.keymap.set("n", "<leader>nh", ":nohlsearch<CR>", { desc = "[N]o [H]ighlight" })
 vim.keymap.set("n", "c", '"_c')

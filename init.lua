@@ -195,6 +195,16 @@ require("lazy").setup({
         end,
       },
     },
+    opts = {
+      defaults = {
+        mappings = {
+          i = {
+            ["<C-u>"] = false,
+            ["<C-d>"] = false,
+          },
+        },
+      },
+    },
   },
 
   {
@@ -287,50 +297,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   group = highlight_group,
   pattern = "*",
 })
-
--- [[ Configure Telescope ]]
--- See `:help telescope` and `:help telescope.setup()`
-require("telescope").setup({
-  defaults = {
-    mappings = {
-      i = {
-        ["<C-u>"] = false,
-        ["<C-d>"] = false,
-      },
-    },
-  },
-})
-
--- Enable telescope fzf native, if installed
-pcall(require("telescope").load_extension, "fzf")
-local telescope = require("telescope.builtin")
-
--- See `:help telescope.builtin`
-vim.keymap.set("n", "<leader>hh", telescope.oldfiles, { desc = "[hh] Find recently opened files" })
-vim.keymap.set("n", "<leader><space>", telescope.buffers, { desc = "[ ] Find existing buffers" })
-vim.keymap.set("n", "<leader>/", function()
-  -- You can pass additional configuration to telescope to change theme, layout, etc.
-  telescope.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-    winblend = 10,
-    previewer = false,
-  }))
-end, { desc = "[/] Fuzzily search in current buffer", noremap = true })
-vim.keymap.set("n", "<C-f>", "<leader>/", { remap = true })
-
-vim.keymap.set("n", "<leader>gf", telescope.git_files, { desc = "Open [G]it [F]iles" })
-vim.keymap.set("n", "<leader>gs", telescope.git_status, { desc = "Show files changed in [G]it [S]tatus" })
-vim.keymap.set("n", "<leader>gc", telescope.git_commits, { desc = "Show [G]it [C]ommits" })
-vim.keymap.set("n", "<leader>p", telescope.find_files, { desc = "[p] Find Files" })
-vim.keymap.set("n", "<leader>fh", telescope.help_tags, { desc = "[F]ind [H]elp" })
-vim.keymap.set("n", "<leader>fw", telescope.grep_string, { desc = "[F]ind current [W]ord" })
-vim.keymap.set("n", "<leader>ff", telescope.live_grep, { desc = "[F]ind in files using [G]rep" })
-vim.keymap.set("n", "<leader>fd", telescope.diagnostics, { desc = "[F]ind [D]iagnostics" })
-vim.keymap.set("n", "<leader>fr", telescope.resume, { desc = "[F]ind [R]resume" })
-vim.keymap.set("n", "<leader>fk", telescope.keymaps, { desc = "[F]ind [k]eymaps" })
-vim.keymap.set("n", "<leader>f/", telescope.search_history, { desc = "[F]ind in search [/] history" })
-vim.keymap.set("n", "<leader>f:", telescope.command_history, { desc = "[F]ind in command [:] history" })
-vim.keymap.set("n", '<leader>f"', telescope.registers, { desc = '[F]ind in registers ["]' })
-vim.keymap.set("n", "<leader>fc", telescope.commands, { desc = "[F]ind [C]ommands" })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
@@ -442,6 +408,7 @@ local on_attach = function(_, bufnr)
   nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
   nmap("<leader>fo", ":Format<CR>", "[Fo]rmat")
 
+  local telescope = require("telescope.builtin")
   nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
   nmap("gr", telescope.lsp_references, "[G]oto [R]eferences")
   nmap("gi", telescope.lsp_implementations, "[G]oto [I]mplementation")
@@ -602,3 +569,4 @@ cmp.setup({
 
 require("custom.settings")
 require("custom.mappings")
+require("custom.telescope")
