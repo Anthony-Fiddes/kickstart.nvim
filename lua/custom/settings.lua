@@ -12,3 +12,7 @@ vim.o.textwidth = 80
 
 -- Relative line numbers are fun
 vim.wo.relativenumber = true
+
+-- Important when using a session manager that loads/saves sessions
+-- automatically
+vim.o.sessionoptions = "buffers,curdir,folds,tabpages,winpos,winsize"
