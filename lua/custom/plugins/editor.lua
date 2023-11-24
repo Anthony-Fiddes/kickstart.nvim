@@ -48,7 +48,6 @@ return {
       })
     end,
     version = false,
-    lazy = false,
   },
   {
     "folke/todo-comments.nvim",
@@ -181,7 +180,7 @@ return {
   {
     "echasnovski/mini.misc",
     version = "*",
-    lazy = false,
+    event = "VeryLazy",
     config = function()
       local mini_misc = require("mini.misc")
       local fallback = function(buf_path)

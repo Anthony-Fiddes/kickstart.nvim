@@ -14,6 +14,8 @@ local _is_inside_work_tree = {}
 
 -- Returns false if not in a git project
 local function get_git_root()
+  -- I can just use the current directory since mini.misc handles auto changing
+  -- it upon entering a new buffer.
   local cwd = vim.fn.getcwd()
   if _is_inside_work_tree[cwd] == nil then
     vim.fn.system("git rev-parse --is-inside-work-tree")
