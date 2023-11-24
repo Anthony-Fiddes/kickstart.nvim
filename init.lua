@@ -180,6 +180,8 @@ require("lazy").setup({
   {
     "nvim-telescope/telescope.nvim",
     branch = "0.1.x",
+    -- We require telescope() directly
+    lazy = true,
     dependencies = {
       "nvim-lua/plenary.nvim",
       -- Fuzzy Finder Algorithm which requires local dependencies to be built.
@@ -195,9 +197,6 @@ require("lazy").setup({
         end,
       },
     },
-    -- Weirdly I get nil errors without this. Maybe because I have telescope
-    -- config that isn't all set up here.
-    event = "VeryLazy",
     opts = {
       defaults = {
         mappings = {
