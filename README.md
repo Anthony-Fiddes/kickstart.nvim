@@ -2,6 +2,12 @@
 
 https://github.com/kdheepak/kickstart.nvim/assets/1813121/f3ff9a2b-c31f-44df-a4fa-8a0d7b17cf7b
 
+### Customizations
+
+I added a [scripts](./scripts) directory with some scripts for installing
+dependencies (e.g. a Python virtualenv with pynvim so that you don't need to
+install it in every virtualenv you develop in).
+
 ### Introduction
 
 A starting point for Neovim that is:
