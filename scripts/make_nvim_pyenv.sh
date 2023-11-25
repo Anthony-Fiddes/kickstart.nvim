@@ -1,7 +1,8 @@
 #!/bin/sh
-set -e
 pyenv install 3.10 --skip-existing
 pyenv virtualenv 3.10 neovim
+
+set -e
 python_host=$(pyenv root)/versions/neovim/bin/python
 $python_host -m pip install pynvim
 globals_file="../lua/custom/generated_globals.lua"
