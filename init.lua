@@ -4,6 +4,7 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+require("custom.generated_globals")
 require("custom.globals")
 
 -- Install package manager
