@@ -14,6 +14,7 @@ local languages = {
   lua = { stylua },
   python = { black },
   typescript = { eslint, prettier },
+  typescriptreact = { eslint, prettier },
   javascript = { eslint, prettier },
   json = { prettier },
   sql = { prettier },
