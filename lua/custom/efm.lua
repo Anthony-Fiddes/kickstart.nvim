@@ -9,6 +9,7 @@ local fish = require("efmls-configs.linters.fish")
 local fish_indent = require("efmls-configs.formatters.fish_indent")
 
 local languages = {
+  css = { prettier },
   fish = { fish, fish_indent },
   go = { gofmt, goimports },
   lua = { stylua },

@@ -469,14 +469,9 @@ require("mason-lspconfig").setup()
 --  define the property 'filetypes' to the map in question.
 
 local servers = {
-  -- clangd = {},
-  -- gopls = {},
-  -- pyright = {},
-  -- rust_analyzer = {},
-  -- tsserver = {},
-  -- html = { filetypes = { 'html', 'twig', 'hbs'} },
-
   efm = require("custom.efm"),
+  gopls = {},
+  html = { filetypes = { "html" } },
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
@@ -488,6 +483,7 @@ local servers = {
   },
   -- pylsp handles linting if you have flake8 installed
   pylsp = {},
+  tsserver = {},
 }
 
 -- Setup neovim lua configuration
