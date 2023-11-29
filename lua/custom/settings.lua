@@ -16,3 +16,7 @@ vim.wo.relativenumber = true
 -- Important when using a session manager that loads/saves sessions
 -- automatically
 vim.o.sessionoptions = "buffers,curdir,folds,tabpages,winpos,winsize"
+
+-- Wrapping text as I type is more often annoying than helpful in code. It's
+-- welcome in comments.
+vim.opt.formatoptions:remove("t")
