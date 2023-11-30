@@ -328,7 +328,11 @@ vim.defer_fn(function()
       enable = true,
     },
     highlight = { enable = true },
-    indent = { enable = true },
+    indent = {
+      enable = true,
+      -- it never works well with SQL unfortunately
+      disable = { "sql" },
+    },
     incremental_selection = {
       enable = true,
       lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
