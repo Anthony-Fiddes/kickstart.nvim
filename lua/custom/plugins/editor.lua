@@ -5,10 +5,6 @@ return {
     dependencies = { "neovim/nvim-lspconfig" },
   },
   {
-    "mtoohey31/cmp-fish",
-    ft = "fish",
-  },
-  {
     "echasnovski/mini.bufremove",
     version = false,
     config = true,
@@ -26,6 +22,28 @@ return {
           require("mini.bufremove").delete(0, true)
         end,
         desc = "[B]uffer [D]elete (Force)",
+      },
+    },
+  },
+  {
+    "echasnovski/mini.files",
+    version = false,
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
+    opts = {
+      mappings = {
+        close = "q",
+        go_in = "",
+        go_in_plus = "<CR>",
+        go_out = "",
+        go_out_plus = "<BS>",
+        reset = "<ESC>",
+        reveal_cwd = "@",
+        show_help = "g?",
+        synchronize = "=",
+        trim_left = "<",
+        trim_right = ">",
       },
     },
   },
@@ -48,11 +66,6 @@ return {
       })
     end,
     version = false,
-  },
-  {
-    "folke/todo-comments.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    config = true,
   },
   {
     "folke/flash.nvim",

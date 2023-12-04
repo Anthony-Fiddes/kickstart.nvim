@@ -1,30 +1,5 @@
 return {
   {
-    "nvim-tree/nvim-tree.lua",
-    version = "*",
-    dependencies = {
-      "nvim-tree/nvim-web-devicons",
-    },
-    lazy = false,
-    keys = {
-      {
-        "<leader>tf",
-        ":NvimTreeFindFileToggle<CR>",
-        desc = "[T]oggle [F]ile tree",
-        noremap = true,
-        silent = false,
-      },
-      {
-        "<leader>of",
-        ":NvimTreeFindFile!<CR>",
-        desc = "[O]pen Current [F]ile",
-        noremap = true,
-        silent = false,
-      },
-    },
-    config = true,
-  },
-  {
     "echasnovski/mini.indentscope",
     version = "*",
     opts = {
@@ -34,5 +9,10 @@ return {
         try_as_border = true,
       },
     },
+  },
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = true,
   },
 }

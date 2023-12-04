@@ -80,6 +80,9 @@ require("lazy").setup({
       -- Add completion from buffer contents / nearby file paths
       "hrsh7th/cmp-buffer",
       "FelipeLema/cmp-async-path",
+
+      -- Misc
+      "mtoohey31/cmp-fish",
     },
   },
 
