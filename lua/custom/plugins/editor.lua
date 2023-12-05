@@ -31,21 +31,27 @@ return {
     dependencies = {
       "nvim-tree/nvim-web-devicons",
     },
-    opts = {
-      mappings = {
-        close = "q",
-        go_in = "",
-        go_in_plus = "<CR>",
-        go_out = "",
-        go_out_plus = "<BS>",
-        reset = "<ESC>",
-        reveal_cwd = "@",
-        show_help = "g?",
-        synchronize = "=",
-        trim_left = "<",
-        trim_right = ">",
-      },
-    },
+    config = function()
+      require("mini.files").setup({
+        mappings = {
+          close = "q",
+          go_in = "",
+          go_in_plus = "<CR>",
+          go_out = "",
+          go_out_plus = "<BS>",
+          reset = "<ESC>",
+          reveal_cwd = "@",
+          show_help = "g?",
+          synchronize = "=",
+          trim_left = "<",
+          trim_right = ">",
+        },
+      })
+
+      vim.keymap.set("n", "<Leader>of", function()
+        MiniFiles.open(vim.api.nvim_buf_get_name(0))
+      end, { desc = "[O]pen [F]ile tree" })
+    end,
   },
   {
     "echasnovski/mini.surround",
