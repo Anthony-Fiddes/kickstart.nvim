@@ -42,14 +42,26 @@ return {
           reset = "<ESC>",
           reveal_cwd = "@",
           show_help = "g?",
-          synchronize = "=",
+          synchronize = "<Space>",
           trim_left = "<",
           trim_right = ">",
         },
       })
 
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "MiniFilesBufferCreate",
+        callback = function(args)
+          vim.keymap.set("n", "ZZ", "q", { buffer = args.data.buf_id, remap = true })
+        end,
+      })
+
       vim.keymap.set("n", "<Leader>of", function()
-        MiniFiles.open(vim.api.nvim_buf_get_name(0))
+        local buf_name = vim.api.nvim_buf_get_name(0)
+        if buf_name ~= "" then
+          MiniFiles.open(buf_name)
+        else
+          MiniFiles.open()
+        end
       end, { desc = "[O]pen [F]ile tree" })
     end,
   },
