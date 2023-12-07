@@ -39,7 +39,7 @@ return {
           go_in_plus = "<CR>",
           go_out = "",
           go_out_plus = "<BS>",
-          reset = "<ESC>",
+          reset = "`",
           reveal_cwd = "@",
           show_help = "g?",
           synchronize = "<Space>",
