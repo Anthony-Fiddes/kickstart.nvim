@@ -9,5 +9,5 @@ local function cmd(command)
 end
 
 -- Not working yet
-map("cc", cmd("Git commit -v"))
-map("ca", cmd("Git commit --amend -v"))
+-- map("cc", cmd("Git commit -v"))
+-- map("ca", cmd("Git commit --amend -v"))
