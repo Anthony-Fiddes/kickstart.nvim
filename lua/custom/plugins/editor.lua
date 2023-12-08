@@ -48,13 +48,6 @@ return {
         },
       })
 
-      vim.api.nvim_create_autocmd("User", {
-        pattern = "MiniFilesBufferCreate",
-        callback = function(args)
-          vim.keymap.set("n", "ZZ", "q", { buffer = args.data.buf_id, remap = true })
-        end,
-      })
-
       vim.keymap.set("n", "<Leader>of", function()
         local buf_name = vim.api.nvim_buf_get_name(0)
         if buf_name ~= "" then
