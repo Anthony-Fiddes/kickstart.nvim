@@ -51,3 +51,20 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz", { noremap = true })
 -- Misc
 vim.keymap.set("n", "<leader>nh", ":nohlsearch<CR>", { desc = "[N]o [H]ighlight" })
 vim.keymap.set("n", "c", '"_c')
+
+local function cmd(command)
+  return function()
+    vim.cmd(command)
+  end
+end
+
+-- Fugitive
+vim.api.nvim_create_autocmd("User", {
+  pattern = "FugitiveIndex",
+  callback = function(args)
+    -- change the c keymap back to normal in fugitive buffers
+    vim.keymap.set("n", "c", "c", { buffer = args.buf })
+    vim.keymap.set("n", "cc", cmd("G commit -v"), { buffer = args.buf })
+    vim.keymap.set("n", "ca", cmd("G commit --amend -v"), { buffer = args.buf })
+  end,
+})
