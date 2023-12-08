@@ -5,7 +5,7 @@ local function windo(command)
     local windows = vim.api.nvim_list_wins()
     for _, window in pairs(windows) do
       vim.api.nvim_set_current_win(window)
-      if vim.bo.filetype == "" then
+      if vim.fn.bufname() == "" then
         -- Ignore scratch buffers
         goto continue
       end
