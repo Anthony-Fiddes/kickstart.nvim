@@ -59,13 +59,13 @@ local function cmd(command)
 end
 
 -- Fugitive
+-- TODO: Rearrange things so I can just do <Leader>g
+vim.keymap.set("n", "<Leader>G", cmd("G"))
 vim.api.nvim_create_autocmd("User", {
   pattern = "FugitiveIndex",
   callback = function(args)
-    -- change the c keymap back to normal in fugitive buffers
-    vim.keymap.set("n", "c", "c", { buffer = args.buf, noremap = true })
-    vim.keymap.set("n", "cc", cmd("G commit -v"), { buffer = args.buf })
-    vim.keymap.set("n", "ca", cmd("G commit --amend -v"), { buffer = args.buf })
+    vim.keymap.set("n", "c", cmd("G commit -v"), { buffer = args.buf })
+    vim.keymap.set("n", "a", cmd("G commit --amend -v"), { buffer = args.buf })
     vim.keymap.set("n", "p", cmd("G push"), { buffer = args.buf })
   end,
 })
