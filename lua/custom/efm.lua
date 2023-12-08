@@ -15,12 +15,8 @@ local fs = require("efmls-configs.fs")
 
 local which_sqlfluff = fs.executable("sqlfluff")
 -- I'd prefer that dialect was set from the nearest sqlfluff file
-local sqlfluff_main_command =
+local sqlfluff_command =
   string.format("%s lint --format github-annotation-native --annotation-level warning --nocolor --disable-progress-bar ${INPUT}", which_sqlfluff)
--- If it fails default to ANSI
-local sqlfluff_backup_command =
-  string.format("%s lint --dialect ansi --format github-annotation-native --annotation-level warning --nocolor --disable-progress-bar ${INPUT}", which_sqlfluff)
-local sqlfluff_command = string.format("%s || %s", sqlfluff_main_command, sqlfluff_backup_command)
 sqlfluff = vim.tbl_extend("force", sqlfluff, { lintCommand = sqlfluff_command })
 
 local languages = {
