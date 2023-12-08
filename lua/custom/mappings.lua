@@ -64,7 +64,9 @@ vim.keymap.set("n", "<Leader>G", cmd("G"))
 vim.api.nvim_create_autocmd("User", {
   pattern = "FugitiveIndex",
   callback = function(args)
+    vim.keymap.del("n", "cc", { buffer = args.buf })
     vim.keymap.set("n", "c", cmd("G commit -v"), { buffer = args.buf })
+    vim.keymap.del("n", "ca", { buffer = args.buf })
     vim.keymap.set("n", "a", cmd("G commit --amend -v"), { buffer = args.buf })
     vim.keymap.set("n", "p", cmd("G push"), { buffer = args.buf })
   end,
