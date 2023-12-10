@@ -10,6 +10,9 @@ vim.o.listchars = "tab:> ,trail:⋅,extends:>,precedes:<"
 -- Hard wrap text at this col
 vim.o.textwidth = 80
 
+-- Don't soft wrap lines in the middle of a word
+vim.o.linebreak = true
+
 -- Relative line numbers are fun
 vim.wo.relativenumber = true
 
