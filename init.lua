@@ -122,8 +122,10 @@ require("lazy").setup({
         end, "[hb] Show git blame for hunk")
         map("n", "<leader>hp", gs.preview_hunk, "[H]unk [P]review")
         map({ "n", "v" }, "<Leader>hs", ":Gitsigns stage_hunk<CR>", "[hs] Stage Hunk")
+        map({ "n", "v" }, "<Leader>hS", gs.stage_buffer, "[hS] Stage Buffer")
         map({ "n", "v" }, "<Leader>hu", gs.undo_stage_hunk, "[hu] Undo Stage Hunk")
         map({ "n", "v" }, "<Leader>hr", ":Gitsigns reset_hunk<CR>", "[hr] Reset Hunk")
+        map({ "n", "v" }, "<Leader>hR", gs.reset_buffer, "[hR] Reset Buffer")
         map({ "n", "v" }, "hn", function()
           if vim.wo.diff then
             return "]c"
@@ -143,6 +145,8 @@ require("lazy").setup({
           return "<Ignore>"
         end, "[hN] Jump to previous hunk", true)
         map("n", "<Leader>tb", gs.toggle_current_line_blame, "[T]oggle git [blame] on current line")
+        -- hunk text object
+        map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
       end,
     },
   },
