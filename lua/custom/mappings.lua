@@ -50,7 +50,7 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz", { noremap = true })
 
 -- Misc
 vim.keymap.set("n", "<leader>nh", ":nohlsearch<CR>", { desc = "[N]o [H]ighlight" })
-vim.keymap.set("n", "c", '"_c')
+vim.keymap.set({ "n", "v" }, "c", '"_c')
 
 local function cmd(command)
   return function()
