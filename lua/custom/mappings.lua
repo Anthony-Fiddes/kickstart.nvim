@@ -62,7 +62,7 @@ end
 
 -- Fugitive
 -- TODO: Rearrange things so I can just do <Leader>g
-vim.keymap.set("n", "<Leader>G", cmd("G"))
+vim.keymap.set("n", "<Leader>g", cmd("G"))
 vim.api.nvim_create_autocmd("User", {
   pattern = "FugitiveIndex",
   callback = function(args)

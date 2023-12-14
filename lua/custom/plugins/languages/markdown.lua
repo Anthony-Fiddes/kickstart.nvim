@@ -6,7 +6,7 @@ return {
   {
     "ellisonleao/glow.nvim",
     keys = {
-      { "<leader>gp", ":Glow<CR>", desc = "[G]low [P]review" },
+      { "<leader>md", ":Glow<CR>", desc = "[md] Glow Preview" },
     },
     config = true,
     ft = "markdown",
