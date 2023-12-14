@@ -47,6 +47,8 @@ vim.keymap.set("o", "a`", "2i`", { desc = "Yank in ` quote without whitespace" }
 -- Movement
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { noremap = true })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { noremap = true })
+vim.keymap.set("n", "<PageUp>", "<PageUp>zz", { noremap = true })
+vim.keymap.set("n", "<PageDown>", "<PageDown>zz", { noremap = true })
 
 -- Misc
 vim.keymap.set("n", "<leader>nh", ":nohlsearch<CR>", { desc = "[N]o [H]ighlight" })
