@@ -166,6 +166,10 @@ return {
     opts = { skipInsignificantPunctuation = false },
   },
   {
+    "chrisgrieser/nvim-puppeteer",
+    lazy = false, -- plugin lazy-loads itself. Can also load on filetypes.
+  },
+  {
     "olimorris/persisted.nvim",
     config = function()
       local persisted = require("persisted")
