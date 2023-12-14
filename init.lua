@@ -315,6 +315,7 @@ vim.defer_fn(function()
     ensure_installed = {
       "bash",
       "fish",
+      "dockerfile",
       "go",
       "lua",
       "python",
