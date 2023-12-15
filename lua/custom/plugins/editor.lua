@@ -213,4 +213,8 @@ return {
       mini_misc.setup_auto_root({ ".git", "package.json", "Makefile" }, fallback)
     end,
   },
+  {
+    "fdschmidt93/telescope-egrepify.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+  },
 }
