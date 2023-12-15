@@ -56,6 +56,18 @@ return {
           MiniFiles.open()
         end
       end, { desc = "[O]pen [F]ile tree" })
+
+      local function sync_and_close()
+        MiniFiles.synchronize()
+        MiniFiles.close()
+      end
+
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "MiniFilesBufferCreate",
+        callback = function(args)
+          vim.keymap.set("n", "ZZ", sync_and_close, { buffer = args.buf })
+        end,
+      })
     end,
   },
   {
