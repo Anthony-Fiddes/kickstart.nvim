@@ -42,7 +42,7 @@ return {
           reset = "`",
           reveal_cwd = "@",
           show_help = "g?",
-          synchronize = "<Space>",
+          synchronize = "<Leader>u",
           trim_left = "<",
           trim_right = ">",
         },
