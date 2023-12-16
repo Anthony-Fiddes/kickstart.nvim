@@ -65,7 +65,7 @@ return {
       vim.api.nvim_create_autocmd("User", {
         pattern = "MiniFilesBufferCreate",
         callback = function(args)
-          vim.keymap.set("n", "ZZ", sync_and_close, { buffer = args.buf })
+          vim.keymap.set("n", "ZZ", sync_and_close, { buffer = args.data.buf_id })
         end,
       })
     end,
