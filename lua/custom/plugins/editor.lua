@@ -203,10 +203,6 @@ return {
       vim.api.nvim_create_autocmd({ "User" }, {
         pattern = "PersistedSavePre",
         group = hooks,
-        callback = function()
-          -- Ensure an NvimTree buffer can't mess up your session file
-          pcall(vim.cmd, "NvimTreeClose")
-        end,
       })
       -- Load telescope plugin if it's available
       pcall(require("telescope").load_extension("persisted"))
