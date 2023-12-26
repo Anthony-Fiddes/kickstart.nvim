@@ -24,6 +24,7 @@ require("telescope").setup({
 
 -- Enable telescope fzf native, if installed
 pcall(require("telescope").load_extension, "fzf")
+pcall(require("telescope").load_extension, "egrepify")
 local telescope = require("telescope.builtin")
 
 -- Following functions heavily inspired by or taken from
@@ -87,7 +88,7 @@ vim.keymap.set("n", "<leader>fl", telescope.git_commits, { desc = "[F]ind in Git
 vim.keymap.set("n", "<leader>p", project_files, { desc = "Find [P]roject Files" })
 vim.keymap.set("n", "<leader>fh", telescope.help_tags, { desc = "[F]ind [H]elp" })
 vim.keymap.set("n", "<leader>fw", telescope.grep_string, { desc = "[F]ind current [W]ord" })
-vim.keymap.set("n", "<leader>ff", telescope.live_grep, { desc = "[F]ind in [f]iles (live_grep)" })
+vim.keymap.set("n", "<leader>ff", "<cmd>Telescope egrepify<cr>", { desc = "[F]ind in [f]iles (live_grep)" })
 vim.keymap.set("n", "<leader>fd", telescope.diagnostics, { desc = "[F]ind [D]iagnostics" })
 vim.keymap.set("n", "<leader>fr", telescope.resume, { desc = "[F]ind [R]resume" })
 vim.keymap.set("n", "<leader>fk", telescope.keymaps, { desc = "[F]ind [k]eymaps" })
