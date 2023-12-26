@@ -199,11 +199,6 @@ return {
         },
       })
 
-      local hooks = vim.api.nvim_create_augroup("PersistedHooks", {})
-      vim.api.nvim_create_autocmd({ "User" }, {
-        pattern = "PersistedSavePre",
-        group = hooks,
-      })
       -- Load telescope plugin if it's available
       pcall(require("telescope").load_extension("persisted"))
     end,
