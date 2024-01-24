@@ -188,7 +188,7 @@ return {
       persisted.setup({
         save_dir = vim.fn.expand(vim.fn.stdpath("data") .. "/sessions/"), -- directory where session files are saved
         silent = false, -- silent nvim message when sourcing session file
-        use_git_branch = true, -- create session files based on the branch of the git enabled repository
+        use_git_branch = false, -- create session files based on the branch of the git enabled repository
         autosave = true, -- automatically save session files when exiting Neovim
         autoload = true, -- automatically load the session for the cwd on Neovim startup
         follow_cwd = true, -- change session file name to match current working directory if it changes
