@@ -122,10 +122,16 @@ require("lazy").setup({
         end, "[hb] Show git blame for hunk")
         map("n", "<leader>hp", gs.preview_hunk, "[H]unk [P]review")
         map({ "n", "v" }, "<Leader>hs", ":Gitsigns stage_hunk<CR>", "[hs] Stage Hunk")
-        map({ "n", "v" }, "<Leader>hS", gs.stage_buffer, "[hS] Stage Buffer")
+        map({ "n", "v" }, "<Leader>hS", function()
+          gs.stage_buffer()
+          vim.cmd("w")
+        end, "[hS] Stage Buffer")
         map({ "n", "v" }, "<Leader>hu", gs.undo_stage_hunk, "[hu] Undo Stage Hunk")
         map({ "n", "v" }, "<Leader>hr", ":Gitsigns reset_hunk<CR>", "[hr] Reset Hunk")
-        map({ "n", "v" }, "<Leader>hR", gs.reset_buffer, "[hR] Reset Buffer")
+        map({ "n", "v" }, "<Leader>hR", function()
+          gs.reset_buffer()
+          vim.cmd("w")
+        end, "[hR] Reset Buffer")
         map({ "n", "v" }, "hn", function()
           if vim.wo.diff then
             return "]c"
