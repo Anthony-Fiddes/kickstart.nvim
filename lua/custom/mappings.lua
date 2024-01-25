@@ -68,9 +68,8 @@ vim.api.nvim_create_autocmd("User", {
   callback = function(args)
     vim.keymap.set("n", "cc", cmd("G commit -v"), { buffer = args.buf })
     vim.keymap.set("n", "ca", cmd("G commit --amend -v"), { buffer = args.buf })
-    vim.keymap.del("n", "p", { buffer = args.buf })
-    vim.keymap.set("n", "pu", cmd("G push"), { buffer = args.buf })
-    vim.keymap.set("n", "pl", cmd("G pull"), { buffer = args.buf })
+    vim.keymap.set("n", "p", cmd("G push"), { buffer = args.buf, noremap = true })
+    vim.keymap.set("n", "P", cmd("G pull"), { buffer = args.buf, noremap = true })
     vim.keymap.set("n", "<Leader>g", "gq", { buffer = args.buf, remap = true })
   end,
 })
