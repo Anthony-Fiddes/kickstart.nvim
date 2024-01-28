@@ -40,7 +40,7 @@ return {
         local bufnr = args.buf
 
         -- Only attach to clients that support document formatting
-        if not client.server_capabilities.documentFormattingProvider then
+        if not client.server_capabilities.documentFormattingProvider or vim.g.banned_formatters[client.name] then
           return
         end
 
@@ -64,7 +64,7 @@ return {
             vim.lsp.buf.format({
               async = false,
               filter = function(c)
-                return c.id == client.id and not vim.g.banned_formatters[c.name]
+                return c.id == client.id
               end,
             })
           end,
