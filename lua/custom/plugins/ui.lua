@@ -19,4 +19,13 @@ return {
     "folke/zen-mode.nvim",
     cmd = "ZenMode",
   },
+  {
+    "rcarriga/nvim-notify",
+    event = "VeryLazy",
+    config = function()
+      local notify = require("notify")
+      notify.setup({ timeout = 2500 })
+      vim.notify = notify
+    end,
+  },
 }
