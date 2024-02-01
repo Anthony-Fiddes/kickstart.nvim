@@ -112,25 +112,23 @@ require("lazy").setup({
           vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc, expr = expr })
         end
 
+        local function update_after(callback)
+          return function()
+            callback()
+            vim.cmd("update")
+          end
+        end
+
         local gs = package.loaded.gitsigns
         map("n", "hb", function()
           gs.blame_line({ full = true })
         end, "[hb] Show git blame for hunk")
         map("n", "hp", gs.preview_hunk, "[H]unk [P]review")
-        map({ "n", "v" }, "hs", ":Gitsigns stage_hunk | update<CR>", "[hs] Stage Hunk")
-        map({ "n", "v" }, "hS", function()
-          gs.stage_buffer()
-          vim.cmd("update")
-        end, "[hS] Stage Buffer")
-        map({ "n", "v" }, "hu", function()
-          gs.undo_stage_hunk()
-          vim.cmd("update")
-        end, "[hu] Undo Stage Hunk")
-        map({ "n", "v" }, "hr", ":Gitsigns reset_hunk | update<CR>", "[hr] Reset Hunk")
-        map({ "n", "v" }, "hR", function()
-          gs.reset_buffer()
-          vim.cmd("update")
-        end, "[hR] Reset Buffer")
+        map({ "n", "v" }, "hs", update_after(gs.stage_hunk), "[hs] Stage Hunk")
+        map({ "n", "v" }, "hS", update_after(gs.stage_buffer), "[hS] Stage Buffer")
+        map({ "n", "v" }, "hu", update_after(gs.undo_stage_hunk), "[hu] Undo Stage Hunk")
+        map({ "n", "v" }, "hr", update_after(gs.reset_hunk), "[hr] Reset Hunk")
+        map({ "n", "v" }, "hR", update_after(gs.reset_buffer), "[hR] Reset Buffer")
         map({ "n", "v" }, "hn", function()
           if vim.wo.diff then
             return "]c"
