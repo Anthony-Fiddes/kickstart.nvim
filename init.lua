@@ -120,16 +120,16 @@ require("lazy").setup({
         end
 
         local gs = package.loaded.gitsigns
-        map("n", "hb", function()
+        map("n", "<Leader>hb", function()
           gs.blame_line({ full = true })
         end, "[hb] Show git blame for hunk")
         map("n", "hp", gs.preview_hunk, "[H]unk [P]review")
-        map({ "n", "v" }, "hs", update_after(gs.stage_hunk), "[hs] Stage Hunk")
-        map({ "n", "v" }, "hS", update_after(gs.stage_buffer), "[hS] Stage Buffer")
-        map({ "n", "v" }, "hu", update_after(gs.undo_stage_hunk), "[hu] Undo Stage Hunk")
-        map({ "n", "v" }, "hr", update_after(gs.reset_hunk), "[hr] Reset Hunk")
-        map({ "n", "v" }, "hR", update_after(gs.reset_buffer), "[hR] Reset Buffer")
-        map({ "n", "v" }, "hn", function()
+        map({ "n", "v" }, "<Leader>hs", update_after(gs.stage_hunk), "[hs] Stage Hunk")
+        map({ "n", "v" }, "<Leader>hS", update_after(gs.stage_buffer), "[hS] Stage Buffer")
+        map({ "n", "v" }, "<Leader>hu", update_after(gs.undo_stage_hunk), "[hu] Undo Stage Hunk")
+        map({ "n", "v" }, "<Leader>hr", update_after(gs.reset_hunk), "[hr] Reset Hunk")
+        map({ "n", "v" }, "<Leader>hR", update_after(gs.reset_buffer), "[hR] Reset Buffer")
+        map({ "n", "v" }, "]h", function()
           if vim.wo.diff then
             return "]c"
           end
@@ -138,7 +138,7 @@ require("lazy").setup({
           end)
           return "<Ignore>"
         end, "[hn] Jump to next hunk", true)
-        map({ "n", "v" }, "hN", function()
+        map({ "n", "v" }, "[h", function()
           if vim.wo.diff then
             return "[c"
           end
