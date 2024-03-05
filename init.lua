@@ -129,7 +129,11 @@ require("lazy").setup({
         map({ "n", "v" }, "<Leader>hu", update_after(gs.undo_stage_hunk), "[hu] Undo Stage Hunk")
         map({ "n", "v" }, "<Leader>hr", update_after(gs.reset_hunk), "[hr] Reset Hunk")
         map({ "n", "v" }, "<Leader>hR", update_after(gs.reset_buffer), "[hR] Reset Buffer")
-        map({ "n", "v" }, "]h", function()
+        map("n", "<Leader>tb", gs.toggle_current_line_blame, "[T]oggle git [blame] on current line")
+        -- hunk text object
+        map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
+
+        local function next_hunk()
           if vim.wo.diff then
             return "]c"
           end
@@ -137,8 +141,10 @@ require("lazy").setup({
             gs.next_hunk()
           end)
           return "<Ignore>"
-        end, "[hn] Jump to next hunk", true)
-        map({ "n", "v" }, "[h", function()
+        end
+        map({ "n", "v" }, "<Leader>hn", next_hunk, "[hn] Jump to next hunk", true)
+        map({ "n", "v" }, "]h", next_hunk, "[hn] Jump to next hunk", true)
+        local function prev_hunk()
           if vim.wo.diff then
             return "[c"
           end
@@ -146,10 +152,9 @@ require("lazy").setup({
             gs.next_hunk()
           end)
           return "<Ignore>"
-        end, "[hN] Jump to previous hunk", true)
-        map("n", "<Leader>tb", gs.toggle_current_line_blame, "[T]oggle git [blame] on current line")
-        -- hunk text object
-        map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
+        end
+        map({ "n", "v" }, "<Leader>hN", prev_hunk, "[hN] Jump to previous hunk", true)
+        map({ "n", "v" }, "[h", prev_hunk, "[hN] Jump to previous hunk", true)
       end,
     },
   },
