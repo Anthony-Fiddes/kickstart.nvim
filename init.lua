@@ -183,6 +183,10 @@ require("lazy").setup({
         section_separators = "",
       },
     },
+    init = function()
+      -- It's gonna be in the lualine
+      vim.o.showmode = false
+    end,
   },
 
   -- "gc" to comment visual regions/lines
