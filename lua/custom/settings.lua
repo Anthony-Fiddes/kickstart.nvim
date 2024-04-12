@@ -26,3 +26,13 @@ vim.opt.formatoptions:remove("t")
 
 -- Preview substitutions as I type
 vim.opt.inccommand = "split"
+
+-- Set tab defaults for text files
+vim.api.nvim_create_autocmd("BufNewFile", {
+  pattern = { "*.txt", "*.md" },
+  callback = function()
+    vim.opt_local.tabstop = 2
+    vim.opt_local.expandtab = true
+    vim.opt_local.shiftwidth = 0
+  end,
+})
