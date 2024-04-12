@@ -1,9 +1,11 @@
 -- Softwrapping .txt files just makes sense to me for writing emails and other
 -- text where I want to paste it elsewhere.
-vim.opt.formatoptions:remove("t")
-vim.opt.linebreak = true
+vim.opt_local.formatoptions:remove("t")
+vim.opt_local.linebreak = true
 
-vim.opt.spell = true
+vim.opt_local.tabstop = 2
+vim.opt_local.shiftwidth = 0
+vim.opt_local.spell = true
 
 local dont_zen_names = { "requirements", "requirements3" }
 local zen = true
