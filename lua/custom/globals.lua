@@ -3,7 +3,7 @@ These custom globals allow me to easily tweak settings between my work and perso
 --]]
 
 vim.g.copilot_enabled = false
-vim.g.codeium_enabled = true
+vim.g.codeium_enabled = false
 
 vim.g.banned_formatters = {
   tsserver = true,
