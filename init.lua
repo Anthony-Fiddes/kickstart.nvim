@@ -66,15 +66,23 @@ require("lazy").setup({
         version = "v2.*",
         -- install jsregexp (optional!).
         build = "make install_jsregexp",
+        dependencies = {
+          -- `friendly-snippets` contains a variety of premade snippets.
+          --    See the README about individual language/framework/plugin snippets:
+          --    https://github.com/rafamadriz/friendly-snippets
+          {
+            "rafamadriz/friendly-snippets",
+            config = function()
+              require("luasnip.loaders.from_vscode").lazy_load()
+            end,
+          },
+        },
       },
       "saadparwaiz1/cmp_luasnip",
 
       -- Adds LSP completion capabilities
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-nvim-lsp-signature-help",
-
-      -- Adds a number of user-friendly snippets
-      "rafamadriz/friendly-snippets",
 
       -- Automatically close symbols like ", ', (, etc.
       "windwp/nvim-autopairs",
@@ -548,65 +556,100 @@ mason_lspconfig.setup_handlers({
   end,
 })
 
--- [[ Configure nvim-cmp ]]
+-- [[ Start configuring nvim-cmp ]]
 -- See `:help cmp`
 local cmp = require("cmp")
 require("nvim-autopairs").setup({})
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 local luasnip = require("luasnip")
-require("luasnip.loaders.from_vscode").lazy_load()
 luasnip.config.setup({})
 
-cmp.setup({
-  snippet = {
-    expand = function(args)
-      luasnip.lsp_expand(args.body)
-    end,
-  },
-  mapping = cmp.mapping.preset.insert({
-    ["<C-n>"] = cmp.mapping.select_next_item(),
-    ["<C-p>"] = cmp.mapping.select_prev_item(),
-    ["<C-s>"] = cmp.mapping.scroll_docs(-4),
-    ["<C-t>"] = cmp.mapping.scroll_docs(4),
-    ["<C-Space>"] = cmp.mapping.complete({}),
-    ["<CR>"] = cmp.mapping.confirm({
-      behavior = cmp.ConfirmBehavior.Insert,
-      select = true,
-    }),
-    ["<S-CR>"] = cmp.mapping.confirm({
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    }),
-    ["<Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_locally_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
-    ["<S-Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.locally_jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
-  }),
-  sources = {
-    { name = "copilot" },
-    { name = "codeium" },
-    { name = "nvim_lsp" },
-    { name = "nvim_lsp_signature_help" },
-    { name = "luasnip" },
-    { name = "fish" },
-    { name = "buffer" },
-    { name = "async_path" },
-  },
+-- Adapted from
+-- https://github.com/hrsh7th/nvim-cmp/wiki/Advanced-techniques#disabling-completion-in-certain-contexts-such-as-comments
+local size = {}
+local function bufIsBig(bufnr)
+  local max_filesize = 100 * 1024 -- 100 KB
+  local name = vim.api.nvim_buf_get_name(bufnr)
+  if not size[name] then
+    local ok, stats = pcall(vim.loop.fs_stat, name)
+    if ok and stats then
+      size[name] = stats.size
+    else
+      -- if we can't get the file size we just assume it's too big
+      size[name] = max_filesize + 1
+    end
+  end
+
+  if size[name] > max_filesize then
+    return true
+  end
+  return false
+end
+
+-- Set up completion sources per buffer, since some of them don't work well on big
+-- files.
+vim.api.nvim_create_autocmd("BufReadPre", {
+  callback = function(t)
+    -- NOTE: Be careful when adding the group_index attribute. The entries
+    -- without the attribute count as a different group.
+    local default_cmp_sources = {
+      { name = "nvim_lsp_signature_help" },
+      { name = "nvim_lsp" },
+      { name = "luasnip" },
+      { name = "copilot" },
+      { name = "fish" },
+      { name = "buffer" },
+      { name = "async_path" },
+    }
+    local sources = default_cmp_sources
+    if not bufIsBig(t.buf) then
+      table.insert(sources, 4, { name = "codeium" })
+      sources[#sources + 1] = { name = "buffer" }
+    end
+
+    cmp.setup.buffer({
+      sources = sources,
+      snippet = {
+        expand = function(args)
+          luasnip.lsp_expand(args.body)
+        end,
+      },
+      mapping = cmp.mapping.preset.insert({
+        ["<C-n>"] = cmp.mapping.select_next_item(),
+        ["<C-p>"] = cmp.mapping.select_prev_item(),
+        ["<C-s>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-t>"] = cmp.mapping.scroll_docs(4),
+        ["<C-Space>"] = cmp.mapping.complete({}),
+        ["<CR>"] = cmp.mapping.confirm({
+          behavior = cmp.ConfirmBehavior.Insert,
+          select = true,
+        }),
+        ["<S-CR>"] = cmp.mapping.confirm({
+          behavior = cmp.ConfirmBehavior.Replace,
+          select = true,
+        }),
+        ["<Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item()
+          elseif luasnip.expand_or_locally_jumpable() then
+            luasnip.expand_or_jump()
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          elseif luasnip.locally_jumpable(-1) then
+            luasnip.jump(-1)
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
+      }),
+    })
+  end,
 })
 
 require("custom.settings")
