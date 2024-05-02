@@ -291,7 +291,7 @@ vim.o.updatetime = 250
 vim.o.timeoutlen = 300
 
 -- Set completeopt to have a better completion experience
-vim.o.completeopt = "menuone,noselect"
+vim.o.completeopt = "menuone"
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
@@ -605,11 +605,11 @@ cmp.setup({
     end, { "i", "s" }),
   }),
   sources = {
-    { name = "copilot" },
-    { name = "codeium" },
     { name = "nvim_lsp" },
     { name = "nvim_lsp_signature_help" },
     { name = "luasnip" },
+    { name = "copilot" },
+    { name = "codeium" },
     { name = "fish" },
     { name = "buffer" },
     { name = "async_path" },
