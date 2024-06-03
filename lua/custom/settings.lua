@@ -36,3 +36,13 @@ vim.api.nvim_create_autocmd("BufNewFile", {
     vim.opt_local.shiftwidth = 0
   end,
 })
+
+-- Set tab defaults for go
+vim.api.nvim_create_autocmd("BufNewFile", {
+  pattern = { "*.go" },
+  callback = function()
+    vim.opt_local.tabstop = 4
+    vim.opt_local.expandtab = false
+    vim.opt_local.shiftwidth = 0
+  end,
+})
