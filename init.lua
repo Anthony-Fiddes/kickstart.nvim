@@ -85,6 +85,7 @@ require("lazy").setup({
 
       -- Misc
       "mtoohey31/cmp-fish",
+      "hrsh7th/cmp-emoji",
     },
   },
 
@@ -613,6 +614,7 @@ cmp.setup({
     { name = "fish" },
     { name = "buffer" },
     { name = "async_path" },
+    { name = "emoji" },
   },
 })
 
