@@ -28,6 +28,7 @@ local languages = {
   typescriptreact = { eslint, prettier },
   javascript = { eslint, prettier },
   json = { prettier },
+  markdown = { prettier },
   sql = { sqlfluff },
   yaml = { yamllint },
 }
