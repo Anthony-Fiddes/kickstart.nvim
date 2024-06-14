@@ -175,7 +175,7 @@ return {
         mode = { "n", "o", "x" },
       },
     },
-    opts = { skipInsignificantPunctuation = true },
+    opts = { skipInsignificantPunctuation = false },
   },
   {
     "chrisgrieser/nvim-puppeteer",
