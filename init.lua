@@ -446,8 +446,10 @@ local on_attach = function(_, bufnr)
   nmap("gr", telescope.lsp_references, "[G]oto [R]eferences")
   nmap("gi", telescope.lsp_implementations, "[G]oto [I]mplementation")
   nmap("<leader>D", vim.lsp.buf.type_definition, "Type [D]efinition")
-  nmap("<leader>fs", telescope.lsp_document_symbols, "[F]ind Document [S]ymbols")
-  nmap("<leader>ws", telescope.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+  -- TODO: do I want to be able to only look for symbols in the current buffer?
+  -- I removed that because it doesn't seem super useful (unless I was working
+  -- on a massive code base).
+  nmap("<leader>fs", telescope.lsp_dynamic_workspace_symbols, "[F]ind [S]ymbols")
 
   -- See `:help K` for why this keymap
   nmap("K", vim.lsp.buf.hover, "Hover Documentation")
