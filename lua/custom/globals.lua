@@ -10,7 +10,3 @@ vim.g.banned_formatters = {
   pylsp = true,
   lua_ls = true,
 }
-
--- disable netrw since we're using nvim-tree
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1

@@ -27,6 +27,8 @@ vim.opt.formatoptions:remove("t")
 -- Preview substitutions as I type
 vim.opt.inccommand = "split"
 
+vim.opt.spelllang:append("de_de")
+
 -- Set tab defaults for text files
 vim.api.nvim_create_autocmd("BufNewFile", {
   pattern = { "*.txt", "*.md" },
