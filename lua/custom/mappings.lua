@@ -64,7 +64,7 @@ local function cmd(command)
 end
 
 -- Fugitive
-vim.keymap.set("n", "<Leader>g", cmd("G"))
+vim.keymap.set("n", "<Leader>g", cmd("G"), { desc = "[G]it" })
 vim.api.nvim_create_autocmd("User", {
   pattern = "FugitiveIndex",
   callback = function(args)
