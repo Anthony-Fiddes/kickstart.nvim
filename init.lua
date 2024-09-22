@@ -523,7 +523,7 @@ local servers = {
     },
   },
   ruff_lsp = {},
-  tsserver = {},
+  ts_ls = {},
 }
 
 -- Setup neovim lua configuration

@@ -6,7 +6,7 @@ vim.g.copilot_enabled = false
 vim.g.codeium_enabled = true
 
 vim.g.banned_formatters = {
-  tsserver = true,
+  ts_ls = true,
   pylsp = true,
   lua_ls = true,
 }
