@@ -475,12 +475,12 @@ end
 
 -- document existing key chains
 require("which-key").add({
-  { "<leader>c", group = "[B]uffer" },
+  { "<leader>b", group = "[B]uffer" },
   { "<leader>c", group = "[C]ode" },
   { "<leader>f", group = "[F]ind" },
   { "<leader>h", group = "Git [H]unk" },
   { "<leader>r", name = "[R]ename" },
-  { "<leader>s", name = "[S]earch" },
+  { "<leader>s", name = "[S]urrounding" },
   { "<leader>t", name = "[T]oggle" },
   { "<leader>w", name = "[W]orkspace" },
 })
