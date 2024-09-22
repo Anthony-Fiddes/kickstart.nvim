@@ -523,7 +523,29 @@ local servers = {
     },
   },
   ruff_lsp = {},
-  tsserver = {},
+  tsserver = {
+    init_options = {
+      plugins = {
+        {
+          name = "@vue/typescript-plugin",
+          location = "/Users/anthonyfiddes/.local/share/nvm/v22.1.0/lib/node_modules/@vue/typescript-plugin/",
+          languages = { "javascript", "typescript", "vue" },
+        },
+      },
+    },
+    filetypes = {
+      "javascript",
+      "typescript",
+      "vue",
+      "javascriptreact",
+      "javascript.jsx",
+      "typescriptreact",
+      "typescript.tsx",
+    },
+  },
+  volar = {
+    filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
+  },
 }
 
 -- Setup neovim lua configuration
