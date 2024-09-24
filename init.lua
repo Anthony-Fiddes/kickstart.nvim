@@ -6,7 +6,6 @@ vim.g.maplocalleader = " "
 
 -- generated_globals is optional
 pcall(require, "custom.generated_globals")
-require("custom.globals")
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
@@ -467,7 +466,7 @@ local on_attach = function(_, bufnr)
   vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
     vim.lsp.buf.format({
       filter = function(client)
-        return not vim.g.banned_formatters[client.name]
+        return not require("custom.vars").banned_formatters[client.name]
       end,
     })
   end, { desc = "Format current buffer with LSP" })
@@ -524,6 +523,13 @@ local servers = {
   },
   ruff_lsp = {},
   ts_ls = {},
+  yamlls = {
+    settings = {
+      yaml = {
+        schemas = {},
+      },
+    },
+  },
 }
 
 -- Setup neovim lua configuration
@@ -533,11 +539,15 @@ require("neodev").setup()
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
--- Ensure the servers above are installed
 local mason_lspconfig = require("mason-lspconfig")
 
+-- ensure that the servers that don't scream at you are installed
 mason_lspconfig.setup({
-  ensure_installed = vim.tbl_keys(servers),
+  ensure_installed = {
+    "efm",
+    "lua_ls",
+    "yamlls",
+  },
 })
 
 mason_lspconfig.setup_handlers({

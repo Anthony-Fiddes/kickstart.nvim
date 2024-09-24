@@ -40,7 +40,8 @@ return {
         local bufnr = args.buf
 
         -- Only attach to clients that support document formatting
-        if not client.server_capabilities.documentFormattingProvider or vim.g.banned_formatters[client.name] then
+        local banned_formatters = require("custom.vars").banned_formatters
+        if not client.server_capabilities.documentFormattingProvider or banned_formatters[client.name] then
           return
         end
 

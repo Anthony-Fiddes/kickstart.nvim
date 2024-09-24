@@ -1,3 +1,5 @@
+local custom_vars = require("custom.vars")
+
 return {
   {
     "zbirenbaum/copilot-cmp",
@@ -11,7 +13,7 @@ return {
         panel = { enabled = false },
       })
     end,
-    enabled = vim.g.copilot_enabled == true,
+    enabled = custom_vars.copilot_enabled,
   },
   {
     "Exafunction/codeium.nvim",
@@ -22,6 +24,6 @@ return {
     config = function()
       require("codeium").setup({})
     end,
-    enabled = vim.g.codeium_enabled == true,
+    enabled = custom_vars.codeium_enabled,
   },
 }
