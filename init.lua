@@ -546,7 +546,6 @@ mason_lspconfig.setup({
   ensure_installed = {
     "efm",
     "lua_ls",
-    "yamlls",
   },
 })
 
