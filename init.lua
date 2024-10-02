@@ -6,6 +6,7 @@ vim.g.maplocalleader = " "
 
 -- generated_globals is optional
 pcall(require, "custom.generated_globals")
+local custom_vars = require("custom.vars")
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
@@ -466,7 +467,7 @@ local on_attach = function(_, bufnr)
   vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
     vim.lsp.buf.format({
       filter = function(client)
-        return not require("custom.vars").banned_formatters[client.name]
+        return not custom_vars.banned_formatters[client.name]
       end,
     })
   end, { desc = "Format current buffer with LSP" })
@@ -526,7 +527,7 @@ local servers = {
   yamlls = {
     settings = {
       yaml = {
-        schemas = {},
+        schemas = custom_vars.yaml_schemas or nil,
       },
     },
   },
