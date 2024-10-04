@@ -72,6 +72,15 @@ local function project_files()
   end
 end
 
+local function expanded_fuzzy_find(expand_query)
+  return function()
+    local command = "<cmd>Telescope egrepify<cr>"
+    local expansion = vim.fn.expand(expand_query)
+    local keys = vim.api.nvim_replace_termcodes(command, true, false, true) .. expansion
+    vim.api.nvim_feedkeys(keys, "n", true)
+  end
+end
+
 -- See `:help telescope.builtin`
 vim.keymap.set("n", "<leader>hh", telescope.oldfiles, { desc = "[hh] Find recently opened files" })
 vim.keymap.set("n", "<leader><space>", telescope.buffers, { desc = "[ ] Find existing buffers" })
@@ -87,7 +96,8 @@ vim.keymap.set("n", "<leader>fm", telescope.git_status, { desc = "[F]ind [m]odif
 vim.keymap.set("n", "<leader>fl", telescope.git_commits, { desc = "[F]ind in Git [l]og" })
 vim.keymap.set("n", "<leader>p", project_files, { desc = "Find [P]roject Files" })
 vim.keymap.set("n", "<leader>fh", telescope.help_tags, { desc = "[F]ind [H]elp" })
-vim.keymap.set("n", "<leader>fw", telescope.grep_string, { desc = "[F]ind current [W]ord" })
+vim.keymap.set("n", "<leader>fw", expanded_fuzzy_find("<cword>"), { desc = "[F]ind current [W]ord" })
+vim.keymap.set("n", "<leader>fW", expanded_fuzzy_find("<cWORD>"), { desc = "[F]ind current [W]ORD" })
 vim.keymap.set("n", "<leader>ff", "<cmd>Telescope egrepify<cr>", { desc = "[F]ind in [f]iles (live_grep)" })
 vim.keymap.set("n", "<leader>fd", telescope.diagnostics, { desc = "[F]ind [D]iagnostics" })
 vim.keymap.set("n", "<leader>fr", telescope.resume, { desc = "[F]ind [R]resume" })
