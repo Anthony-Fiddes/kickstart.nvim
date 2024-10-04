@@ -183,6 +183,7 @@ require("lazy").setup({
         component_separators = "|",
         section_separators = "",
       },
+      sections = { lualine_c = { { "filename", path = 4 } } },
     },
     init = function()
       -- It's gonna be in the lualine
