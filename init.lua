@@ -423,7 +423,7 @@ vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagn
 
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
-local on_attach = function(_, bufnr)
+local on_attach = function(client, bufnr)
   -- NOTE: Remember that lua is a real programming language, and as such it is possible
   -- to define small helper and utility functions so you don't have to repeat yourself
   -- many times.
@@ -503,6 +503,7 @@ require("mason-lspconfig").setup()
 local servers = {
   efm = require("custom.efm"),
   gopls = {},
+  gitlab_ci_ls = {},
   html = { filetypes = { "html" } },
   lua_ls = {
     Lua = {
@@ -528,6 +529,7 @@ local servers = {
   yamlls = {
     settings = {
       yaml = {
+        customTags = { "!reference sequence" },
         schemas = custom_vars.yaml_schemas or nil,
       },
     },
