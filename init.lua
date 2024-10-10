@@ -506,7 +506,7 @@ local servers = {
   efm = require("custom.efm"),
   gopls = {},
   gitlab_ci_ls = {},
-  html = { filetypes = { "html" } },
+  html = {},
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
