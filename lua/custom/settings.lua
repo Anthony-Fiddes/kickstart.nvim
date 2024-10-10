@@ -29,7 +29,13 @@ vim.opt.inccommand = "split"
 
 vim.opt.spelllang:append("de_de")
 
--- Set tab defaults for text files
+vim.filetype.add({
+  filename = {
+    ["docker-compose.yml"] = "yaml.docker-compose",
+  },
+})
+
+-- Set tab defaults for new text files
 vim.api.nvim_create_autocmd("BufNewFile", {
   pattern = { "*.txt", "*.md" },
   callback = function()
@@ -39,7 +45,7 @@ vim.api.nvim_create_autocmd("BufNewFile", {
   end,
 })
 
--- Set tab defaults for go
+-- Set tab defaults for new go files
 vim.api.nvim_create_autocmd("BufNewFile", {
   pattern = { "*.go" },
   callback = function()

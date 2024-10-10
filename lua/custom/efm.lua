@@ -8,6 +8,7 @@ local yamllint = require("efmls-configs.linters.yamllint")
 local fish = require("efmls-configs.linters.fish")
 local fish_indent = require("efmls-configs.formatters.fish_indent")
 local sqlfluff = require("efmls-configs.linters.sqlfluff")
+local hadolint = require("efmls-configs.linters.hadolint")
 
 -- Extensions/overrides
 local fs = require("efmls-configs.fs")
@@ -20,6 +21,7 @@ sqlfluff = vim.tbl_extend("force", sqlfluff, { lintCommand = sqlfluff_command })
 
 local languages = {
   css = { prettier },
+  dockerfile = { hadolint },
   fish = { fish, fish_indent },
   go = { gofmt, goimports },
   lua = { stylua },

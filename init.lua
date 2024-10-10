@@ -501,6 +501,8 @@ require("mason-lspconfig").setup()
 --  define the property 'filetypes' to the map in question.
 
 local servers = {
+  dockerls = {},
+  docker_compose_language_service = {},
   efm = require("custom.efm"),
   gopls = {},
   gitlab_ci_ls = {},
