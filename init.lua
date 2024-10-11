@@ -86,6 +86,7 @@ require("lazy").setup({
       -- Misc
       "mtoohey31/cmp-fish",
       "hrsh7th/cmp-emoji",
+      "davidsierradz/cmp-conventionalcommits",
     },
   },
 
