@@ -9,6 +9,7 @@ local fish = require("efmls-configs.linters.fish")
 local fish_indent = require("efmls-configs.formatters.fish_indent")
 local sqlfluff = require("efmls-configs.linters.sqlfluff")
 local hadolint = require("efmls-configs.linters.hadolint")
+local gitlint = require("efmls-configs.linters.gitlint")
 
 -- Extensions/overrides
 local fs = require("efmls-configs.fs")
@@ -24,6 +25,7 @@ local languages = {
   dockerfile = { hadolint },
   fish = { fish, fish_indent },
   go = { gofmt, goimports },
+  gitcommit = { gitlint },
   lua = { stylua },
   python = { isort },
   typescript = { eslint, prettier },
