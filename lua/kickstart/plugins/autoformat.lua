@@ -12,7 +12,7 @@ return {
       vim.b.kickstart_autoformat_enabled = not vim.b.kickstart_autoformat_enabled
       print("Setting autoformatting to: " .. tostring(vim.b.kickstart_autoformat_enabled))
     end, {})
-    vim.keymap.set("n", "<leader>ft", ":KickstartFormatToggle<CR>", { desc = "Auto[f]ormat [T]oggle" })
+    vim.keymap.set("n", "<leader>tf", "<cmd>KickstartFormatToggle<CR>", { desc = "[T]oggle Auto[f]ormat" })
 
     -- Create an augroup that is used for managing our formatting autocmds.
     --      We need one augroup per client to make sure that multiple clients
