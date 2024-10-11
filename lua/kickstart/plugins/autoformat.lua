@@ -46,10 +46,12 @@ return {
         end
 
         -- Determine autoformat default value
-        if vim.g.kickstart_autoformat_enabled ~= nil then
-          vim.b.kickstart_autoformat_enabled = vim.g.kickstart_autoformat_enabled
-        else
-          vim.b.kickstart_autoformat_enabled = true
+        if vim.b.kickstart_autoformat_enabled == nil then
+          if vim.g.kickstart_autoformat_enabled ~= nil then
+            vim.b.kickstart_autoformat_enabled = vim.g.kickstart_autoformat_enabled
+          else
+            vim.b.kickstart_autoformat_enabled = true
+          end
         end
 
         -- Create an autocmd that will run *before* we save the buffer.
