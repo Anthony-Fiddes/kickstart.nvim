@@ -7,11 +7,14 @@ return {
     event = "InsertEnter",
     cmd = "Copilot",
     config = function()
-      require("copilot").setup({})
-      require("copilot_cmp").setup({
+      require("copilot").setup({
         suggestion = { enabled = false },
         panel = { enabled = false },
+        filetypes = {
+          yaml = true,
+        },
       })
+      require("copilot_cmp").setup({})
     end,
     enabled = custom_vars.copilot_enabled,
   },
