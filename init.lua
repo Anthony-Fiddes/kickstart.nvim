@@ -360,7 +360,7 @@ vim.defer_fn(function()
       enable = true,
     },
     -- filed an issue on how diff was being weird with + and -
-    highlight = { enable = true, disable = { "gitcommit", "diff" } },
+    highlight = { enable = true },
     indent = {
       enable = true,
       -- it never works well with SQL unfortunately
