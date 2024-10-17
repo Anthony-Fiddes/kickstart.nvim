@@ -20,6 +20,15 @@ require("telescope").setup({
       },
     },
   },
+  extensions = {
+    egrepify = {
+      prefixes = {
+        ["."] = {
+          flag = "hidden",
+        },
+      },
+    },
+  },
 })
 
 -- Enable telescope fzf native, if installed
