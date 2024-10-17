@@ -81,14 +81,28 @@ local function project_files()
   end
 end
 
-local function expanded_fuzzy_find(expand_query)
+local function fuzzy_find_motion(motion)
   return function()
+    local dummy_register = "a"
+    local old_content = vim.fn.getreginfo(dummy_register)
+    -- yank text described by the motion to the dummy register
+    vim.cmd('norm "' .. dummy_register .. "y" .. motion)
+    local selection = vim.fn.getreg(dummy_register)
+    -- if I use this technique to restore registers more often, maybe it should
+    -- be a decorator?
+    vim.fn.setreg(dummy_register, old_content)
+
+    -- unfortunately, I have literally no clue how to call this extension's
+    -- picker with text prefilled programatically...
     local command = "<cmd>Telescope egrepify<cr>"
-    local expansion = vim.fn.expand(expand_query)
-    local keys = vim.api.nvim_replace_termcodes(command, true, false, true) .. expansion
+    local keys = vim.api.nvim_replace_termcodes(command, true, false, true) .. selection
     vim.api.nvim_feedkeys(keys, "n", true)
   end
 end
+
+-- seems like magic, but it works because you don't need to supply a motion if
+-- you've already selected the text that you want to search.
+local fuzzy_find_selection = fuzzy_find_motion("")
 
 -- See `:help telescope.builtin`
 vim.keymap.set("n", "<leader>hh", telescope.oldfiles, { desc = "[hh] Find recently opened files" })
@@ -105,8 +119,10 @@ vim.keymap.set("n", "<leader>fm", telescope.git_status, { desc = "[F]ind [m]odif
 vim.keymap.set("n", "<leader>fl", telescope.git_commits, { desc = "[F]ind in Git [l]og" })
 vim.keymap.set("n", "<leader>p", project_files, { desc = "Find [P]roject Files" })
 vim.keymap.set("n", "<leader>fh", telescope.help_tags, { desc = "[F]ind [H]elp" })
-vim.keymap.set("n", "<leader>fw", expanded_fuzzy_find("<cword>"), { desc = "[F]ind current [W]ord" })
-vim.keymap.set("n", "<leader>fW", expanded_fuzzy_find("<cWORD>"), { desc = "[F]ind current [W]ORD" })
+vim.keymap.set("n", "<leader>fw", fuzzy_find_motion("iw"), { desc = "[F]ind current [W]ord" })
+vim.keymap.set("n", "<leader>fW", fuzzy_find_motion("iW"), { desc = "[F]ind current [W]ORD" })
+vim.keymap.set("n", "<leader>fE", fuzzy_find_motion("E"), { desc = "[F]ind to [E]nd of word" })
+vim.keymap.set("x", "<leader>f", fuzzy_find_selection, { desc = "[F]ind selection" })
 vim.keymap.set("n", "<leader>ff", "<cmd>Telescope egrepify<cr>", { desc = "[F]ind in [f]iles (live_grep)" })
 vim.keymap.set("n", "<leader>fd", telescope.diagnostics, { desc = "[F]ind [D]iagnostics" })
 vim.keymap.set("n", "<leader>fr", telescope.resume, { desc = "[F]ind [R]resume" })
