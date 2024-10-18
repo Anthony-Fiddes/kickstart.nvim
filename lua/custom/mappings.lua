@@ -28,7 +28,7 @@ local function toggle_diagnostics()
     vim.diagnostic.enable()
     vim.w.diag_disabled = false
   else
-    vim.diagnostic.disable()
+    vim.diagnostic.enable(false)
     vim.w.diag_disabled = true
   end
 end
