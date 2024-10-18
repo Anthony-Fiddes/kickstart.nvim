@@ -258,18 +258,6 @@ require("lazy").setup({
   { import = "custom.plugins.languages" },
 })
 
--- [[ Basic Keymaps ]]
-
--- Keymaps for better default experience
--- See `:help vim.keymap.set()`
-vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
-
--- Remap for dealing with word wrap
-vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set("n", "<Up>", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-vim.keymap.set("n", "<Down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
@@ -382,12 +370,6 @@ vim.defer_fn(function()
   })
 end, 0)
 
--- Diagnostic keymaps
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
-vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Open floating [D]iagnostic message" })
-vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
-
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(client, bufnr)
@@ -440,18 +422,6 @@ local on_attach = function(client, bufnr)
     })
   end, { desc = "Format current buffer with LSP" })
 end
-
--- document existing key chains
-require("which-key").add({
-  { "<leader>b", group = "[B]uffer" },
-  { "<leader>c", group = "[C]ode" },
-  { "<leader>f", group = "[F]ind" },
-  { "<leader>h", group = "Git [H]unk" },
-  { "<leader>r", name = "[R]ename" },
-  { "<leader>s", name = "[S]urrounding" },
-  { "<leader>t", name = "[T]oggle" },
-  { "<leader>w", name = "[W]orkspace" },
-})
 
 -- It's very important to do these steps in this order before setting up servers
 -- using lspconfig.

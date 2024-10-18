@@ -76,3 +76,31 @@ vim.api.nvim_create_autocmd("User", {
     vim.keymap.set("n", "<Leader>g", "gq", { buffer = args.buf, remap = true, desc = "Close Fugitive" })
   end,
 })
+
+-- document key chains
+require("which-key").add({
+  { "<leader>b", group = "[B]uffer" },
+  { "<leader>c", group = "[C]ode" },
+  { "<leader>f", group = "[F]ind" },
+  { "<leader>h", group = "Git [H]unk" },
+  { "<leader>r", name = "[R]ename" },
+  { "<leader>s", name = "[S]urrounding" },
+  { "<leader>t", name = "[T]oggle" },
+  { "<leader>w", name = "[W]orkspace" },
+})
+
+-- Diagnostic keymaps
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
+vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Open floating [D]iagnostic message" })
+vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
+
+-- Kickstart keymaps for better default experience
+-- See `:help vim.keymap.set()`
+vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
+
+-- Remap for dealing with word wrap
+vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set("n", "<Up>", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+vim.keymap.set("n", "<Down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
