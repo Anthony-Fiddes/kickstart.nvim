@@ -434,7 +434,7 @@ require("mason-lspconfig").setup()
 --  NOTE: The contents of the following map will be passed to the `settings`
 --  field of the server config. You must look up that documentation yourself.
 
-local servers = {
+local server_settings = {
   dockerls = {},
   docker_compose_language_service = {},
   efm = require("custom.efm"),
@@ -492,8 +492,7 @@ mason_lspconfig.setup_handlers({
     require("lspconfig")[server_name].setup({
       capabilities = capabilities,
       on_attach = on_attach,
-      settings = servers[server_name],
-      init_options = (servers[server_name] or {}).init_options,
+      settings = server_settings[server_name],
     })
   end,
 })
