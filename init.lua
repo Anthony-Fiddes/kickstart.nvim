@@ -373,6 +373,9 @@ end, 0)
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(client, bufnr)
+  if client.name == "yamlls" then
+    vim.print(client.settings)
+  end
   -- NOTE: Remember that lua is a real programming language, and as such it is possible
   -- to define small helper and utility functions so you don't have to repeat yourself
   -- many times.
@@ -428,14 +431,8 @@ end
 require("mason").setup()
 require("mason-lspconfig").setup()
 
--- Enable the following language servers
---  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
---
---  Add any additional override configuration in the following tables. They will be passed to
---  the `settings` field of the server config. You must look up that documentation yourself.
---
---  If you want to override the default filetypes that your language server will attach to you can
---  define the property 'filetypes' to the map in question.
+--  NOTE: The contents of the following map will be passed to the `settings`
+--  field of the server config. You must look up that documentation yourself.
 
 local servers = {
   dockerls = {},
@@ -466,11 +463,9 @@ local servers = {
   ruff_lsp = {},
   ts_ls = {},
   yamlls = {
-    settings = {
-      yaml = {
-        customTags = { "!reference sequence" },
-        schemas = custom_vars.yaml_schemas or nil,
-      },
+    yaml = {
+      customTags = { "!reference sequence" },
+      schemas = custom_vars.yaml_schemas or nil,
     },
   },
 }
