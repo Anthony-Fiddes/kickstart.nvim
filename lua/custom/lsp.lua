@@ -57,10 +57,11 @@ require("mason-lspconfig").setup()
 --  NOTE: The contents of the following map will be passed to the `settings`
 --  field of the server config. You must look up that documentation yourself.
 
-local server_settings = {
+local efm_lsp = require("custom.efm")
+local settings = {
   dockerls = {},
   docker_compose_language_service = {},
-  efm = require("custom.efm"),
+  efm = efm_lsp.settings,
   gopls = {},
   gitlab_ci_ls = {},
   html = {},
@@ -93,6 +94,14 @@ local server_settings = {
   },
 }
 
+local filetypes = {
+  efm = efm_lsp.filetypes,
+}
+
+local init_options = {
+  efm = efm_lsp.init_options,
+}
+
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
@@ -110,7 +119,9 @@ mason_lspconfig.setup_handlers({
     require("lspconfig")[server_name].setup({
       capabilities = capabilities,
       on_attach = on_attach,
-      settings = server_settings[server_name],
+      settings = settings[server_name],
+      filetypes = filetypes[server_name],
+      init_options = init_options[server_name],
     })
   end,
 })
