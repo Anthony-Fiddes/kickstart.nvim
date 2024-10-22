@@ -39,8 +39,10 @@ local languages = {
 
 local efmls_config = {
   filetypes = vim.tbl_keys(languages),
-  rootMarkers = { ".git/" },
-  languages = languages,
+  settings = {
+    rootMarkers = { ".git/" },
+    languages = languages,
+  },
   init_options = {
     documentFormatting = true,
     documentRangeFormatting = true,
