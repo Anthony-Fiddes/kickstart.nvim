@@ -53,42 +53,6 @@ require("lazy").setup({
     },
   },
 
-  {
-    -- Autocompletion
-    "hrsh7th/nvim-cmp",
-    lazy = false,
-    dependencies = {
-      -- Snippet Engine & its associated nvim-cmp source
-      {
-        "L3MON4D3/LuaSnip",
-        -- follow latest release.
-        version = "v2.*",
-        -- install jsregexp (optional!).
-        build = "make install_jsregexp",
-      },
-      "saadparwaiz1/cmp_luasnip",
-
-      -- Adds LSP completion capabilities
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-nvim-lsp-signature-help",
-
-      -- Adds a number of user-friendly snippets
-      "rafamadriz/friendly-snippets",
-
-      -- Automatically close symbols like ", ', (, etc.
-      "windwp/nvim-autopairs",
-
-      -- Add completion from buffer contents / nearby file paths
-      "hrsh7th/cmp-buffer",
-      "FelipeLema/cmp-async-path",
-
-      -- Misc
-      "mtoohey31/cmp-fish",
-      "hrsh7th/cmp-emoji",
-      "davidsierradz/cmp-conventionalcommits",
-    },
-  },
-
   -- Useful plugin to show you pending keybinds.
   { "folke/which-key.nvim", opts = {} },
   {
@@ -371,75 +335,6 @@ end, 0)
 
 -- Setup neovim lua configuration
 require("neodev").setup()
-
--- [[ Configure nvim-cmp ]]
--- See `:help cmp`
-local cmp = require("cmp")
-require("nvim-autopairs").setup({})
-local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
-local luasnip = require("luasnip")
-require("luasnip.loaders.from_vscode").lazy_load()
-luasnip.config.setup({})
-
-cmp.setup({
-  snippet = {
-    expand = function(args)
-      luasnip.lsp_expand(args.body)
-    end,
-  },
-  -- These preselect/completion settings automatically highlight the first menu
-  -- option. Preselect keeps the lsp from choosing an option for you.
-  --
-  -- Not 100% sure why the completion setting makes it work. Without it nothing
-  -- is preselected. It also didn't work to set vim's completeopt directly.
-  preselect = cmp.PreselectMode.None,
-  completion = { completeopt = "menu,menuone" },
-  mapping = cmp.mapping.preset.insert({
-    ["<C-n>"] = cmp.mapping.select_next_item(),
-    ["<C-p>"] = cmp.mapping.select_prev_item(),
-    ["<C-s>"] = cmp.mapping.scroll_docs(-4),
-    ["<C-t>"] = cmp.mapping.scroll_docs(4),
-    ["<C-Space>"] = cmp.mapping.complete({}),
-    ["<CR>"] = cmp.mapping.confirm({
-      behavior = cmp.ConfirmBehavior.Insert,
-      select = true,
-    }),
-    ["<S-CR>"] = cmp.mapping.confirm({
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    }),
-    ["<Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_locally_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
-    ["<S-Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.locally_jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
-  }),
-  sources = {
-    { name = "nvim_lsp" },
-    { name = "nvim_lsp_signature_help" },
-    { name = "luasnip" },
-    { name = "copilot" },
-    { name = "codeium" },
-    { name = "fish" },
-    { name = "buffer" },
-    { name = "async_path" },
-    { name = "emoji" },
-  },
-})
 
 require("custom.lsp")
 require("custom.settings")
