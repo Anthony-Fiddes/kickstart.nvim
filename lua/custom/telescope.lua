@@ -32,9 +32,10 @@ require("telescope").setup({
 })
 
 -- Enable telescope fzf native, if installed
-pcall(require("telescope").load_extension, "fzf")
-pcall(require("telescope").load_extension, "egrepify")
-local telescope = require("telescope.builtin")
+local telescope = require("telescope")
+pcall(telescope.load_extension, "fzf")
+pcall(telescope.load_extension, "egrepify")
+local builtin = require("telescope.builtin")
 
 -- Following functions heavily inspired by or taken from
 -- https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes
@@ -75,9 +76,9 @@ local function project_files()
 
   local git_root = get_git_root()
   if not git_root then
-    telescope.find_files(opts)
+    builtin.find_files(opts)
   else
-    telescope.git_files(opts)
+    builtin.git_files(opts)
   end
 end
 
@@ -91,12 +92,7 @@ local function fuzzy_find_motion(motion)
     -- if I use this technique to restore registers more often, maybe it should
     -- be a decorator?
     vim.fn.setreg(dummy_register, old_content)
-
-    -- unfortunately, I have literally no clue how to call this extension's
-    -- picker with text prefilled programatically...
-    local command = "<cmd>Telescope egrepify<cr>"
-    local keys = vim.api.nvim_replace_termcodes(command, true, false, true) .. selection
-    vim.api.nvim_feedkeys(keys, "n", true)
+    telescope.extensions.egrepify.egrepify({ default_text = selection })
   end
 end
 
@@ -105,29 +101,29 @@ end
 local fuzzy_find_selection = fuzzy_find_motion("")
 
 -- See `:help telescope.builtin`
-vim.keymap.set("n", "<leader>hh", telescope.oldfiles, { desc = "[hh] Find recently opened files" })
-vim.keymap.set("n", "<leader><space>", telescope.buffers, { desc = "[ ] Find existing buffers" })
+vim.keymap.set("n", "<leader>hh", builtin.oldfiles, { desc = "[hh] Find recently opened files" })
+vim.keymap.set("n", "<leader><space>", builtin.buffers, { desc = "[ ] Find existing buffers" })
 vim.keymap.set("n", "<leader>/", function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.
-  telescope.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+  builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
     winblend = 10,
     previewer = false,
   }))
 end, { desc = "[/] Fuzzily search in current buffer", noremap = true })
 vim.keymap.set("n", "<C-f>", "<leader>/", { remap = true })
-vim.keymap.set("n", "<leader>fm", telescope.git_status, { desc = "[F]ind [m]odified files (using Git Status)" })
-vim.keymap.set("n", "<leader>fl", telescope.git_commits, { desc = "[F]ind in Git [l]og" })
+vim.keymap.set("n", "<leader>fm", builtin.git_status, { desc = "[F]ind [m]odified files (using Git Status)" })
+vim.keymap.set("n", "<leader>fl", builtin.git_commits, { desc = "[F]ind in Git [l]og" })
 vim.keymap.set("n", "<leader>p", project_files, { desc = "Find [P]roject Files" })
-vim.keymap.set("n", "<leader>fh", telescope.help_tags, { desc = "[F]ind [H]elp" })
+vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "[F]ind [H]elp" })
 vim.keymap.set("n", "<leader>fw", fuzzy_find_motion("iw"), { desc = "[F]ind current [W]ord" })
 vim.keymap.set("n", "<leader>fW", fuzzy_find_motion("iW"), { desc = "[F]ind current [W]ORD" })
 vim.keymap.set("n", "<leader>fE", fuzzy_find_motion("E"), { desc = "[F]ind to [E]nd of word" })
 vim.keymap.set("x", "<leader>f", fuzzy_find_selection, { desc = "[F]ind selection" })
 vim.keymap.set("n", "<leader>ff", "<cmd>Telescope egrepify<cr>", { desc = "[F]ind in [f]iles (live_grep)" })
-vim.keymap.set("n", "<leader>fd", telescope.diagnostics, { desc = "[F]ind [D]iagnostics" })
-vim.keymap.set("n", "<leader>fr", telescope.resume, { desc = "[F]ind [R]resume" })
-vim.keymap.set("n", "<leader>fk", telescope.keymaps, { desc = "[F]ind [k]eymaps" })
-vim.keymap.set("n", "<leader>f/", telescope.search_history, { desc = "[F]ind in search [/] history" })
-vim.keymap.set("n", "<leader>f:", telescope.command_history, { desc = "[F]ind in command [:] history" })
-vim.keymap.set("n", '<leader>f"', telescope.registers, { desc = '[F]ind in registers ["]' })
-vim.keymap.set("n", "<leader>fc", telescope.commands, { desc = "[F]ind [C]ommands" })
+vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "[F]ind [D]iagnostics" })
+vim.keymap.set("n", "<leader>fr", builtin.resume, { desc = "[F]ind [R]resume" })
+vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "[F]ind [k]eymaps" })
+vim.keymap.set("n", "<leader>f/", builtin.search_history, { desc = "[F]ind in search [/] history" })
+vim.keymap.set("n", "<leader>f:", builtin.command_history, { desc = "[F]ind in command [:] history" })
+vim.keymap.set("n", '<leader>f"', builtin.registers, { desc = '[F]ind in registers ["]' })
+vim.keymap.set("n", "<leader>fc", builtin.commands, { desc = "[F]ind [C]ommands" })
