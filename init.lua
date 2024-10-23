@@ -330,9 +330,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   pattern = "*",
 })
 
--- Setup neovim lua configuration
-require("neodev").setup()
-
 require("custom.lsp")
 require("custom.settings")
 require("custom.mappings")
