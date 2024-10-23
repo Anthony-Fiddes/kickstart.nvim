@@ -18,6 +18,9 @@ return {
   {
     "folke/zen-mode.nvim",
     cmd = "ZenMode",
+    init = function()
+      vim.keymap.set("n", "<leader>tz", ":ZenMode<CR>", { desc = "[T]oggle [Z]enMode" })
+    end,
   },
   {
     "rcarriga/nvim-notify",
