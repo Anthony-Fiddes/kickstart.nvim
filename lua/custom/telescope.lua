@@ -119,3 +119,4 @@ vim.keymap.set("n", "<leader>f/", builtin.search_history, { desc = "[F]ind in se
 vim.keymap.set("n", "<leader>f:", builtin.command_history, { desc = "[F]ind in command [:] history" })
 vim.keymap.set("n", '<leader>f"', builtin.registers, { desc = '[F]ind in registers ["]' })
 vim.keymap.set("n", "<leader>fc", builtin.commands, { desc = "[F]ind [C]ommands" })
+vim.keymap.set("n", "<leader>fb", builtin.git_branches, { desc = "[F]ind [B]ranches" })
