@@ -36,6 +36,7 @@ local builtin = require("telescope.builtin")
 local _is_inside_work_tree = {}
 
 -- Returns nil if not in a git project
+---@return nil | string
 local function get_git_root()
   -- I can just use the current directory since mini.misc handles auto changing
   -- it upon entering a new buffer.
