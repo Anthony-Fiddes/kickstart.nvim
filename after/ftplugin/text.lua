@@ -13,8 +13,18 @@ for _, name in ipairs(dont_zen_names) do
     break
   end
 end
--- for some reason the autocmd is required, calling the lua function puts my
--- cursor in the wrong place.
+
 if zen then
-  vim.cmd("autocmd VimEnter *.txt ZenMode")
+  local zen_mode = require("zen-mode")
+  local buf = vim.api.nvim_get_current_buf()
+  local zen_text_augroup = vim.api.nvim_create_augroup("zen-text", { clear = true })
+  -- the event has to be VimEnter, probably because it needs certain UI elements
+  -- to be loaded.
+  vim.api.nvim_create_autocmd({ "VimEnter" }, {
+    group = zen_text_augroup,
+    buffer = buf,
+    callback = function()
+      zen_mode.open()
+    end,
+  })
 end
