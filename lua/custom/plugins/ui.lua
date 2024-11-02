@@ -21,6 +21,13 @@ return {
     init = function()
       vim.keymap.set("n", "<leader>tz", ":ZenMode<CR>", { desc = "[T]oggle [Z]enMode" })
     end,
+    opts = {
+      plugins = {
+        kitty = {
+          enabled = true,
+        },
+      },
+    },
   },
   {
     "rcarriga/nvim-notify",
