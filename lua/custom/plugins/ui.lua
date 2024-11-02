@@ -24,7 +24,7 @@ return {
     opts = {
       plugins = {
         kitty = {
-          enabled = true,
+          enabled = os.getenv("KITTY_PID") ~= nil,
         },
       },
     },
