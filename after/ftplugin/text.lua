@@ -20,11 +20,18 @@ if zen then
   local zen_text_augroup = vim.api.nvim_create_augroup("zen-text", { clear = true })
   -- the event has to be VimEnter, probably because it needs certain UI elements
   -- to be loaded.
+  -- NOTE: this only triggers when opening a text file from the command line. It
+  -- doesn't appear to work when reopening a persisted session that has a .txt
+  -- buffer open.
   vim.api.nvim_create_autocmd({ "VimEnter" }, {
     group = zen_text_augroup,
     buffer = buf,
     callback = function()
       zen_mode.open()
+      vim.keymap.set("n", "ZZ", function()
+        zen_mode.close()
+        vim.cmd("x")
+      end, { buffer = buf })
     end,
   })
 end
