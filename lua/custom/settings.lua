@@ -66,6 +66,9 @@ vim.o.completeopt = "menuone"
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
+-- mainly to make markdown prettier
+vim.o.conceallevel = 2
+
 vim.filetype.add({
   filename = {
     ["docker-compose.yml"] = "yaml.docker-compose",

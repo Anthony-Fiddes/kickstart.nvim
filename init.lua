@@ -189,6 +189,8 @@ require("lazy").setup({
         "gitignore",
         "gitattributes",
         "lua",
+        "markdown",
+        "markdown_inline",
         "python",
         "sql",
         "javascript",
