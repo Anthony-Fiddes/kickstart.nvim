@@ -52,7 +52,7 @@ return {
     "echasnovski/mini.files",
     version = false,
     dependencies = {
-      "nvim-tree/nvim-web-devicons",
+      "echasnovski/mini.icons",
     },
     config = function()
       require("mini.files").setup({
