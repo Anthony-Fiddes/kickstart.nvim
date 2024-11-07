@@ -64,6 +64,7 @@ local settings = {
   efm = efm_lsp.settings,
   gopls = {},
   gitlab_ci_ls = {},
+  helm_ls = {},
   html = {},
   lua_ls = {
     Lua = {

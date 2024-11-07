@@ -188,6 +188,7 @@ require("lazy").setup({
         "git_rebase",
         "gitignore",
         "gitattributes",
+        "helm",
         "lua",
         "markdown",
         "markdown_inline",
