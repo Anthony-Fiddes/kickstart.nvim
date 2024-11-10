@@ -5,17 +5,19 @@ local custom_vars = require("custom.vars")
 local on_attach = function(_, bufnr)
   -- In this case, we create a function that lets us more easily define mappings specific
   -- for LSP related items. It sets the mode, buffer and description for us each time.
-  local nmap = function(keys, func, desc)
-    if desc then
-      desc = "LSP: " .. desc
+  local map_func = function(mode)
+    return function(keys, func, desc)
+      if desc then
+        desc = "LSP: " .. desc
+      end
+      vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = desc })
     end
-
-    vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
   end
+  local nmap = map_func("n")
+  local vmap = map_func("v")
 
   nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
   nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
-  nmap("<leader>fo", ":Format<CR>", "[Fo]rmat")
 
   local telescope = require("telescope.builtin")
   nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
@@ -39,14 +41,18 @@ local on_attach = function(_, bufnr)
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, "[W]orkspace [L]ist Folders")
 
-  -- Create a command `:Format` local to the LSP buffer
-  vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
+  local format_buffer = function()
     vim.lsp.buf.format({
       filter = function(client)
         return not custom_vars.banned_formatters[client.name]
       end,
     })
-  end, { desc = "Format current buffer with LSP" })
+  end
+
+  -- Create a command `:Format` local to the LSP buffer
+  vim.api.nvim_buf_create_user_command(bufnr, "Format", format_buffer, { desc = "Format current buffer with LSP" })
+  nmap("<leader>fo", ":Format<CR>", "[Fo]rmat")
+  vmap("<leader>fo", format_buffer, "[Fo]rmat")
 end
 
 -- It's very important to do these steps in this order before setting up servers

@@ -139,7 +139,7 @@ return {
     vim.keymap.set("n", "<leader>fw", fuzzy_find_motion("iw"), { desc = "[F]ind current [W]ord" })
     vim.keymap.set("n", "<leader>fW", fuzzy_find_motion("iW"), { desc = "[F]ind current [W]ORD" })
     vim.keymap.set("n", "<leader>fE", fuzzy_find_motion("E"), { desc = "[F]ind to [E]nd of word" })
-    vim.keymap.set("x", "<leader>f", fuzzy_find_selection, { desc = "[F]ind selection" })
+    vim.keymap.set("x", "<leader>ff", fuzzy_find_selection, { desc = "[F]ind selection" })
     vim.keymap.set("n", "<leader>ff", "<cmd>Telescope egrepify<CR>", { desc = "[F]ind in [f]iles (live_grep)" })
     vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "[F]ind [D]iagnostics" })
     vim.keymap.set("n", "<leader>fr", builtin.resume, { desc = "[F]ind [R]resume" })
