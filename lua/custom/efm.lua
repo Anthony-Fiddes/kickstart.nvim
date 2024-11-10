@@ -34,7 +34,7 @@ local languages = {
   json = { prettier },
   markdown = { prettier },
   sql = { sqlfluff },
-  yaml = { yamllint },
+  yaml = { yamllint, prettier },
 }
 
 local efmls_config = {
