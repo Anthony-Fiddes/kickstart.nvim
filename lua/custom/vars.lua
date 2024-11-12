@@ -13,4 +13,5 @@ return {
   -- see examples here if you want to set this:
   -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#yamlls
   yaml_schemas = nil,
+  gitlab_domains = {},
 }

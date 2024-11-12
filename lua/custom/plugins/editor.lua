@@ -32,6 +32,12 @@ return {
   },
   "tpope/vim-rhubarb",
   {
+    "shumphrey/fugitive-gitlab.vim",
+    config = function()
+      vim.g.fugitive_gitlab_domains = require("custom.vars").gitlab_domains
+    end,
+  },
+  {
     "creativenull/efmls-configs-nvim",
     version = "v1.x.x", -- version is optional, but recommended
     dependencies = { "neovim/nvim-lspconfig" },
