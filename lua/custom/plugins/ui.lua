@@ -38,4 +38,10 @@ return {
       vim.notify = notify
     end,
   },
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    -- didn't work well on some computers with an event = "VeryLazy"
+    -- also, there's a problem where using the builtin command to "toggle"
+    -- context just makes it not work.
+  },
 }
