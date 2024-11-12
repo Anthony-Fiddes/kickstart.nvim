@@ -251,8 +251,4 @@ return {
     opts = {},
   },
   { "akinsho/git-conflict.nvim", version = "*", config = true },
-  {
-    "nvim-treesitter/nvim-treesitter-context",
-    event = "VeryLazy",
-  },
 }
