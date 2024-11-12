@@ -56,25 +56,6 @@ vim.keymap.set("n", "<PageDown>", "<PageDown>zz", { noremap = true })
 vim.keymap.set("n", "<leader>nh", ":nohlsearch<CR>", { desc = "[N]o [H]ighlight" })
 vim.keymap.set({ "n", "v" }, "c", '"_c')
 
-local function cmd(command)
-  return function()
-    vim.cmd(command)
-  end
-end
-
--- Fugitive
-vim.keymap.set("n", "<Leader>g", cmd("G"), { desc = "[G]it" })
-vim.api.nvim_create_autocmd("User", {
-  pattern = "FugitiveIndex",
-  callback = function(args)
-    vim.keymap.set("n", "cc", cmd("G commit -v"), { buffer = args.buf, desc = "Git commit" })
-    vim.keymap.set("n", "ca", cmd("G commit --amend -v"), { buffer = args.buf, desc = "Git amend" })
-    vim.keymap.set("n", "p", cmd("G push"), { buffer = args.buf, noremap = true, desc = "Git push" })
-    vim.keymap.set("n", "P", cmd("G pull"), { buffer = args.buf, noremap = true, desc = "Git pull" })
-    vim.keymap.set("n", "<Leader>g", "gq", { buffer = args.buf, remap = true, desc = "Close Fugitive" })
-  end,
-})
-
 -- document key chains
 require("which-key").add({
   { "<leader>b", group = "[B]uffer" },

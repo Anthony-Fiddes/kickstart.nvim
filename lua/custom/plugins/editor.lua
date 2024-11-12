@@ -1,4 +1,36 @@
 return {
+  -- Git related plugins
+  {
+    "tpope/vim-fugitive",
+    config = function()
+      local function cmd(command)
+        return function()
+          if type(command) == "table" then
+            for _, c in pairs(command) do
+              vim.cmd(c)
+            end
+          else
+            vim.cmd(command)
+          end
+        end
+      end
+
+      -- Fugitive
+      -- :update before running :G so that the changes are up to date
+      vim.keymap.set("n", "<Leader>g", cmd({ "update", "G" }), { desc = "[G]it" })
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "FugitiveIndex",
+        callback = function(args)
+          vim.keymap.set("n", "cc", cmd("G commit -v"), { buffer = args.buf, desc = "Git commit" })
+          vim.keymap.set("n", "ca", cmd("G commit --amend -v"), { buffer = args.buf, desc = "Git amend" })
+          vim.keymap.set("n", "p", cmd("G push"), { buffer = args.buf, noremap = true, desc = "Git push" })
+          vim.keymap.set("n", "P", cmd("G pull"), { buffer = args.buf, noremap = true, desc = "Git pull" })
+          vim.keymap.set("n", "<Leader>g", "gq", { buffer = args.buf, remap = true, desc = "Close Fugitive" })
+        end,
+      })
+    end,
+  },
+  "tpope/vim-rhubarb",
   {
     "creativenull/efmls-configs-nvim",
     version = "v1.x.x", -- version is optional, but recommended
