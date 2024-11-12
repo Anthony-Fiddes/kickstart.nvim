@@ -109,7 +109,8 @@ require("lazy").setup({
           return "<Ignore>"
         end
         map({ "n", "v" }, "<Leader>hn", next_hunk, "[hn] Jump to next hunk", true)
-        map({ "n", "v" }, "]h", next_hunk, "[hn] Jump to next hunk", true)
+        map({ "n", "v" }, "]h", next_hunk, "Jump to next hunk", true)
+
         local function prev_hunk()
           if vim.wo.diff then
             return "[c"
@@ -120,7 +121,7 @@ require("lazy").setup({
           return "<Ignore>"
         end
         map({ "n", "v" }, "<Leader>hN", prev_hunk, "[hN] Jump to previous hunk", true)
-        map({ "n", "v" }, "[h", prev_hunk, "[hN] Jump to previous hunk", true)
+        map({ "n", "v" }, "[h", prev_hunk, "Jump to previous hunk", true)
       end,
     },
   },
