@@ -76,6 +76,8 @@ vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldtext = ""
 -- don't fold code by default, please
 vim.opt.foldlevelstart = 99
+-- don't add a bunch of dots after the foldtext...
+vim.opt.fillchars = { fold = " " }
 
 vim.filetype.add({
   filename = {
