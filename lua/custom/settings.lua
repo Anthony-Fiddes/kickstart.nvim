@@ -69,6 +69,14 @@ vim.o.termguicolors = true
 -- mainly to make markdown prettier
 vim.o.conceallevel = 2
 
+-- use treesitter's folding capabilities
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+-- just show the code with highlighting
+vim.opt.foldtext = ""
+-- don't fold code by default, please
+vim.opt.foldlevelstart = 99
+
 vim.filetype.add({
   filename = {
     ["docker-compose.yml"] = "yaml.docker-compose",
