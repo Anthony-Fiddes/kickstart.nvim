@@ -170,7 +170,8 @@ require("lazy").setup({
   {
     -- Highlight, edit, and navigate code
     "nvim-treesitter/nvim-treesitter",
-    event = { "VeryLazy" },
+    -- foldexpr doesn't work on files opened from a previous session if this is lazy loaded, so it's just not worth it...
+    lazy = false,
     main = "nvim-treesitter.configs",
     opts = {
       -- Add languages to be installed here that you want installed for treesitter
