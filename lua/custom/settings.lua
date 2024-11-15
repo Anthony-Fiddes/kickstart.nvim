@@ -85,9 +85,12 @@ vim.filetype.add({
   },
 })
 
+local augroup = vim.api.nvim_create_augroup("custom_settings", { clear = true })
+
 -- Set tab defaults for new text files
 vim.api.nvim_create_autocmd("BufNewFile", {
   pattern = { "*.txt", "*.md" },
+  group = augroup,
   callback = function()
     vim.opt_local.tabstop = 2
     vim.opt_local.expandtab = true
@@ -98,6 +101,7 @@ vim.api.nvim_create_autocmd("BufNewFile", {
 -- Set tab defaults for new go files
 vim.api.nvim_create_autocmd("BufNewFile", {
   pattern = { "*.go" },
+  group = augroup,
   callback = function()
     vim.opt_local.tabstop = 4
     vim.opt_local.expandtab = false
