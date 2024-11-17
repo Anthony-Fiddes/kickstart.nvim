@@ -161,7 +161,14 @@ require("lazy").setup({
     },
     config = function()
       require("Comment").setup({
-        pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
+        pre_hook = function(ctx)
+          -- fix commentstring for helm files according to
+          -- https://github.com/numToStr/Comment.nvim/issues/172
+          if vim.bo.filetype == "helm" then
+            return vim.bo.commentstring
+          end
+          return require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook()(ctx)
+        end,
       })
     end,
     event = "VeryLazy",
