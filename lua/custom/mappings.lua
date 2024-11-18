@@ -41,11 +41,6 @@ vim.keymap.set("n", "<leader>th", ":set hlsearch!<CR>", { desc = "[T]oggle Searc
 vim.keymap.set("n", "<leader>tl", ":set list!<CR>", { desc = "[T]oggle [L]ist (show/hide white space)" })
 vim.keymap.set("n", "<leader>ts", ":set spell!<CR>", { desc = "[T]oggle [S]pellcheck" })
 
--- Yank quotes without whitespace
-vim.keymap.set("o", 'a"', '2i"', { desc = 'Yank in " quote without whitespace' })
-vim.keymap.set("o", "a'", "2i'", { desc = "Yank in ' quote without whitespace" })
-vim.keymap.set("o", "a`", "2i`", { desc = "Yank in ` quote without whitespace" })
-
 -- Movement
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { noremap = true })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { noremap = true })
