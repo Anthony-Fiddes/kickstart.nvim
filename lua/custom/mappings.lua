@@ -49,6 +49,7 @@ vim.keymap.set("n", "<PageDown>", "<PageDown>zz", { noremap = true })
 
 -- Misc
 vim.keymap.set("n", "<leader>nh", ":nohlsearch<CR>", { desc = "[N]o [H]ighlight" })
+vim.keymap.set("n", "<esc>", ":nohlsearch<CR>", { desc = "No Highlight" })
 vim.keymap.set({ "n", "v" }, "c", '"_c')
 
 -- document key chains
