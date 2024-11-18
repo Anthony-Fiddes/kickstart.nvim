@@ -66,27 +66,6 @@ return {
     end,
   },
   {
-    "echasnovski/mini.bufremove",
-    version = false,
-    config = true,
-    keys = {
-      {
-        "<leader>bd",
-        function()
-          require("mini.bufremove").delete(0, false)
-        end,
-        desc = "[B]uffer [D]elete",
-      },
-      {
-        "<leader>bD",
-        function()
-          require("mini.bufremove").delete(0, true)
-        end,
-        desc = "[B]uffer [D]elete (Force)",
-      },
-    },
-  },
-  {
     "echasnovski/mini.files",
     version = false,
     dependencies = {
