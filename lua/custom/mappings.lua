@@ -58,7 +58,6 @@ vim.keymap.set({ "n", "v" }, "c", '"_c')
 
 -- document key chains
 require("which-key").add({
-  { "<leader>b", group = "[B]uffer" },
   { "<leader>c", group = "[C]ode" },
   { "<leader>f", group = "[F]ind" },
   { "<leader>h", group = "Git [H]unk" },

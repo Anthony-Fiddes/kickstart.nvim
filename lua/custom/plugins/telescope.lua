@@ -150,5 +150,6 @@ return {
     vim.keymap.set("n", "<leader>fc", builtin.commands, { desc = "[F]ind [C]ommands" })
     vim.keymap.set("n", "<leader>fb", builtin.git_branches, { desc = "[F]ind [B]ranches" })
     vim.keymap.set("n", "<leader>fu", "<cmd>Telescope undo<CR>", { desc = "[F]ind [U]ndo" })
+    vim.keymap.set("n", "<leader>b", builtin.buffers, { desc = "[F]ind [B]uffers" })
   end,
 }
