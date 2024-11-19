@@ -155,25 +155,26 @@ require("lazy").setup({
 
   -- "gc" to comment visual regions/lines
   {
-    "numToStr/Comment.nvim",
-    dependencies = {
-      "JoosepAlviste/nvim-ts-context-commentstring",
-    },
+    "echasnovski/mini.comment",
+    version = false,
     config = function()
-      local pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook()
-      require("Comment").setup({
-        pre_hook = function(ctx)
-          -- fix commentstring for helm files according to
-          -- https://github.com/numToStr/Comment.nvim/issues/172
-          if vim.bo.filetype == "helm" then
-            return vim.bo.commentstring
-          end
-          return pre_hook(ctx)
-        end,
+      local ts_context_commentstring = require("ts_context_commentstring")
+      ts_context_commentstring.setup({ enable_autocmd = false })
+      local calculate_commentstring = function()
+        -- fix commentstring for helm files similar to
+        -- https://github.com/numToStr/Comment.nvim/issues/172
+        if vim.bo.filetype == "helm" then
+          return vim.bo.commentstring
+        end
+        return ts_context_commentstring.calculate_commentstring() or vim.bo.commentstring
+      end
+
+      require("mini.comment").setup({
+        options = { custom_commentstring = calculate_commentstring },
       })
     end,
     event = "VeryLazy",
-    opts = {},
+    dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
   },
   {
     -- Highlight, edit, and navigate code
@@ -268,7 +269,6 @@ require("lazy").setup({
     },
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
-      "JoosepAlviste/nvim-ts-context-commentstring",
       "windwp/nvim-ts-autotag",
     },
     build = ":TSUpdate",
