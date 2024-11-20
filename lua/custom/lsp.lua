@@ -28,9 +28,6 @@ local on_attach = function(_, bufnr)
   -- I removed that because it doesn't seem super useful (unless I was working
   -- on a massive code base).
   nmap("<leader>fs", telescope.lsp_dynamic_workspace_symbols, "[F]ind [S]ymbols")
-
-  -- See `:help K` for why this keymap
-  nmap("K", vim.lsp.buf.hover, "Hover Documentation")
   nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
 
   -- Lesser used LSP functionality
