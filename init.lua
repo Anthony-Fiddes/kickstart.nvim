@@ -153,29 +153,6 @@ require("lazy").setup({
     end,
   },
 
-  -- "gc" to comment visual regions/lines
-  {
-    "echasnovski/mini.comment",
-    version = false,
-    config = function()
-      local ts_context_commentstring = require("ts_context_commentstring")
-      ts_context_commentstring.setup({ enable_autocmd = false })
-      local calculate_commentstring = function()
-        -- fix commentstring for helm files similar to
-        -- https://github.com/numToStr/Comment.nvim/issues/172
-        if vim.bo.filetype == "helm" then
-          return vim.bo.commentstring
-        end
-        return ts_context_commentstring.calculate_commentstring() or vim.bo.commentstring
-      end
-
-      require("mini.comment").setup({
-        options = { custom_commentstring = calculate_commentstring },
-      })
-    end,
-    event = "VeryLazy",
-    dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
-  },
   {
     -- Highlight, edit, and navigate code
     "nvim-treesitter/nvim-treesitter",
