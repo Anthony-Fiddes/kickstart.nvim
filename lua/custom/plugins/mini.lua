@@ -113,6 +113,8 @@ return {
         return vim.fn.fnamemodify(buf_path, ":h")
       end
       mini_misc.setup_auto_root({ ".git", "package.json", "Makefile" }, fallback)
+
+      require("mini.bracketed").setup()
     end,
   },
 }
