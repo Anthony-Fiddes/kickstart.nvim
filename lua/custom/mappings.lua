@@ -51,6 +51,9 @@ vim.keymap.set("n", "<PageDown>", "<PageDown>zz", { noremap = true })
 vim.keymap.set("n", "<leader>nh", ":nohlsearch<CR>", { desc = "[N]o [H]ighlight" })
 vim.keymap.set("n", "<esc>", ":nohlsearch<CR>", { desc = "No Highlight", silent = true })
 vim.keymap.set({ "n", "v" }, "c", '"_c')
+-- this is pretty much always what I mean to do when I press . with a visual
+-- selection
+vim.keymap.set("x", ".", ":norm .<CR>")
 
 -- document key chains
 require("which-key").add({
