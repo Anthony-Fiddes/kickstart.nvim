@@ -54,6 +54,7 @@ return {
         egrepify = {
           mappings = {
             i = {
+              -- useful since ctrl-h on Linux tends to map to backspace
               ["<A-h>"] = egrep_actions.toggle_hidden,
             },
           },
