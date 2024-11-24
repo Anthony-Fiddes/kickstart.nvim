@@ -25,8 +25,10 @@ return {
     },
   },
   config = function()
+    local telescope = require("telescope")
     local actions = require("telescope.actions")
-    require("telescope").setup({
+    local egrep_actions = require("telescope._extensions.egrepify.actions")
+    telescope.setup({
       defaults = {
         mappings = {
           i = {
@@ -48,10 +50,18 @@ return {
           },
         },
       },
+      extensions = {
+        egrepify = {
+          mappings = {
+            i = {
+              ["<A-h>"] = egrep_actions.toggle_hidden,
+            },
+          },
+        },
+      },
     })
 
     -- Enable telescope fzf native, if installed
-    local telescope = require("telescope")
     pcall(telescope.load_extension, "fzf")
     pcall(telescope.load_extension, "egrepify")
     pcall(telescope.load_extension, "undo")
