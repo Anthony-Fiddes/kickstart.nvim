@@ -100,7 +100,7 @@ require("lazy").setup({
             return "]c"
           end
           vim.schedule(function()
-            gs.next_hunk()
+            gs.nav_hunk("next")
           end)
           return "<Ignore>"
         end
@@ -112,7 +112,7 @@ require("lazy").setup({
             return "[c"
           end
           vim.schedule(function()
-            gs.next_hunk()
+            gs.nav_hunk("prev")
           end)
           return "<Ignore>"
         end
