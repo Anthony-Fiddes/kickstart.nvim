@@ -53,8 +53,9 @@ vim.o.undofile = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
--- Keep signcolumn on by default
-vim.wo.signcolumn = "yes"
+-- mainly for gitsigns, so I can see staged vs unstaged content. Taken from:
+-- https://github.com/lewis6991/gitsigns.nvim/issues/1102
+vim.wo.signcolumn = "auto:1-2"
 
 -- Decrease update time
 vim.o.updatetime = 250
