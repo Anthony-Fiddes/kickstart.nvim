@@ -71,7 +71,7 @@ require("lazy").setup({
           if expr == nil then
             expr = false
           end
-          vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc, expr = expr })
+          vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc, expr = expr, noremap = true })
         end
 
         local gs = require("gitsigns")
