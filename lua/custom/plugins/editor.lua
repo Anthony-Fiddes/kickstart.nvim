@@ -117,6 +117,8 @@ return {
     },
     opts = { skipInsignificantPunctuation = false },
   },
+  -- automatically converts a string to an f-string or template string when a
+  -- variable is referenced in python/javascript/lua
   {
     "chrisgrieser/nvim-puppeteer",
     lazy = false, -- plugin lazy-loads itself. Can also load on filetypes.
