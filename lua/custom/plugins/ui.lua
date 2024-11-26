@@ -30,7 +30,8 @@ return {
   {
     "nvim-treesitter/nvim-treesitter-context",
     -- didn't work well on some computers with an event = "VeryLazy"
-    -- also, there's a problem where using the builtin command to "toggle"
-    -- context just makes it not work.
+    config = function()
+      vim.keymap.set("n", "<leader>tc", ":TSContextToggle<CR>", { desc = "[T]oggle TS [C]ontext" })
+    end,
   },
 }
