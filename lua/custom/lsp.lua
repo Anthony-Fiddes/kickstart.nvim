@@ -62,6 +62,7 @@ require("mason-lspconfig").setup()
 
 local efm_lsp = require("custom.efm")
 local settings = {
+  bashls = {},
   dockerls = {},
   docker_compose_language_service = {},
   efm = efm_lsp.settings,
