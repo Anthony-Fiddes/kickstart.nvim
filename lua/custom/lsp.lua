@@ -89,7 +89,7 @@ local settings = {
       },
     },
   },
-  ruff_lsp = {},
+  ruff = {},
   ts_ls = {},
   yamlls = {
     yaml = {
