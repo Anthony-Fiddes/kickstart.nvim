@@ -41,7 +41,7 @@ local on_attach = function(_, bufnr)
   local format_buffer = function()
     vim.lsp.buf.format({
       filter = function(client)
-        return not custom_vars.banned_formatters[client.name]
+        return not custom_vars.formatting.banned_lsps[client.name]
       end,
     })
   end
