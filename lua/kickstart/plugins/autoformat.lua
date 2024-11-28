@@ -40,13 +40,16 @@ return {
         local bufnr = args.buf
 
         -- Only attach to clients that support document formatting
-        local banned_formatters = require("custom.vars").banned_formatters
-        if not client.server_capabilities.documentFormattingProvider or banned_formatters[client.name] then
+        local formatting = require("custom.vars").formatting
+        local banned_lsps = formatting.banned_lsps
+        if not client.server_capabilities.documentFormattingProvider or banned_lsps[client.name] then
           return
         end
 
         -- Determine autoformat default value
-        if vim.b.kickstart_autoformat_enabled == nil then
+        if formatting.ignored_files[vim.fn.expand("%t")] then
+          vim.b.kickstart_autoformat_enabled = false
+        elseif vim.b.kickstart_autoformat_enabled == nil then
           if vim.g.kickstart_autoformat_enabled ~= nil then
             vim.b.kickstart_autoformat_enabled = vim.g.kickstart_autoformat_enabled
           else
