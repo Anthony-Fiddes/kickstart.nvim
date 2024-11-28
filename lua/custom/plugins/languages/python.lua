@@ -1,6 +1,8 @@
 return {
   {
     "linux-cultist/venv-selector.nvim",
+    -- use new, refactored version
+    branch = "regexp",
     dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim" },
     opts = {
       pyenv_path = vim.fn.expand("~/.pyenv/versions"),
