@@ -2,7 +2,7 @@ local custom_vars = require("custom.vars")
 
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
-local on_attach = function(_, bufnr)
+local on_attach = function(client, bufnr)
   -- In this case, we create a function that lets us more easily define mappings specific
   -- for LSP related items. It sets the mode, buffer and description for us each time.
   local map_func = function(mode)
@@ -50,6 +50,13 @@ local on_attach = function(_, bufnr)
   vim.api.nvim_buf_create_user_command(bufnr, "Format", format_buffer, { desc = "Format current buffer with LSP" })
   nmap("<leader>fo", ":Format<CR>", "[Fo]rmat")
   vmap("<leader>fo", format_buffer, "[Fo]rmat")
+
+  -- Don't let ruff try to give hover information in favor of pylsp
+  -- If I end up needing to do this with other LSPs, I should add a table in
+  -- custom_vars.
+  if client.name == "ruff" then
+    client.server_capabilities.hoverProvider = false
+  end
 end
 
 -- It's very important to do these steps in this order before setting up servers
