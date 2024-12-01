@@ -1,17 +1,8 @@
--- windo but it goes back to the original window
+-- windo, but it goes back to the original window
 local function windo(command)
   return function()
     local original_win = vim.fn.win_getid()
-    local windows = vim.api.nvim_list_wins()
-    for _, window in pairs(windows) do
-      vim.api.nvim_set_current_win(window)
-      if vim.fn.bufname() == "" or vim.bo.readonly then
-        -- Ignore scratch buffers and read-only files (e.g. help files)
-        goto continue
-      end
-      vim.cmd(command)
-      ::continue::
-    end
+    vim.cmd("windo " .. command)
     vim.api.nvim_set_current_win(original_win)
   end
 end
