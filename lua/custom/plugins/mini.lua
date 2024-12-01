@@ -72,8 +72,14 @@ return {
 
       vim.keymap.set("n", "<Leader>of", function()
         local buf_name = vim.api.nvim_buf_get_name(0)
-        if buf_name ~= "" then
+        if vim.fn.filereadable(buf_name) == 1 then
           MiniFiles.open(buf_name)
+          return
+        end
+
+        local buf_dir = vim.fs.dirname(buf_name)
+        if vim.fn.isdirectory(buf_dir) == 1 then
+          MiniFiles.open(buf_dir)
         else
           MiniFiles.open()
         end
