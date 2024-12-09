@@ -3,7 +3,9 @@ local function windo(command)
   return function()
     local original_win = vim.fn.win_getid()
     vim.cmd("windo " .. command)
-    vim.api.nvim_set_current_win(original_win)
+    if vim.api.nvim_win_is_valid(original_win) then
+      vim.api.nvim_set_current_win(original_win)
+    end
   end
 end
 
