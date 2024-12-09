@@ -3,7 +3,7 @@ return {
   {
     "echasnovski/mini.nvim",
     version = false,
-    event = "VeryLazy",
+    lazy = false,
     dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
     config = function()
       local ts_context_commentstring = require("ts_context_commentstring")
@@ -67,6 +67,9 @@ return {
           synchronize = "<Leader>u",
           trim_left = "<",
           trim_right = ">",
+        },
+        options = {
+          use_as_default_explorer = true,
         },
       })
 
