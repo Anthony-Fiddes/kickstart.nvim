@@ -86,6 +86,7 @@ local settings = {
       },
     },
   },
+  marksman = {},
   pylsp = {
     pylsp = {
       plugins = {
