@@ -23,6 +23,8 @@ vim.o.sessionoptions = "curdir,folds,tabpages,winpos,winsize"
 -- Wrapping text as I type is more often annoying than helpful in code. It's
 -- welcome in comments.
 vim.opt.formatoptions:remove("t")
+-- Respect numbered list indentation
+vim.opt_local.formatoptions:append("n")
 
 -- Preview substitutions as I type
 vim.opt.inccommand = "split"
