@@ -42,6 +42,7 @@ local function autocontinue(key)
 end
 
 vim.keymap.set("n", "o", autocontinue("o"), { expr = true, buffer = true })
+vim.keymap.set("n", "O", autocontinue("O"), { expr = true, buffer = true })
 vim.keymap.set("i", "<CR>", autocontinue("<CR>"), { expr = true, buffer = true })
 
 -- ctrl+k: markdown link
