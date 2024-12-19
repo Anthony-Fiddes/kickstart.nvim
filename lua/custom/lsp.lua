@@ -20,7 +20,19 @@ local on_attach = function(client, bufnr)
   nmap("<leader>D", vim.lsp.buf.type_definition, "Type [D]efinition")
 
   local fzf = require("fzf-lua")
-  nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
+  nmap("gd", function()
+    ---@param options vim.lsp.LocationOpts.OnList
+    local on_list = function(options)
+      if #options.items > 1 then
+        -- use fzf-lua instead of the default quick fix list
+        fzf.lsp_definitions()
+        return
+      end
+
+      vim.lsp.buf.definition()
+    end
+    vim.lsp.buf.definition({ on_list = on_list })
+  end, "[G]oto [D]efinition")
   nmap("gr", fzf.lsp_references, "[G]oto [R]eferences")
   nmap("gi", fzf.lsp_implementations, "[G]oto [I]mplementation")
   nmap("<leader>fs", fzf.lsp_workspace_symbols, "[F]ind [S]ymbols")
