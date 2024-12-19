@@ -33,6 +33,21 @@ vim.keymap.set("n", "<leader>td", toggle_diagnostics, { desc = "[T]oggle [D]iagn
 vim.keymap.set("n", "<leader>th", ":set hlsearch!<CR>", { desc = "[T]oggle Search [H]ighlight" })
 vim.keymap.set("n", "<leader>tl", ":set list!<CR>", { desc = "[T]oggle [L]ist (show/hide white space)" })
 vim.keymap.set("n", "<leader>ts", ":set spell!<CR>", { desc = "[T]oggle [S]pellcheck" })
+vim.keymap.set("n", "<leader>tq", function()
+  -- somehow it seems like there would be a more straightforward way to do this?
+  local qf_info = vim.fn.getqflist({ winid = 0, size = 0 })
+  local qf_win_id = qf_info.winid
+  local qf_size = qf_info.size
+  if qf_size == 0 then
+    print("quickfix list is empty")
+    return
+  end
+  if qf_win_id == 0 then
+    vim.cmd("cwindow")
+  else
+    vim.cmd("cclose")
+  end
+end, { desc = "[T]oggle [Q]uickfix Window" })
 
 -- Movement
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { noremap = true })
