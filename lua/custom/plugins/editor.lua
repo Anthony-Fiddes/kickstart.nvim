@@ -158,8 +158,11 @@ return {
       })
 
       -- Load telescope plugin if it's available
-      pcall(require("telescope").load_extension("persisted"))
-      vim.keymap.set("n", "<leader>P", require("telescope").extensions.persisted.persisted, { desc = "Find [P]roject" })
+      local ok, telescope = pcall(require, "telescope")
+      if ok then
+        telescope.load_extension("persisted")
+        vim.keymap.set("n", "<leader>P", require("telescope").extensions.persisted.persisted, { desc = "Find [P]roject" })
+      end
     end,
   },
   {

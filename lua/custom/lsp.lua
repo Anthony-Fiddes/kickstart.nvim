@@ -17,18 +17,15 @@ local on_attach = function(client, bufnr)
   local vmap = map_func("v")
 
   nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-  nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
-
-  local telescope = require("telescope.builtin")
-  nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
-  nmap("gr", telescope.lsp_references, "[G]oto [R]eferences")
-  nmap("gi", telescope.lsp_implementations, "[G]oto [I]mplementation")
   nmap("<leader>D", vim.lsp.buf.type_definition, "Type [D]efinition")
-  -- TODO: do I want to be able to only look for symbols in the current buffer?
-  -- I removed that because it doesn't seem super useful (unless I was working
-  -- on a massive code base).
-  nmap("<leader>fs", telescope.lsp_dynamic_workspace_symbols, "[F]ind [S]ymbols")
+
+  local fzf = require("fzf-lua")
+  nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
+  nmap("gr", fzf.lsp_references, "[G]oto [R]eferences")
+  nmap("gi", fzf.lsp_implementations, "[G]oto [I]mplementation")
+  nmap("<leader>fs", fzf.lsp_workspace_symbols, "[F]ind [S]ymbols")
   nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
+  nmap("<leader>ca", fzf.lsp_code_actions, "[C]ode [A]ction")
 
   -- Lesser used LSP functionality
   nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")

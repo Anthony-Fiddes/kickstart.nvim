@@ -145,6 +145,7 @@ return {
       mini_misc.setup_auto_root({ ".git", "package.json", "Makefile" }, fallback)
 
       require("mini.bracketed").setup()
+      require("mini.icons").setup()
     end,
   },
 }
