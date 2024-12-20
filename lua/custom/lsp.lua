@@ -19,22 +19,17 @@ local on_attach = function(client, bufnr)
   nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
   nmap("<leader>D", vim.lsp.buf.type_definition, "Type [D]efinition")
 
-  local fzf = require("fzf-lua")
-  nmap("gd", function()
-    ---@param options vim.lsp.LocationOpts.OnList
-    local on_list = function(options)
-      if #options.items > 1 then
-        -- use fzf-lua instead of the default quick fix list
-        fzf.lsp_definitions()
-        return
-      end
-
-      vim.lsp.buf.definition()
+  local jump_to_single_result = function(func)
+    return function()
+      -- undocumented functionality of fzf-lua that I found from looking at
+      -- LazyVim config.
+      func({ jump_to_single_result = true, ignore_current_line = true })
     end
-    vim.lsp.buf.definition({ on_list = on_list })
-  end, "[G]oto [D]efinition")
-  nmap("gr", fzf.lsp_references, "[G]oto [R]eferences")
-  nmap("gi", fzf.lsp_implementations, "[G]oto [I]mplementation")
+  end
+  local fzf = require("fzf-lua")
+  nmap("gd", jump_to_single_result(fzf.lsp_definitions), "[G]oto [R]eferences")
+  nmap("gr", jump_to_single_result(fzf.lsp_references), "[G]oto [R]eferences")
+  nmap("gi", jump_to_single_result(fzf.lsp_implementations), "[G]oto [I]mplementation")
   nmap("<leader>fs", fzf.lsp_workspace_symbols, "[F]ind [S]ymbols")
   nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
   nmap("<leader>ca", fzf.lsp_code_actions, "[C]ode [A]ction")
