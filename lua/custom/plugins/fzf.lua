@@ -52,6 +52,7 @@ return {
     vim.keymap.set("n", "<leader>fc", fzf.commands, { desc = "[F]ind [C]ommands" })
     vim.keymap.set("n", "<leader>fz", fzf.builtin, { desc = "[FZ]f-lua Builtins" })
     vim.keymap.set("n", "<leader>b", fzf.buffers, { desc = "[F]ind [B]uffers" })
+    vim.keymap.set("n", "<leader>fq", fzf.quickfix, { desc = "[F]ind in [Q]uickfix List" })
 
     vim.keymap.set("n", "<leader>fl", fzf.git_commits, { desc = "[F]ind in Git [l]og" })
     vim.keymap.set("n", "<leader>fL", fzf.git_bcommits, { desc = "[F]ind this buffer in Git [L]og" })
