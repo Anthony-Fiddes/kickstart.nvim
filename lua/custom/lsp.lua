@@ -6,11 +6,15 @@ local on_attach = function(client, bufnr)
   -- In this case, we create a function that lets us more easily define mappings specific
   -- for LSP related items. It sets the mode, buffer and description for us each time.
   local map_func = function(mode)
-    return function(keys, func, desc)
+    ---@param keys string
+    ---@param func string | function
+    ---@param desc string
+    ---@param nowait boolean?
+    return function(keys, func, desc, nowait)
       if desc then
         desc = "LSP: " .. desc
       end
-      vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = desc })
+      vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = desc, nowait = nowait })
     end
   end
   local nmap = map_func("n")
@@ -28,7 +32,7 @@ local on_attach = function(client, bufnr)
   end
   local fzf = require("fzf-lua")
   nmap("gd", jump_to_single_result(fzf.lsp_definitions), "[G]oto [R]eferences")
-  nmap("gr", jump_to_single_result(fzf.lsp_references), "[G]oto [R]eferences")
+  nmap("gr", jump_to_single_result(fzf.lsp_references), "[G]oto [R]eferences", true)
   nmap("gi", jump_to_single_result(fzf.lsp_implementations), "[G]oto [I]mplementation")
   nmap("<leader>fs", fzf.lsp_workspace_symbols, "[F]ind [S]ymbols")
   nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
