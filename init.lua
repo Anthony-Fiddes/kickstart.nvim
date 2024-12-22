@@ -195,7 +195,6 @@ require("lazy").setup({
       autotag = {
         enable = true,
       },
-      -- filed an issue on how diff was being weird with + and -
       highlight = { enable = true },
       indent = {
         enable = true,
