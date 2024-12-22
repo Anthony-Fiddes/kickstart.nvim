@@ -1,6 +1,16 @@
 -- windo, but it goes back to the original window
 local function windo(command)
   return function()
+    -- Don't do anything if there's only one window.
+    --
+    -- This is pretty much exclusively so that zen-mode doesn't exit everytime I
+    -- want to save the buffer.
+    local windows = vim.api.nvim_tabpage_list_wins(0)
+    if #windows == 1 then
+      vim.cmd(command)
+      return
+    end
+
     local original_win = vim.fn.win_getid()
     vim.cmd("windo " .. command)
     if vim.api.nvim_win_is_valid(original_win) then
