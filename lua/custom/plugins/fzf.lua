@@ -6,8 +6,14 @@ return {
     local fzf = require("fzf-lua")
     fzf.setup({
       keymap = {
+        builtin = {
+          ["<C-d>"] = "preview-page-down",
+          ["<C-u>"] = "preview-page-up",
+        },
         fzf = {
           ["ctrl-q"] = "select-all+accept",
+          ["ctrl-d"] = "preview-page-down",
+          ["ctrl-u"] = "preview-page-up",
         },
       },
     })
