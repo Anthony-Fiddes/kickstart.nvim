@@ -4,7 +4,7 @@ These custom variables allow me to easily tweak settings between my work and per
 
 return {
   copilot_enabled = false,
-  codeium_enabled = true,
+  codeium_enabled = false,
   formatting = {
     banned_lsps = {
       ts_ls = true,
