@@ -29,12 +29,11 @@ return {
       defaults = {
         mappings = {
           i = {
-            ["<C-u>"] = false,
-            ["<C-d>"] = false,
             ["<C-s>"] = actions.select_horizontal,
           },
           n = {
             ["<C-s>"] = actions.select_horizontal,
+            ["ZZ"] = actions.close,
           },
         },
       },
