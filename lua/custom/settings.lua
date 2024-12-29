@@ -111,3 +111,12 @@ vim.api.nvim_create_autocmd("BufNewFile", {
     vim.opt_local.shiftwidth = 0
   end,
 })
+
+-- Use modelines for help files to correctly set filetype
+vim.api.nvim_create_autocmd("BufReadPre", {
+  pattern = { "*/doc/*.txt" },
+  group = augroup,
+  callback = function()
+    vim.opt_local.modelines = 5
+  end,
+})
