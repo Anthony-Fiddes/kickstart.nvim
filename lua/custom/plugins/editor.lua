@@ -126,14 +126,28 @@ return {
   {
     "olimorris/persisted.nvim",
     config = function()
+      local should_autoload = function()
+        -- if any of these args are present when calling nvim, don't autoload
+        -- the directory's session.
+        local skip_autoload_args = {
+          "-",
+          "+Man!",
+          "lua require('kitty-vi-mode')",
+        }
+        local autoload = vim.iter(skip_autoload_args):all(function(arg)
+          return not vim.tbl_contains(vim.v.argv, arg)
+        end)
+        return autoload
+      end
+
       local persisted = require("persisted")
       persisted.setup({
         save_dir = vim.fn.expand(vim.fn.stdpath("data") .. "/sessions/"), -- directory where session files are saved
         silent = false, -- silent nvim message when sourcing session file
         use_git_branch = false, -- create session files based on the branch of the git enabled repository
         autosave = true, -- automatically save session files when exiting Neovim
-        autoload = true, -- automatically load the session for the cwd on Neovim startup
-        follow_cwd = true, -- change session file name to match current working directory if it changes
+        autoload = should_autoload(),
+        follow_cwd = false, -- don't change session file name to match current working directory if it changes
         allowed_dirs = nil, -- table of dirs that the plugin will auto-save and auto-load from
         ignored_dirs = nil, -- table of dirs that are ignored when auto-saving and auto-loading
         telescope = { -- options for the telescope extension
