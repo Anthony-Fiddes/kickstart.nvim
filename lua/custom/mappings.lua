@@ -1,6 +1,14 @@
 -- windo, but it goes back to the original window
-local function windo(command)
+---@param command string
+---@param silent boolean?
+---@return function
+local function windo(command, silent)
   return function()
+    -- This makes it so that the cursor doesn't jump down to the cmdline and
+    -- back
+    if silent then
+      command = "silent " .. command
+    end
     -- Don't do anything if there's only one window.
     --
     -- This is pretty much exclusively so that zen-mode doesn't exit everytime I
@@ -20,8 +28,8 @@ local function windo(command)
 end
 
 -- Open window management
-vim.keymap.set("n", "<leader>u", windo("update"), { desc = "[U]pdate files (:update)" })
-vim.keymap.set("n", "<leader>rf", windo("e!"), { desc = "[R]eload [F]iles (:e!)" })
+vim.keymap.set("n", "<leader>u", windo("update", true), { desc = "[U]pdate files (:update)" })
+vim.keymap.set("n", "<leader>rf", windo("e!", true), { desc = "[R]eload [F]iles (:e!)" })
 vim.keymap.set("n", "<leader>on", ":on<CR>", { desc = ":[on]ly (close all other windows)" })
 vim.keymap.set("n", "ZA", ":wqa<CR>", { desc = "Save and close all" })
 vim.keymap.set("n", "<C-t>", ":tabnew<CR>", { desc = "Open a new tab" })
