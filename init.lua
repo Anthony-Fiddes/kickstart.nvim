@@ -128,23 +128,12 @@ require("lazy").setup({
     priority = 1000,
     config = function()
       local onedark = require("onedark")
-      onedark.setup({ style = "warmer" })
+      onedark.setup({
+        style = "warmer",
+        toggle_style_list = { "light", "warmer" },
+        toggle_style_key = "<Leader>tt",
+      })
       onedark.load()
-
-      -- TODO: add a user command for this
-      -- TODO: determine if there's a better mapping than tt
-      local style = "warmer"
-      local toggle_theme = function()
-        if style == "warmer" then
-          style = "light"
-        else
-          style = "warmer"
-        end
-        onedark.setup({ style = style })
-        onedark.load()
-      end
-
-      vim.keymap.set("n", "<Leader>tt", toggle_theme)
     end,
   },
 
