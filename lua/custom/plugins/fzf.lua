@@ -5,6 +5,8 @@ return {
   config = function()
     local fzf = require("fzf-lua")
     fzf.setup({
+      -- generate a fzf colorscheme based off of current neovim colorscheme
+      fzf_colors = true,
       keymap = {
         builtin = {
           ["<C-d>"] = "preview-page-down",
