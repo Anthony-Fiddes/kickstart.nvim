@@ -1,7 +1,23 @@
-require("cmp").setup.buffer({
-  sources = require("cmp").config.sources({
+local cmp = require("cmp")
+
+local buffer_source = {
+  name = "buffer",
+}
+-- if a yaml file is mentioned in the git commit diff, use my custom
+-- special keyword_pattern for yaml so that long job
+-- names with ':' are properly autocompleted.
+--
+-- It may be a bit overcomplicated, but it's fun :)
+local yaml_present = vim.fn.search([[\(yaml\|yml\)]], "nw") ~= 0
+if yaml_present then
+  local yaml_keyword_pattern = require("custom.vars").cmp.keyword_pattern.yaml
+  buffer_source.option = { keyword_pattern = yaml_keyword_pattern }
+end
+
+cmp.setup.buffer({
+  sources = cmp.config.sources({
     { name = "conventionalcommits" },
-    { name = "buffer" },
+    buffer_source,
     { name = "luasnip" },
     { name = "copilot" },
     { name = "codeium" },
