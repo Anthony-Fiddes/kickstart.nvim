@@ -47,14 +47,6 @@ end
 -- LSP
 vim.keymap.set("n", "<leader>td", toggle_diagnostics, { desc = "[T]oggle [D]iagnostics" })
 
--- Indentation
-vim.keymap.set("n", "<Tab>", ">>", { desc = "󰉶 indent" })
-vim.keymap.set("x", "<Tab>", ">gv", { desc = "󰉶 indent" })
-vim.keymap.set("i", "<Tab>", "<C-t>", { desc = "󰉶 indent" })
-vim.keymap.set("n", "<S-Tab>", "<<", { desc = "󰉵 outdent" })
-vim.keymap.set("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent" })
-vim.keymap.set("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent" })
-
 -- Toggles
 vim.keymap.set("n", "<leader>th", ":set hlsearch!<CR>", { desc = "[T]oggle Search [H]ighlight" })
 vim.keymap.set("n", "<leader>tl", ":set list!<CR>", { desc = "[T]oggle [L]ist (show/hide white space)" })
