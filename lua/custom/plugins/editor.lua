@@ -184,5 +184,26 @@ return {
     event = "BufWritePre",
     opts = {},
   },
-  { "akinsho/git-conflict.nvim", version = "*", config = true },
+  {
+    "akinsho/git-conflict.nvim",
+    version = "*",
+    opts = {
+      default_mappings = false,
+    },
+    config = function()
+      -- Setting mappings manually because if you don't type them fast enough,
+      -- vim thinks that you're providing a text object / motion to c.
+      --
+      -- Something to consider if it ever bothers me: I could use the provided
+      -- autocmds to load these mappings only whene there's actually a conflict
+      -- present in a buffer.
+      vim.keymap.set("n", "<Leader>co", "<Plug>(git-conflict-ours)", { desc = "[C]hoose [O]urs (resolve git conflict)" })
+      vim.keymap.set("n", "<Leader>ct", "<Plug>(git-conflict-theirs)", { desc = "[C]hoose [T]heirs (resolve git conflict)" })
+      vim.keymap.set("n", "<Leader>cb", "<Plug>(git-conflict-both)", { desc = "[C]hoose [B]oth (resolve git conflict)" })
+      vim.keymap.set("n", "<Leader>c0", "<Plug>(git-conflict-none)", { desc = "[C]hoose [N]one (resolve git conflict)" })
+      -- These are already implemented by mini.bracketed
+      -- vim.keymap.set("n", "[x", "<Plug>(git-conflict-prev-conflict)")
+      -- vim.keymap.set("n", "]x", "<Plug>(git-conflict-next-conflict)")
+    end,
+  },
 }
