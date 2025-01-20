@@ -88,6 +88,8 @@ return {
         end
       end, { desc = "[O]pen [F]ile tree" })
 
+      -- snippet taken from docs:
+      -- https://github.com/echasnovski/mini.nvim/blob/fcf982a66df4c9e7ebb31a6a01c604caee2cd488/doc/mini-files.txt#L475
       local map_split = function(buf_id, lhs, direction)
         local rhs = function()
           -- Make new window and set it as target
@@ -98,6 +100,7 @@ return {
           end)
 
           MiniFiles.set_target_window(new_target)
+          MiniFiles.go_in()
           MiniFiles.close()
         end
 
