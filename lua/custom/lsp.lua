@@ -111,6 +111,9 @@ local settings = {
         rangeVariableTypes = true,
       },
     },
+    -- consider adding support for semantic tokens?
+    staticcheck = true,
+    directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
   },
   gitlab_ci_ls = {},
   helm_ls = {},
