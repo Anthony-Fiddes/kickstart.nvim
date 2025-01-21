@@ -122,6 +122,14 @@ local settings = {
       diagnostics = {
         disable = { "missing-fields", "inject-field" },
       },
+      hint = {
+        enable = true,
+        setType = "Disable",
+        paramType = true,
+        paramName = true,
+        semicolon = "Disable",
+        arrayIndex = "Disable",
+      },
     },
   },
   marksman = {},
