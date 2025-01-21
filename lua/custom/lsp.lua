@@ -59,6 +59,14 @@ local on_attach = function(client, bufnr)
   nmap("<leader>fo", ":Format<CR>", "[Fo]rmat")
   vmap("<leader>fo", format_buffer, "[Fo]rmat")
 
+  if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
+    nmap("<leader>ti", function()
+      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+    end, "[T]oggle [I]nlay Hints")
+    -- hints enabled by default
+    vim.lsp.inlay_hint.enable()
+  end
+
   -- Don't let ruff try to give hover information in favor of pylsp
   -- If I end up needing to do this with other LSPs, I should add a table in
   -- custom_vars.
