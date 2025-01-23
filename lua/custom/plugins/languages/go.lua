@@ -11,7 +11,8 @@ return {
     },
     -- (optional) will update plugin's deps on every update
     build = function()
-      vim.cmd.GoInstallDeps()
+      vim.notify("installing go dependencies via gopher.nvim")
+      require("gopher").install_deps()
     end,
     config = function()
       require("gopher").setup(
