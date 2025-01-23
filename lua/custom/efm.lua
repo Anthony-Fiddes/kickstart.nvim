@@ -1,7 +1,7 @@
 local eslint = require("efmls-configs.linters.eslint")
 local prettier = require("efmls-configs.formatters.prettier")
 local stylua = require("efmls-configs.formatters.stylua")
-local gofmt = require("efmls-configs.formatters.gofmt")
+local gofumpt = require("efmls-configs.formatters.gofumpt")
 local goimports = require("efmls-configs.formatters.goimports")
 local golines = require("efmls-configs.formatters.golines")
 local isort = require("efmls-configs.formatters.isort")
@@ -25,7 +25,7 @@ local languages = {
   css = { prettier },
   dockerfile = { hadolint },
   fish = { fish, fish_indent },
-  go = { gofmt, goimports, golines },
+  go = { gofumpt, goimports, golines },
   gitcommit = { gitlint },
   lua = { stylua },
   python = { isort },
