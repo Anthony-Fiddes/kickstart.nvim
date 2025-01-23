@@ -1,5 +1,5 @@
 vim.opt_local.includeexpr = "substitute(v:fname,'^/','','')"
-vim.b.kickstart_autoformat_enabled = false
+vim.b.autoformat_enabled = false
 
 local cmp = require("cmp")
 -- inspired by this example: https://github.com/hrsh7th/nvim-cmp/issues/666#issuecomment-1000925581

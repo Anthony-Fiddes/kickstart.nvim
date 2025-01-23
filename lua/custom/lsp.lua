@@ -46,19 +46,6 @@ local on_attach = function(client, bufnr)
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, "[W]orkspace [L]ist Folders")
 
-  local format_buffer = function()
-    vim.lsp.buf.format({
-      filter = function(client)
-        return not custom_vars.formatting.banned_lsps[client.name]
-      end,
-    })
-  end
-
-  -- Create a command `:Format` local to the LSP buffer
-  vim.api.nvim_buf_create_user_command(bufnr, "Format", format_buffer, { desc = "Format current buffer with LSP" })
-  nmap("<leader>fo", ":Format<CR>", "[Fo]rmat")
-  vmap("<leader>fo", format_buffer, "[Fo]rmat")
-
   if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
     nmap("<leader>ti", function()
       vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())

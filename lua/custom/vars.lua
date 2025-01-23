@@ -6,6 +6,7 @@ return {
   copilot_enabled = false,
   codeium_enabled = false,
   formatting = {
+    on_save = true,
     banned_lsps = {
       ts_ls = true,
       pylsp = true,

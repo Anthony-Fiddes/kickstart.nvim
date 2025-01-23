@@ -1,13 +1,6 @@
 local eslint = require("efmls-configs.linters.eslint")
-local prettier = require("efmls-configs.formatters.prettier")
-local stylua = require("efmls-configs.formatters.stylua")
-local gofumpt = require("efmls-configs.formatters.gofumpt")
-local goimports = require("efmls-configs.formatters.goimports")
-local golines = require("efmls-configs.formatters.golines")
-local isort = require("efmls-configs.formatters.isort")
 local yamllint = require("efmls-configs.linters.yamllint")
 local fish = require("efmls-configs.linters.fish")
-local fish_indent = require("efmls-configs.formatters.fish_indent")
 local sqlfluff = require("efmls-configs.linters.sqlfluff")
 local hadolint = require("efmls-configs.linters.hadolint")
 local gitlint = require("efmls-configs.linters.gitlint")
@@ -22,20 +15,14 @@ local sqlfluff_command =
 sqlfluff = vim.tbl_extend("force", sqlfluff, { lintCommand = sqlfluff_command })
 
 local languages = {
-  css = { prettier },
   dockerfile = { hadolint },
-  fish = { fish, fish_indent },
-  go = { goimports, golines, gofumpt },
+  fish = { fish },
   gitcommit = { gitlint },
-  lua = { stylua },
-  python = { isort },
-  typescript = { eslint, prettier },
-  typescriptreact = { eslint, prettier },
-  javascript = { eslint, prettier },
-  json = { prettier },
-  markdown = { prettier },
+  typescript = { eslint },
+  typescriptreact = { eslint },
+  javascript = { eslint },
   sql = { sqlfluff },
-  yaml = { yamllint, prettier },
+  yaml = { yamllint },
 }
 
 local efmls_config = {
