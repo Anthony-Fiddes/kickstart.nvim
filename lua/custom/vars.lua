@@ -10,6 +10,7 @@ return {
       ts_ls = true,
       pylsp = true,
       lua_ls = true,
+      gopls = true,
     },
     ignored_files = {
       ["lazy-lock.json"] = true,
