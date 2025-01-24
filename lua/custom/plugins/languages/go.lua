@@ -40,10 +40,6 @@ return {
           },
         }
       )
-
-      -- this is mostly what I wanted this plugin for
-      vim.keymap.set("n", "<Leader>ie", ":GoIfErr<CR>", { buffer = true, desc = "[i]ff [e]rr" })
-      vim.keymap.set("n", "<Leader>im", ":GoImpl ", { buffer = true, desc = "[i]ff [e]rr" })
     end,
   },
 }
