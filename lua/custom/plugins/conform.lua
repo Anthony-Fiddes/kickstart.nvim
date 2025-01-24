@@ -13,22 +13,6 @@ return { -- Autoformat
     },
   },
   config = function()
-    -- Add a buffer variable that determines whether or not to format on save
-    local formatting = require("custom.vars").formatting
-    local augroup = vim.api.nvim_create_augroup("set_autoformat_buffer_variable", { clear = true })
-    vim.api.nvim_create_autocmd("BufNew", {
-      group = augroup,
-      callback = function(args)
-        local bufnr = args.buf
-        -- Determine autoformat default value
-        if vim.b[bufnr].autoformat_enabled == nil then
-          if formatting.ignored_files[vim.fn.expand("%t")] then
-            vim.b[bufnr].autoformat_enabled = false
-          end
-          vim.b[bufnr].autoformat_enabled = formatting.on_save
-        end
-      end,
-    })
     vim.keymap.set("n", "<leader>tf", function()
       vim.b.autoformat_enabled = not vim.b.autoformat_enabled
       if vim.b.autoformat_enabled then
@@ -38,18 +22,24 @@ return { -- Autoformat
       end
     end, { desc = "[T]oggle [F]ormatting on Save" })
 
+    local formatting = require("custom.vars").formatting
     require("conform").setup({
-      notify_on_error = false,
       format_on_save = function(bufnr)
-        local lsp_format_opt
-        if vim.b[bufnr].autoformat_enabled then
-          lsp_format_opt = "never"
-        else
-          lsp_format_opt = "fallback"
+        if vim.b[bufnr].autoformat_enabled == nil then
+          -- Determine autoformat default value
+          if formatting.ignored_files[vim.fn.expand("%t")] then
+            vim.b[bufnr].autoformat_enabled = false
+          else
+            vim.b[bufnr].autoformat_enabled = formatting.on_save
+          end
+        end
+
+        if not vim.b[bufnr].autoformat_enabled then
+          return
         end
         return {
           timeout_ms = 500,
-          lsp_format = lsp_format_opt,
+          lsp_format = "fallback",
         }
       end,
       formatters_by_ft = {
