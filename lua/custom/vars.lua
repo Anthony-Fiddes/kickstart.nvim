@@ -7,12 +7,6 @@ return {
   codeium_enabled = false,
   formatting = {
     on_save = true,
-    banned_lsps = {
-      ts_ls = true,
-      pylsp = true,
-      lua_ls = true,
-      gopls = true,
-    },
     ignored_files = {
       ["lazy-lock.json"] = true,
     },
