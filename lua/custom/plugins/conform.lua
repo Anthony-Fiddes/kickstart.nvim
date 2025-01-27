@@ -53,6 +53,8 @@ return { -- Autoformat
         json = { "prettier" },
         markdown = { "prettier" },
         python = { "isort", lsp_format = "last" },
+        -- for all filetypes without a formatter
+        ["_"] = { "trim_whitespace" },
       },
     })
   end,

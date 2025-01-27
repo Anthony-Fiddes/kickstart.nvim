@@ -180,11 +180,6 @@ return {
     end,
   },
   {
-    "cappyzawa/trim.nvim",
-    event = "BufWritePre",
-    opts = {},
-  },
-  {
     "akinsho/git-conflict.nvim",
     version = "*",
     opts = {
