@@ -91,6 +91,7 @@ return {
         ["<C-p>"] = cmp.mapping.select_prev_item(),
         ["<C-u>"] = cmp.mapping.scroll_docs(-4),
         ["<C-d>"] = cmp.mapping.scroll_docs(4),
+        ["<C-a>"] = cmp.mapping.complete({ config = { sources = { name = "copilot" } } }),
         ["<C-Space>"] = cmp.mapping.complete({}),
         ["<C-ESC>"] = cmp.mapping.abort(),
         ["<CR>"] = cmp.mapping.confirm({
