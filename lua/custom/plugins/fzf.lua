@@ -25,7 +25,7 @@ return {
         local dummy_register = "a"
         local old_content = vim.fn.getreginfo(dummy_register)
         -- yank text described by the motion to the dummy register
-        vim.cmd('norm "' .. dummy_register .. "y" .. motion)
+        vim.cmd('norm! "' .. dummy_register .. "y" .. motion)
         local selection = vim.fn.getreg(dummy_register)
         -- if I use this technique to restore registers more often, maybe it should
         -- be a decorator?
