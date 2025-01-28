@@ -18,7 +18,6 @@ local on_attach = function(client, bufnr)
     end
   end
   local nmap = map_func("n")
-  local vmap = map_func("v")
 
   nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
   nmap("<leader>D", vim.lsp.buf.type_definition, "Type [D]efinition")
@@ -31,7 +30,7 @@ local on_attach = function(client, bufnr)
     end
   end
   local fzf = require("fzf-lua")
-  nmap("gd", jump_to_single_result(fzf.lsp_definitions), "[G]oto [R]eferences")
+  nmap("gd", jump_to_single_result(fzf.lsp_definitions), "[G]oto [D]efinition")
   nmap("gr", jump_to_single_result(fzf.lsp_references), "[G]oto [R]eferences", true)
   nmap("gi", jump_to_single_result(fzf.lsp_implementations), "[G]oto [I]mplementation")
   nmap("<leader>fs", fzf.lsp_live_workspace_symbols, "[F]ind [S]ymbols")
