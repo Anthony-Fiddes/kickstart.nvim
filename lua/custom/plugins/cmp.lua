@@ -94,7 +94,11 @@ return {
         ["<C-a>"] = cmp.mapping.complete({ config = { sources = { name = "copilot" } } }),
         ["<C-Space>"] = cmp.mapping.complete({}),
         ["<C-ESC>"] = cmp.mapping.abort(),
-        ["<CR>"] = cmp.mapping.confirm({
+        ["<C-y>"] = cmp.mapping.confirm({
+          behavior = cmp.ConfirmBehavior.Insert,
+          select = true,
+        }),
+        ["<C-CR>"] = cmp.mapping.confirm({
           behavior = cmp.ConfirmBehavior.Insert,
           select = true,
         }),
