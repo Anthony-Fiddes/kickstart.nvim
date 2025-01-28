@@ -79,13 +79,6 @@ return {
           luasnip.lsp_expand(args.body)
         end,
       },
-      -- These preselect/completion settings automatically highlight the first menu
-      -- option. Preselect keeps the lsp from choosing an option for you.
-      --
-      -- Not 100% sure why the completion setting makes it work. Without it nothing
-      -- is preselected. It also didn't work to set vim's completeopt directly.
-      preselect = cmp.PreselectMode.None,
-      completion = { completeopt = "menu,menuone" },
       mapping = cmp.mapping.preset.insert({
         ["<C-n>"] = cmp.mapping.select_next_item(),
         ["<C-p>"] = cmp.mapping.select_prev_item(),
