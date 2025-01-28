@@ -79,8 +79,9 @@ end, { desc = "[T]oggle [Q]uickfix Window" })
 -- Movement
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { noremap = true })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { noremap = true })
-vim.keymap.set("n", "<PageUp>", "<PageUp>zz", { noremap = true })
-vim.keymap.set("n", "<PageDown>", "<PageDown>zz", { noremap = true })
+-- I may press page up and down but the c-u/c-d behavior is what I want
+vim.keymap.set("n", "<PageDown>", "<C-d>zz", { noremap = true })
+vim.keymap.set("n", "<PageUp>", "<C-u>zz", { noremap = true })
 
 -- Misc
 vim.keymap.set("n", "<leader>nh", ":nohlsearch<CR>", { desc = "[N]o [H]ighlight" })
@@ -125,4 +126,3 @@ vim.keymap.set("n", "<leader>tt", function()
     vim.o.background = "dark"
   end
 end, { desc = "[T]oggle [T]heme" })
-
