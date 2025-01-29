@@ -79,6 +79,8 @@ return {
           luasnip.lsp_expand(args.body)
         end,
       },
+      -- Preselect keeps the lsp from choosing an option for you.
+      preselect = cmp.PreselectMode.None,
       mapping = cmp.mapping.preset.insert({
         ["<C-n>"] = cmp.mapping.select_next_item(),
         ["<C-p>"] = cmp.mapping.select_prev_item(),
