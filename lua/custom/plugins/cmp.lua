@@ -94,7 +94,7 @@ return {
             -- this is useful when confirming the selection triggers some
             -- behavior, like gopls importing a module
             cmp.mapping.confirm()
-            fallback()
+            vim.schedule(fallback)
           else
             fallback()
           end
