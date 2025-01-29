@@ -88,7 +88,17 @@ return {
         ["<C-d>"] = cmp.mapping.scroll_docs(4),
         ["<C-a>"] = cmp.mapping.complete({ config = { sources = { name = "copilot" } } }),
         ["<C-Space>"] = cmp.mapping.complete({}),
-        ["<C-ESC>"] = cmp.mapping.abort(),
+        ["<C-Esc>"] = cmp.mapping.abort(),
+        ["<Esc>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            -- this is useful when confirming the selection triggers some
+            -- behavior, like gopls importing a module
+            cmp.mapping.confirm()
+            fallback()
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
         ["<C-y>"] = cmp.mapping.confirm({
           behavior = cmp.ConfirmBehavior.Insert,
           select = true,
