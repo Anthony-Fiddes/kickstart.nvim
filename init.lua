@@ -124,12 +124,23 @@ require("lazy").setup({
 
   {
     "folke/tokyonight.nvim",
-    lazy = false,
-    priority = 1000,
-    opts = {},
+    event = "VeryLazy",
+  },
+
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
     config = function()
-      vim.cmd("colorscheme tokyonight")
+      require("catppuccin").setup({
+        background = { -- :h background
+          light = "latte",
+          dark = "macchiato",
+        },
+      })
+
+      vim.cmd("colorscheme catppuccin")
     end,
+    priority = 1000,
   },
 
   {
@@ -139,7 +150,7 @@ require("lazy").setup({
     opts = {
       options = {
         icons_enabled = false,
-        theme = "tokyonight",
+        theme = "catppuccin",
         component_separators = "|",
         section_separators = "",
       },
