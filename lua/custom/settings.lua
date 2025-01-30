@@ -15,6 +15,8 @@ vim.o.linebreak = true
 
 -- Relative line numbers are fun
 vim.wo.relativenumber = true
+-- Highlight current line
+vim.wo.cursorline = true
 
 -- Important when using a session manager that loads/saves sessions
 -- automatically
