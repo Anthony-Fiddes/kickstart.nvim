@@ -1,2 +1,2 @@
 #!/bin/sh
-nvim --headless -c "MasonInstall gopls golines goimports" -c "qall"
+nvim --headless -c "MasonInstall gopls golines goimports golangci-lint staticcheck" -c "qall"
