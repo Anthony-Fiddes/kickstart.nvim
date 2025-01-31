@@ -97,11 +97,18 @@ local settings = {
         parameterNames = true,
         rangeVariableTypes = true,
       },
+      analyses = {
+        fieldalignment = true,
+        nilness = true,
+        unusedparams = true,
+        unusedwrite = true,
+        useany = true,
+      },
+      staticcheck = true,
+      directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
+      gofumpt = true,
+      -- consider adding support for semantic tokens?
     },
-    -- consider adding support for semantic tokens?
-    staticcheck = true,
-    directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
-    gofumpt = true,
   },
   gitlab_ci_ls = {},
   helm_ls = {},
