@@ -4,6 +4,7 @@ local fish = require("efmls-configs.linters.fish")
 local sqlfluff = require("efmls-configs.linters.sqlfluff")
 local hadolint = require("efmls-configs.linters.hadolint")
 local gitlint = require("efmls-configs.linters.gitlint")
+local golangci_lint = require("efmls-configs.linters.golangci_lint")
 
 -- Extensions/overrides
 local fs = require("efmls-configs.fs")
@@ -18,6 +19,7 @@ local languages = {
   dockerfile = { hadolint },
   fish = { fish },
   gitcommit = { gitlint },
+  go = { golangci_lint },
   typescript = { eslint },
   typescriptreact = { eslint },
   javascript = { eslint },

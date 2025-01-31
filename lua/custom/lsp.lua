@@ -103,7 +103,6 @@ local settings = {
         unusedwrite = true,
         useany = true,
       },
-      staticcheck = true,
       directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
       gofumpt = true,
       -- consider adding support for semantic tokens?
