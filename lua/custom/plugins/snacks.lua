@@ -12,6 +12,8 @@ return {
       pattern = "MiniFilesActionRename",
       callback = function(event)
         snacks.rename.on_rename_file(event.data.from, event.data.to)
+        -- if files are updated, I don't want to have to :wa manually
+        vim.cmd("wa")
       end,
     })
   end,
