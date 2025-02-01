@@ -16,5 +16,9 @@ return {
         vim.cmd("wa")
       end,
     })
+
+    vim.keymap.set("n", "<leader>tt", function()
+      Snacks.terminal()
+    end, { desc = "[T]oggle [T]erminal" })
   end,
 }
