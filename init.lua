@@ -84,7 +84,6 @@ require("lazy").setup({
         map("n", "<Leader>hu", gs.undo_stage_hunk, "[hu] Undo Stage Hunk")
         map("n", "<Leader>hr", gs.reset_hunk, "[hr] Reset Hunk")
         map("n", "<Leader>hR", gs.reset_buffer, "[hR] Reset Buffer")
-        map("n", "<Leader>tb", gs.toggle_current_line_blame, "[T]oggle git [blame] on current line")
         -- hunk text object
         map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
 

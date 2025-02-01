@@ -118,11 +118,11 @@ vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 vim.keymap.set("n", "<Down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Aesthetics
-vim.keymap.set("n", "<leader>tt", function()
+vim.keymap.set("n", "<leader>tb", function()
   local current = vim.o.background
   if current == "dark" then
     vim.o.background = "light"
   else
     vim.o.background = "dark"
   end
-end, { desc = "[T]oggle [T]heme" })
+end, { desc = "[T]oggle [B]ackground" })
