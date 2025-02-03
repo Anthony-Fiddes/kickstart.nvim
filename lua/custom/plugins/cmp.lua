@@ -93,7 +93,10 @@ return {
           if cmp.visible() then
             -- this is useful when confirming the selection triggers some
             -- behavior, like gopls importing a module
-            cmp.mapping.confirm()
+            cmp.confirm({
+              behavior = cmp.ConfirmBehavior.Insert,
+              select = false,
+            })
             vim.schedule(fallback)
           else
             fallback()
