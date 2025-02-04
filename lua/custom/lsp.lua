@@ -87,9 +87,9 @@ local settings = {
         vendor = true,
       },
       hints = {
-        assignVariableTypes = true,
+        assignVariableTypes = false,
         compositeLiteralFields = true,
-        compositeLiteralTypes = true,
+        compositeLiteralTypes = false,
         constantValues = true,
         functionTypeParameters = true,
         parameterNames = true,
