@@ -149,6 +149,7 @@ return {
 
       require("mini.bracketed").setup()
       require("mini.icons").setup()
+      require("mini.git").setup()
     end,
   },
 }
