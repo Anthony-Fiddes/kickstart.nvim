@@ -20,5 +20,7 @@ return {
     vim.keymap.set("n", "<leader>tt", function()
       Snacks.terminal()
     end, { desc = "[T]oggle [T]erminal" })
+
+    vim.api.nvim_create_user_command("GBrowse", "lua require('snacks').gitbrowse.open()", {})
   end,
 }
