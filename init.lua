@@ -135,6 +135,9 @@ require("lazy").setup({
           light = "latte",
           dark = "macchiato",
         },
+        integrations = {
+          notify = true,
+        },
       })
 
       vim.cmd("colorscheme catppuccin")
