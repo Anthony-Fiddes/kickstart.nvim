@@ -27,12 +27,12 @@ local function windo(command, silent)
   end
 end
 
--- Open window management
+-- Open window/buffer management
 vim.keymap.set("n", "<leader>u", windo("update", true), { desc = "[U]pdate files (:update)" })
-vim.keymap.set("n", "<leader>rf", windo("e!", true), { desc = "[R]eload [F]iles (:e!)" })
 vim.keymap.set("n", "<leader>on", ":on<CR>", { desc = ":[on]ly (close all other windows)" })
 vim.keymap.set("n", "ZA", ":wqa<CR>", { desc = "Save and close all" })
 vim.keymap.set("n", "<C-t>", ":tabnew<CR>", { desc = "Open a new tab" })
+vim.keymap.set("n", "<leader>rf", "checktime", { desc = "[R]eload [F]iles (:checktime)" })
 
 local function toggle_diagnostics()
   if vim.w.diag_disabled then
