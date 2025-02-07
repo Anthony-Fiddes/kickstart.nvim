@@ -32,7 +32,7 @@ vim.keymap.set("n", "<leader>u", windo("update", true), { desc = "[U]pdate files
 vim.keymap.set("n", "<leader>on", ":on<CR>", { desc = ":[on]ly (close all other windows)" })
 vim.keymap.set("n", "ZA", ":wqa<CR>", { desc = "Save and close all" })
 vim.keymap.set("n", "<C-t>", ":tabnew<CR>", { desc = "Open a new tab" })
-vim.keymap.set("n", "<leader>rf", "checktime", { desc = "[R]eload [F]iles (:checktime)" })
+vim.keymap.set("n", "<leader>rf", ":checktime<CR>", { desc = "[R]eload [F]iles (:checktime)" })
 
 local function toggle_diagnostics()
   if vim.w.diag_disabled then
