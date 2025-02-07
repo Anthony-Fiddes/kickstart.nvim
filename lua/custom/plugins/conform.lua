@@ -45,7 +45,8 @@ return { -- Autoformat
       formatters_by_ft = {
         css = { "prettier" },
         fish = { "fish_indent" },
-        go = { "goimports", "golines", "gofumpt" },
+        -- the go formatters tend to time out a lot, so just run them asynchronously
+        go = { "goimports", "golines", "gofumpt", format_after_save = true },
         lua = { "stylua" },
         typescript = { "prettier" },
         typescriptreact = { "prettier" },
