@@ -24,12 +24,6 @@ return {
     end,
   },
   {
-    "shumphrey/fugitive-gitlab.vim",
-    config = function()
-      vim.g.fugitive_gitlab_domains = require("custom.vars").gitlab_domains
-    end,
-  },
-  {
     "folke/flash.nvim",
     event = "VeryLazy",
     opts = {
