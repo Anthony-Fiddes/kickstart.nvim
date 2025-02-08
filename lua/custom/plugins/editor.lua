@@ -151,7 +151,7 @@ return {
           }
           for _, buf in ipairs(vim.api.nvim_list_bufs()) do
             local filetype = vim.bo[buf].filetype
-            if banned_filetypes[filetype] then
+            if banned_filetypes[filetype] or filetype:find("Neogit") then
               vim.api.nvim_buf_delete(buf, { force = true })
             end
           end
