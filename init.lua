@@ -137,6 +137,9 @@ require("lazy").setup({
         },
         integrations = {
           notify = true,
+          -- this integration disables highlighting so it's much harder for me
+          -- to see
+          flash = false,
         },
       })
 
