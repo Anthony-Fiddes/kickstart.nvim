@@ -28,7 +28,10 @@ local function windo(command, silent)
 end
 
 -- Open window/buffer management
-vim.keymap.set("n", "<leader>u", windo("update", true), { desc = "[U]pdate files (:update)" })
+vim.keymap.set("n", "<leader>u", function()
+  vim.notify("DEPRECATED, use Ctrl-S", vim.log.levels.WARN)
+end, { desc = "DO NOT USE" })
+vim.keymap.set({ "n", "i" }, "<C-s>", windo("update", true), { desc = "[U]pdate files (:update)" })
 vim.keymap.set("n", "<leader>on", ":on<CR>", { desc = ":[on]ly (close all other windows)" })
 vim.keymap.set("n", "ZA", ":wqa<CR>", { desc = "Save and close all" })
 vim.keymap.set("n", "<C-t>", ":tabnew<CR>", { desc = "Open a new tab" })
