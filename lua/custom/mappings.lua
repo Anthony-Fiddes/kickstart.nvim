@@ -87,6 +87,9 @@ vim.keymap.set({ "n", "v" }, "c", '"_c')
 -- selection
 vim.keymap.set("x", ".", ":norm .<CR>")
 vim.keymap.set("n", "<leader>L", ":Lazy<CR>")
+vim.keymap.set("n", ";", ":") -- convenient
+-- in case I ever actually need it. With flash I can just press f/t again
+vim.keymap.set("n", ":", ";")
 
 -- document key chains
 require("which-key").add({
