@@ -20,7 +20,13 @@ return {
         },
       })
 
-      vim.keymap.set("n", "<Leader>g", ":Neogit<CR>", { silent = true, desc = "Neo[g]it" })
+      local toggle_neogit = function()
+        if vim.bo.filetype:find("Neogit") then
+          return ":q<CR>"
+        end
+        return ":Neogit<CR>"
+      end
+      vim.keymap.set("n", "<Leader>g", toggle_neogit, { silent = true, desc = "Neo[g]it", expr = true })
     end,
   },
   {
