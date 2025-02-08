@@ -140,6 +140,7 @@ require("lazy").setup({
           -- this integration disables highlighting so it's much harder for me
           -- to see
           flash = false,
+          diffview = true,
         },
       })
 
