@@ -28,11 +28,23 @@ local function windo(command, silent)
 end
 
 -- Open window/buffer management
-vim.keymap.set("n", "<leader>u", windo("update", true), { desc = "[U]pdate files (:update)" })
+vim.keymap.set("n", "<leader>u", function()
+  vim.notify("DEPRECATED, use Ctrl-S", vim.log.levels.WARN)
+end, { desc = "DO NOT USE" })
+vim.keymap.set({ "n", "i" }, "<C-s>", windo("update", true), { desc = "[U]pdate files (:update)" })
 vim.keymap.set("n", "<leader>on", ":on<CR>", { desc = ":[on]ly (close all other windows)" })
 vim.keymap.set("n", "ZA", ":wqa<CR>", { desc = "Save and close all" })
 vim.keymap.set("n", "<C-t>", ":tabnew<CR>", { desc = "Open a new tab" })
 vim.keymap.set("n", "<leader>rf", ":checktime<CR>", { desc = "[R]eload [F]iles (:checktime)" })
+
+-- Indentation
+vim.keymap.set("n", "<C-i>", "<C-i>", { noremap = true })
+vim.keymap.set("n", "<Tab>", ">>", { desc = "󰉶 indent" })
+vim.keymap.set("x", "<Tab>", ">gv", { desc = "󰉶 indent" })
+vim.keymap.set("i", "<Tab>", "<C-t>", { desc = "󰉶 indent" })
+vim.keymap.set("n", "<S-Tab>", "<<", { desc = "󰉵 outdent" })
+vim.keymap.set("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent" })
+vim.keymap.set("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent" })
 
 local function toggle_diagnostics()
   if vim.w.diag_disabled then
@@ -44,19 +56,8 @@ local function toggle_diagnostics()
   end
 end
 
--- LSP
-vim.keymap.set("n", "<leader>td", toggle_diagnostics, { desc = "[T]oggle [D]iagnostics" })
-
--- Indentation
-vim.keymap.set("n", "<C-i>", "<C-i>", { noremap = true })
-vim.keymap.set("n", "<Tab>", ">>", { desc = "󰉶 indent" })
-vim.keymap.set("x", "<Tab>", ">gv", { desc = "󰉶 indent" })
-vim.keymap.set("i", "<Tab>", "<C-t>", { desc = "󰉶 indent" })
-vim.keymap.set("n", "<S-Tab>", "<<", { desc = "󰉵 outdent" })
-vim.keymap.set("x", "<S-Tab>", "<gv", { desc = "󰉵 outdent" })
-vim.keymap.set("i", "<S-Tab>", "<C-d>", { desc = "󰉵 outdent" })
-
 -- Toggles
+vim.keymap.set("n", "<leader>td", toggle_diagnostics, { desc = "[T]oggle [D]iagnostics" })
 vim.keymap.set("n", "<leader>th", ":set hlsearch!<CR>", { desc = "[T]oggle Search [H]ighlight" })
 vim.keymap.set("n", "<leader>tl", ":set list!<CR>", { desc = "[T]oggle [L]ist (show/hide white space)" })
 vim.keymap.set("n", "<leader>ts", ":set spell!<CR>", { desc = "[T]oggle [S]pellcheck" })
@@ -84,6 +85,9 @@ vim.keymap.set({ "n", "v" }, "c", '"_c')
 -- selection
 vim.keymap.set("x", ".", ":norm .<CR>")
 vim.keymap.set("n", "<leader>L", ":Lazy<CR>")
+vim.keymap.set("n", ";", ":") -- convenient
+-- in case I ever actually need it. With flash I can just press f/t again
+vim.keymap.set("n", ":", ";")
 
 -- document key chains
 require("which-key").add({
