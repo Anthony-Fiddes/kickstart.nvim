@@ -6,6 +6,7 @@ return {
     local snacks = require("snacks")
     snacks.setup({
       bigfile = { enabled = true },
+      scroll = { enabled = true },
     })
 
     vim.api.nvim_create_autocmd("User", {
