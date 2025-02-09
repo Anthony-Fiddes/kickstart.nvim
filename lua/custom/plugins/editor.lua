@@ -17,6 +17,17 @@ return {
         },
       })
 
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "PersistedSavePre",
+        callback = function()
+          -- snippet taken from:
+          -- https://github.com/sindrets/diffview.nvim/issues/409#issuecomment-1664510013
+          for _, view in ipairs(require("diffview.lib").views) do
+            view:close()
+          end
+        end,
+      })
+
       require("neogit").setup({
         integrations = {
           telescope = false,
