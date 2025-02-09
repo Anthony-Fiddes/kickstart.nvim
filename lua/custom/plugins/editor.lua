@@ -50,7 +50,8 @@ return {
         if vim.bo.filetype:find("Neogit") then
           return ":q<CR>"
         end
-        return ":Neogit<CR>"
+        -- don't show out of date changes...
+        return ":wa<CR>:Neogit<CR>"
       end
       vim.keymap.set("n", "<Leader>g", toggle_neogit, { silent = true, desc = "Neo[g]it", expr = true })
     end,
