@@ -147,6 +147,9 @@ return {
       end
       mini_misc.setup_auto_root({ ".git", "package.json", "Makefile" }, fallback)
 
+      require("mini.git").setup()
+      vim.keymap.set("n", "<Leader>G", ":Git ", { desc = ":Git " })
+
       require("mini.bracketed").setup()
       require("mini.icons").setup()
     end,

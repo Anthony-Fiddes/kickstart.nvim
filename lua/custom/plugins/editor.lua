@@ -1,40 +1,32 @@
 return {
   -- Git related plugins
   {
-    "tpope/vim-fugitive",
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim", -- required
+      "sindrets/diffview.nvim", -- optional - Diff integration
+      "ibhagwan/fzf-lua",
+    },
     config = function()
-      local function cmd(command)
-        return function()
-          if type(command) == "table" then
-            for _, c in pairs(command) do
-              vim.cmd(c)
-            end
-          else
-            vim.cmd(command)
-          end
-        end
-      end
-
-      -- Fugitive
-      -- :update before running :G so that the changes are up to date
-      vim.keymap.set("n", "<Leader>g", cmd({ "update", "G" }), { desc = "[G]it" })
-      vim.api.nvim_create_autocmd("User", {
-        pattern = "FugitiveIndex",
-        callback = function(args)
-          vim.keymap.set("n", "cc", cmd("G commit -v"), { buffer = args.buf, desc = "Git commit" })
-          vim.keymap.set("n", "ca", cmd("G commit --amend -v"), { buffer = args.buf, desc = "Git amend" })
-          vim.keymap.set("n", "p", cmd("G push"), { buffer = args.buf, noremap = true, desc = "Git push" })
-          vim.keymap.set("n", "P", cmd("G pull"), { buffer = args.buf, noremap = true, desc = "Git pull" })
-          vim.keymap.set("n", "<Leader>g", "gq", { buffer = args.buf, remap = true, desc = "Close Fugitive" })
-        end,
+      require("neogit").setup({
+        integrations = {
+          telescope = false,
+        },
+        mappings = {
+          popup = {
+            ["Z"] = false,
+            ["z"] = "StashPopup",
+          },
+        },
       })
-    end,
-  },
-  "tpope/vim-rhubarb",
-  {
-    "shumphrey/fugitive-gitlab.vim",
-    config = function()
-      vim.g.fugitive_gitlab_domains = require("custom.vars").gitlab_domains
+
+      local toggle_neogit = function()
+        if vim.bo.filetype:find("Neogit") then
+          return ":q<CR>"
+        end
+        return ":Neogit<CR>"
+      end
+      vim.keymap.set("n", "<Leader>g", toggle_neogit, { silent = true, desc = "Neo[g]it", expr = true })
     end,
   },
   {
@@ -159,7 +151,7 @@ return {
           }
           for _, buf in ipairs(vim.api.nvim_list_bufs()) do
             local filetype = vim.bo[buf].filetype
-            if banned_filetypes[filetype] then
+            if banned_filetypes[filetype] or filetype:find("Neogit") then
               vim.api.nvim_buf_delete(buf, { force = true })
             end
           end

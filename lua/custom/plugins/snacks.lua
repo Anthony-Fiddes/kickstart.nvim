@@ -7,6 +7,27 @@ return {
     snacks.setup({
       bigfile = { enabled = true },
       scroll = { enabled = true },
+      gitbrowse = {
+        url_patterns = {
+          ["github%.com"] = {
+            branch = "/tree/{branch}",
+            file = "/blob/{branch}/{file}#L{line_start}-L{line_end}",
+            commit = "/commit/{commit}",
+          },
+          -- any url with `gitlab.` should use these rules. Useful for working
+          -- with private gitlab instances.
+          [".*gitlab%..+"] = {
+            branch = "/-/tree/{branch}",
+            file = "/-/blob/{branch}/{file}#L{line_start}-L{line_end}",
+            commit = "/-/commit/{commit}",
+          },
+          ["bitbucket%.org"] = {
+            branch = "/src/{branch}",
+            file = "/src/{branch}/{file}#lines-{line_start}-L{line_end}",
+            commit = "/commits/{commit}",
+          },
+        },
+      },
     })
 
     vim.api.nvim_create_autocmd("User", {
@@ -21,5 +42,7 @@ return {
     vim.keymap.set("n", "<leader>tt", function()
       Snacks.terminal()
     end, { desc = "[T]oggle [T]erminal" })
+
+    vim.api.nvim_create_user_command("GBrowse", "lua require('snacks').gitbrowse.open()", {})
   end,
 }
