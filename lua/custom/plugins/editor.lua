@@ -8,6 +8,15 @@ return {
       "ibhagwan/fzf-lua",
     },
     config = function()
+      require("diffview").setup({
+        hooks = {
+          view_opened = function(_)
+            vim.keymap.set("n", "q", ":DiffviewClose<CR>", { desc = "Close Diffview" })
+            vim.keymap.set("n", "ZZ", "q", { remap = true })
+          end,
+        },
+      })
+
       require("neogit").setup({
         integrations = {
           telescope = false,
