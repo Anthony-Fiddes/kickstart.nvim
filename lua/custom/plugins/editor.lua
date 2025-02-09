@@ -17,6 +17,12 @@ return {
             ["Z"] = false,
             ["z"] = "StashPopup",
           },
+          commit_editor = {
+            ["<c-c><c-c>"] = false,
+            ["<c-c><c-k>"] = false,
+            ["ZZ"] = "Submit",
+            ["ZQ"] = "Abort",
+          },
         },
       })
 
