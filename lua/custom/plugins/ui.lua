@@ -23,7 +23,14 @@ return {
     event = "VeryLazy",
     config = function()
       local notify = require("notify")
-      notify.setup({ timeout = 2500 })
+      notify.setup({
+        timeout = 2500,
+        on_open = function(win)
+          -- never let <c-w> focus a notify window!
+          -- taken from: https://github.com/rcarriga/nvim-notify/issues/183#issuecomment-1464892813
+          vim.api.nvim_win_set_config(win, { focusable = false })
+        end,
+      })
       vim.notify = notify
     end,
   },
