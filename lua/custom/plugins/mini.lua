@@ -64,7 +64,7 @@ return {
           reset = "`",
           reveal_cwd = "@",
           show_help = "g?",
-          synchronize = "<Leader>u",
+          synchronize = "=",
           trim_left = "<",
           trim_right = ">",
         },
