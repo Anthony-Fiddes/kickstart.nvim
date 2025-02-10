@@ -39,7 +39,6 @@ return {
           }),
           f = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }), -- function
           c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }), -- class
-          a = ai.gen_spec.treesitter({ a = "@parameter.outer", i = "@parameter.inner" }), -- argument
           d = { "%f[%d]%d+" }, -- digits
           u = ai.gen_spec.function_call(), -- u for "Usage"
           U = ai.gen_spec.function_call({ name_pattern = "[%w_]" }), -- without dot in function name
