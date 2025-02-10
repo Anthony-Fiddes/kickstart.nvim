@@ -200,6 +200,7 @@ return {
       default_mappings = false,
     },
     config = function()
+      require("git-conflict").setup()
       -- Setting mappings manually because if you don't type them fast enough,
       -- vim thinks that you're providing a text object / motion to c.
       --
