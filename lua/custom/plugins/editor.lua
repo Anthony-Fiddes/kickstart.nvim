@@ -11,8 +11,11 @@ return {
       require("diffview").setup({
         hooks = {
           view_opened = function(_)
-            vim.keymap.set("n", "q", ":DiffviewClose<CR>", { desc = "Close Diffview" })
-            vim.keymap.set("n", "ZZ", "q", { remap = true })
+            for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+              local buf = vim.api.nvim_win_get_buf(win)
+              vim.keymap.set("n", "q", ":DiffviewClose<CR>", { desc = "Close Diffview", buffer = buf })
+              vim.keymap.set("n", "ZZ", "q", { remap = true, buffer = buf })
+            end
           end,
         },
       })
