@@ -200,6 +200,7 @@ return {
       default_mappings = false,
     },
     config = function()
+      ---@diagnostic disable-next-line: missing-parameter
       require("git-conflict").setup()
       -- Setting mappings manually because if you don't type them fast enough,
       -- vim thinks that you're providing a text object / motion to c.
