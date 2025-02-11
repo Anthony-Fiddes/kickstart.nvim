@@ -32,7 +32,8 @@ return {
         end,
       })
 
-      require("neogit").setup({
+      local neogit = require("neogit")
+      neogit.setup({
         integrations = {
           telescope = false,
         },
@@ -59,6 +60,9 @@ return {
       end
       vim.keymap.set("n", "<Leader>tg", toggle_neogit, { silent = true, desc = "[T]oggle Neo[g]it", expr = true })
       vim.keymap.set("n", "<Leader>gg", toggle_neogit, { silent = true, desc = "Toggle Neo[g]it", expr = true })
+      vim.keymap.set("n", "<Leader>gc", function()
+        neogit.open({ "commit" })
+      end, { silent = true, desc = "Toggle Neo[g]it", expr = true })
     end,
   },
   {
