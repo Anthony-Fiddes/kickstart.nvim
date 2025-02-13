@@ -22,7 +22,9 @@ return {
       })
       vim.keymap.set("n", "<Leader>gh", ":DiffviewFileHistory %<CR>", { desc = "View [G]it [H]istory for current file" })
 
+      local git_augroup = vim.api.nvim_create_augroup("git-plugins", { clear = true })
       vim.api.nvim_create_autocmd("User", {
+        group = git_augroup,
         pattern = "PersistedSavePre",
         callback = function()
           -- snippet taken from:
@@ -64,6 +66,14 @@ return {
       vim.keymap.set("n", "<Leader>gc", function()
         neogit.open({ "commit" })
       end, { silent = true, desc = "Toggle Neo[g]it", expr = true })
+
+      vim.api.nvim_create_autocmd("User", {
+        group = git_augroup,
+        pattern = "NeogitStatusRefreshed",
+        callback = function()
+          vim.cmd("checktime")
+        end,
+      })
     end,
   },
   {
