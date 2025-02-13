@@ -143,7 +143,6 @@ require("lazy").setup({
           diffview = true,
         },
       })
-
       vim.cmd("colorscheme catppuccin")
     end,
     priority = 1000,
