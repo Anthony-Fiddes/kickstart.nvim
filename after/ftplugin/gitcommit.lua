@@ -20,7 +20,7 @@ local buffer_source = {
 -- It may be a bit overcomplicated, but it's fun :)
 local yaml_present = vim.fn.search([[\(yaml\|yml\)]], "nw") ~= 0
 if yaml_present then
-  local yaml_keyword_pattern = require("custom.vars").cmp.keyword_pattern.yaml
+  local yaml_keyword_pattern = require("vars").cmp.keyword_pattern.yaml
   local new_option = {
     keyword_pattern = yaml_keyword_pattern,
   }

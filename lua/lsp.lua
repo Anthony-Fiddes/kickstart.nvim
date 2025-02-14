@@ -1,4 +1,4 @@
-local custom_vars = require("custom.vars")
+local custom_vars = require("vars")
 
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.

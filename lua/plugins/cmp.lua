@@ -1,4 +1,4 @@
-local custom_vars = require("custom.vars")
+local custom_vars = require("vars")
 
 return {
   -- Autocompletion

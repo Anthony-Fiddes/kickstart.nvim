@@ -2,4 +2,4 @@ tags
 test.sh
 .luarc.json
 nvim
-lua/custom/generated_globals.lua
+lua/generated_globals.lua

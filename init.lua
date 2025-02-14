@@ -5,7 +5,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- generated_globals is optional
-pcall(require, "custom.generated_globals")
+pcall(require, "generated_globals")
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
@@ -274,8 +274,8 @@ require("lazy").setup({
   --    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
-  { import = "custom.plugins" },
-  { import = "custom.plugins.languages" },
+  { import = "plugins" },
+  { import = "plugins.languages" },
 })
 
 -- [[ Highlight on yank ]]
@@ -289,6 +289,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   pattern = "*",
 })
 
-require("custom.lsp")
-require("custom.settings")
-require("custom.mappings")
+require("lsp")
+require("settings")
+require("mappings")
