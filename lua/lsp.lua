@@ -1,4 +1,4 @@
-local custom_vars = require("vars")
+local config = require("config")
 
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
@@ -56,7 +56,7 @@ local on_attach = function(client, bufnr)
 
   -- Don't let ruff try to give hover information in favor of pylsp
   -- If I end up needing to do this with other LSPs, I should add a table in
-  -- custom_vars.
+  -- config.
   if client.name == "ruff" then
     client.server_capabilities.hoverProvider = false
   end
@@ -142,7 +142,7 @@ local settings = {
   yamlls = {
     yaml = {
       customTags = { "!reference sequence" },
-      schemas = custom_vars.yaml_schemas or nil,
+      schemas = config.yaml_schemas or nil,
     },
   },
 }

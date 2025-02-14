@@ -7,7 +7,7 @@ local sources = cmp.get_config().sources
 if sources ~= nil then
   for i in ipairs(sources) do
     if sources[i].name == "buffer" then
-      local yaml_keyword_pattern = require("vars").cmp.keyword_pattern.yaml
+      local yaml_keyword_pattern = require("config").cmp.keyword_pattern.yaml
       sources[i].option.keyword_pattern = yaml_keyword_pattern
       break
     end

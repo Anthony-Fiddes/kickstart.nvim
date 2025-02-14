@@ -1,4 +1,4 @@
-local custom_vars = require("vars")
+local config = require("config")
 
 return {
   -- Autocompletion
@@ -48,7 +48,7 @@ return {
         })
         require("copilot_cmp").setup({})
       end,
-      enabled = custom_vars.copilot_enabled,
+      enabled = config.copilot_enabled,
     },
     {
       "Exafunction/codeium.nvim",
@@ -59,7 +59,7 @@ return {
       config = function()
         require("codeium").setup({})
       end,
-      enabled = custom_vars.codeium_enabled,
+      enabled = config.codeium_enabled,
     },
   },
   config = function()

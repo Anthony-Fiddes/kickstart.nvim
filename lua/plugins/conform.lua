@@ -22,7 +22,7 @@ return { -- Autoformat
       end
     end, { desc = "[T]oggle [F]ormatting on Save" })
 
-    local formatting = require("vars").formatting
+    local formatting = require("config").formatting
     require("conform").setup({
       format_on_save = function(bufnr)
         if vim.b[bufnr].autoformat_enabled == nil then
