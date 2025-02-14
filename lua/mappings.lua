@@ -113,8 +113,7 @@ vim.keymap.set("n", "<Down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent
 
 -- Aesthetics
 vim.keymap.set("n", "<leader>tb", function()
-  local current = vim.o.background
-  if current == "dark" then
+  if vim.o.background == "dark" then
     vim.o.background = "light"
   else
     vim.o.background = "dark"
