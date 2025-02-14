@@ -100,7 +100,6 @@ require("which-key").add({
 
 -- Diagnostic keymaps
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Open floating [D]iagnostic message" })
-vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
 -- Kickstart keymaps for better default experience
 -- See `:help vim.keymap.set()`
