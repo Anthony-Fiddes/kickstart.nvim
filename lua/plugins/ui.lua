@@ -1,4 +1,53 @@
 return {
+
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    config = function()
+      require("catppuccin").setup({
+        background = { -- :h background
+          light = "latte",
+          dark = "macchiato",
+        },
+        integrations = {
+          notify = true,
+          -- this integration disables highlighting so it's much harder for me
+          -- to see
+          flash = false,
+          diffview = true,
+        },
+      })
+      vim.cmd("colorscheme catppuccin")
+    end,
+    priority = 1000,
+  },
+  {
+    "folke/tokyonight.nvim",
+    event = "VeryLazy",
+  },
+
+  -- Useful plugin to show you pending keybinds.
+  { "folke/which-key.nvim", opts = {} },
+
+  {
+    -- Set lualine as statusline
+    "nvim-lualine/lualine.nvim",
+    -- See `:help lualine.txt`
+    opts = {
+      options = {
+        icons_enabled = false,
+        theme = "catppuccin",
+        component_separators = "|",
+        section_separators = "",
+      },
+      sections = { lualine_c = { { "filename", path = 4 } } },
+    },
+    init = function()
+      -- It's gonna be in the lualine
+      vim.o.showmode = false
+    end,
+  },
+
   {
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
