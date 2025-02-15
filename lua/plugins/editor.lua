@@ -21,6 +21,7 @@ return {
         },
       })
       vim.keymap.set("n", "<Leader>gh", ":DiffviewFileHistory %<CR>", { desc = "View [G]it [H]istory for current file" })
+      vim.keymap.set("n", "<Leader>gd", ":DiffviewOpen<CR>", { desc = "Open [G]it [D]iff view for current changes" })
 
       local git_augroup = vim.api.nvim_create_augroup("git-plugins", { clear = true })
       vim.api.nvim_create_autocmd("User", {
