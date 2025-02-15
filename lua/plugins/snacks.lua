@@ -43,8 +43,10 @@ return {
       Snacks.terminal()
     end, { desc = "[T]oggle [T]erminal" })
 
-    -- TODO: Make the user command respect visual selection as well
-    vim.api.nvim_create_user_command("GBrowse", "lua require('snacks').gitbrowse.open()", {})
+    local gbrowse_command = function(opts)
+      require("snacks").gitbrowse.open({ line_start = opts.line1, line_end = opts.line2 })
+    end
+    vim.api.nvim_create_user_command("GBrowse", gbrowse_command, { range = true })
     vim.keymap.set({ "n", "x" }, "<leader>gb", snacks.gitbrowse.open, { desc = "[G]it [B]rowse" })
   end,
 }
