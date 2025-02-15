@@ -18,6 +18,9 @@ vim.wo.relativenumber = true
 -- Highlight current line
 vim.wo.cursorline = true
 
+-- Minimal number of screen lines to keep above and below the cursor.
+vim.opt.scrolloff = 10
+
 -- Important when using a session manager that loads/saves sessions
 -- automatically
 vim.o.sessionoptions = "curdir,folds,tabpages,winpos,winsize"
