@@ -154,7 +154,7 @@ return {
         { name = "copilot" },
         { name = "codeium" },
         { name = "fish" },
-        { name = "buffer" },
+        require("config.cmp").sources.buffer,
         { name = "async_path" },
         { name = "emoji" },
       },

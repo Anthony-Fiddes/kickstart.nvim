@@ -15,11 +15,4 @@ return {
   -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#yamlls
   yaml_schemas = nil,
   gitlab_domains = {},
-  cmp = {
-    keyword_pattern = {
-      -- the newly added second group matches job names like `.cnf:example:` as
-      -- `.cnf:example`
-      yaml = [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%([\-.\:]\w*\)*\ze\:\|\h\w*\%([\-.]\w*\)*\)]],
-    },
-  },
 }
