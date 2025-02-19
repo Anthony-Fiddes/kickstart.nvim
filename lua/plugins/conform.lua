@@ -16,9 +16,9 @@ return { -- Autoformat
       function()
         vim.b.autoformat_enabled = not vim.b.autoformat_enabled
         if vim.b.autoformat_enabled then
-          print("Format on save enabled")
+          vim.notify("Format on save enabled")
         else
-          print("Format on save disabled")
+          vim.notify("Format on save disabled")
         end
       end,
       desc = "[T]oggle [F]ormatting on Save",
