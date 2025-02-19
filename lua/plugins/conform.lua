@@ -1,6 +1,6 @@
 return { -- Autoformat
   "stevearc/conform.nvim",
-  event = { "BufWritePre" },
+  event = { "BufAdd", "BufWritePre" },
   cmd = { "ConformInfo" },
   keys = {
     {
@@ -26,30 +26,13 @@ return { -- Autoformat
   },
   config = function()
     local formatting = require("config").formatting
-    require("conform").setup({
-      format_on_save = function(bufnr)
-        if vim.b[bufnr].autoformat_enabled == nil then
-          -- Determine autoformat default value
-          if formatting.ignored_files[vim.fn.expand("%t")] then
-            vim.b[bufnr].autoformat_enabled = false
-          else
-            vim.b[bufnr].autoformat_enabled = formatting.on_save
-          end
-        end
-
-        if not vim.b[bufnr].autoformat_enabled then
-          return
-        end
-        return {
-          timeout_ms = 500,
-          lsp_format = "fallback",
-        }
-      end,
+    local conform = require("conform")
+    conform.setup({
       formatters_by_ft = {
         css = { "prettier" },
         fish = { "fish_indent" },
         -- the go formatters tend to time out a lot, so just run them asynchronously
-        go = { "goimports", "golines", "gofumpt", format_after_save = true },
+        go = { "goimports", "golines", "gofumpt", format_after_save = true, timeout_ms = 1000 },
         lua = { "stylua" },
         typescript = { "prettier" },
         typescriptreact = { "prettier" },
@@ -58,9 +41,41 @@ return { -- Autoformat
         markdown = { "prettier" },
         python = { "isort", lsp_format = "last" },
         yaml = { "prettier" },
-        -- for all filetypes without a formatter
-        ["_"] = { "trim_whitespace" },
       },
+    })
+
+    local augroup = vim.api.nvim_create_augroup("format-on-save", { clear = true })
+    vim.api.nvim_create_autocmd("BufAdd", {
+      pattern = "*",
+      group = augroup,
+      callback = function(args)
+        -- Determine autoformat default value
+        if vim.b[args.buf].autoformat_enabled == nil then
+          if formatting.ignored_files[vim.fn.expand("%t")] then
+            vim.b[args.buf].autoformat_enabled = false
+          else
+            vim.b[args.buf].autoformat_enabled = formatting.on_save
+          end
+        end
+      end,
+    })
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      pattern = "*",
+      group = augroup,
+      callback = function(args)
+        -- trim whitespace no matter what
+        conform.format({ bufnr = args.buf, formatters = { "trim_whitespace" } })
+
+        -- Only format on save if autoformat is enabled for the buffer
+        if not vim.b[args.buf].autoformat_enabled then
+          return
+        end
+        conform.format({
+          bufnr = args.buf,
+          timeout_ms = 500,
+          lsp_format = "fallback",
+        })
+      end,
     })
   end,
 }
