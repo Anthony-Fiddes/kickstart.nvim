@@ -9,7 +9,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   pattern = "*",
 })
 
-local augroup = vim.api.nvim_create_augroup("custom_settings", { clear = true })
+local augroup = vim.api.nvim_create_augroup("custom-settings", { clear = true })
 -- Set tab defaults for new text files
 vim.api.nvim_create_autocmd("BufNewFile", {
   pattern = { "*.txt", "*.md" },
