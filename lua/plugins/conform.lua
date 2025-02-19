@@ -11,17 +11,20 @@ return { -- Autoformat
       mode = "",
       desc = "[F]ormat buffer",
     },
+    {
+      "<leader>tf",
+      function()
+        vim.b.autoformat_enabled = not vim.b.autoformat_enabled
+        if vim.b.autoformat_enabled then
+          print("Format on save enabled")
+        else
+          print("Format on save disabled")
+        end
+      end,
+      desc = "[T]oggle [F]ormatting on Save",
+    },
   },
   config = function()
-    vim.keymap.set("n", "<leader>tf", function()
-      vim.b.autoformat_enabled = not vim.b.autoformat_enabled
-      if vim.b.autoformat_enabled then
-        print("Format on save enabled")
-      else
-        print("Format on save disabled")
-      end
-    end, { desc = "[T]oggle [F]ormatting on Save" })
-
     local formatting = require("config").formatting
     require("conform").setup({
       format_on_save = function(bufnr)
