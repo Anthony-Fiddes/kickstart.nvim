@@ -3,8 +3,10 @@ These custom variables allow me to easily tweak settings between my work and per
 --]]
 
 return {
-  copilot_enabled = false,
-  codeium_enabled = false,
+  ai = {
+    copilot_enabled = false,
+    codeium_enabled = false,
+  },
   formatting = {
     on_save = true,
     ignored_files = {

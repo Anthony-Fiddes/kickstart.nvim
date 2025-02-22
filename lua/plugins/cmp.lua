@@ -48,7 +48,7 @@ return {
         })
         require("copilot_cmp").setup({})
       end,
-      enabled = config.copilot_enabled,
+      enabled = config.ai.copilot_enabled,
     },
     {
       "Exafunction/codeium.nvim",
@@ -59,7 +59,8 @@ return {
       config = function()
         require("codeium").setup({})
       end,
-      enabled = config.codeium_enabled,
+      enabled = config.ai.codeium_enabled,
+    },
     },
   },
   config = function()
