@@ -6,6 +6,7 @@ return {
   ai = {
     copilot_enabled = false,
     codeium_enabled = false,
+    supermaven_enabled = true,
   },
   formatting = {
     on_save = true,

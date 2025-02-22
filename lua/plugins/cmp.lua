@@ -61,6 +61,16 @@ return {
       end,
       enabled = config.ai.codeium_enabled,
     },
+    {
+      "supermaven-inc/supermaven-nvim",
+      enabled = config.ai.supermaven_enabled,
+      event = "InsertEnter",
+      config = function()
+        require("supermaven-nvim").setup({
+          disable_keymaps = true,
+          disable_inline_completion = true,
+        })
+      end,
     },
   },
   config = function()
@@ -162,8 +172,9 @@ return {
         { name = "nvim_lsp" },
         { name = "nvim_lsp_signature_help" },
         { name = "luasnip" },
-        { name = "copilot" },
         { name = "codeium" },
+        { name = "copilot" },
+        { name = "supermaven" },
         { name = "fish" },
         require("config.cmp").sources.buffer,
         { name = "async_path" },

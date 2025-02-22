@@ -21,7 +21,8 @@ cmp.setup.buffer({
     { name = "conventionalcommits" },
     buffer_source,
     { name = "luasnip" },
-    { name = "copilot" },
     { name = "codeium" },
+    { name = "copilot" },
+    { name = "supermaven" },
   }),
 })
