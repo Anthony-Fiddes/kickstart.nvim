@@ -71,6 +71,14 @@ return {
           disable_inline_completion = true,
         })
       end,
+      condition = function()
+        -- only allow supermaven in git repos
+        if require("mini.misc").find_root(0, { ".git" }) ~= nil then
+          return false
+        end
+        -- stop supermaven
+        return true
+      end,
     },
   },
   config = function()
