@@ -15,6 +15,7 @@ return {
           -- to see
           flash = false,
           diffview = true,
+          which_key = true,
         },
       })
       vim.cmd("colorscheme catppuccin")
