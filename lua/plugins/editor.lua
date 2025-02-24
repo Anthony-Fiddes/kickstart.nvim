@@ -36,11 +36,16 @@ return {
         end,
       })
 
+      local graph_style = "ascii"
+      if os.getenv("KITTY_PID") ~= nil then
+        graph_style = "kitty"
+      end
       local neogit = require("neogit")
       neogit.setup({
         integrations = {
           telescope = false,
         },
+        graph_style = graph_style,
         mappings = {
           popup = {
             ["Z"] = false,
