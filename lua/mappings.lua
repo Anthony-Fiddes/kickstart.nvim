@@ -77,6 +77,17 @@ vim.keymap.set("n", "<leader>tq", function()
   end
 end, { desc = "[T]oggle [Q]uickfix Window" })
 
+local in_comment = function()
+  local ts_utils = require("nvim-treesitter.ts_utils")
+  local node_at_cursor = ts_utils.get_node_at_cursor()
+
+  if not node_at_cursor then
+    return false
+  end
+  local node_type = node_at_cursor:type()
+  return node_type:find("comment") ~= nil
+end
+
 -- Misc
 vim.keymap.set("n", "<leader>nh", ":nohlsearch<CR>", { desc = "[N]o [H]ighlight" })
 vim.keymap.set("n", "<esc>", ":nohlsearch<CR>", { desc = "No Highlight", silent = true })
@@ -86,6 +97,12 @@ vim.keymap.set({ "n", "v" }, "c", '"_c')
 vim.keymap.set("x", ".", ":norm .<CR>")
 vim.keymap.set("n", "<leader>L", ":Lazy<CR>")
 vim.keymap.set("n", ";", ":") -- convenient
+vim.keymap.set("n", "<leader>gw", function()
+  if in_comment() then
+    return "gwgc"
+  end
+  return "gwip"
+end, { desc = "[W]rap text under cursor smartly", expr = true })
 
 -- document key chains
 require("which-key").add({
