@@ -405,4 +405,60 @@ return {
       "folke/neodev.nvim",
     },
   },
+  {
+
+    "stevearc/quicker.nvim",
+    event = "VeryLazy",
+    config = function()
+      local quicker = require("quicker")
+      quicker.setup({
+        edit = {
+          autosave = true,
+        },
+        keys = {
+          {
+            ">",
+            function()
+              require("quicker").expand({ before = 2, after = 2, add_to_existing = true })
+            end,
+            desc = "Expand quickfix context",
+          },
+          {
+            "<",
+            function()
+              require("quicker").collapse()
+            end,
+            desc = "Collapse quickfix context",
+          },
+        },
+        on_qf = function(buf)
+          -- this is probably okay since there's only one quickfix list
+          local prev_inccommand = nil
+          local set_nosplit = function()
+            prev_inccommand = vim.o.inccommand
+            vim.o.inccommand = "nosplit"
+          end
+          local inccommand_augroup = vim.api.nvim_create_augroup("set-inccommand-in-qf-list", { clear = true })
+          vim.api.nvim_create_autocmd("BufEnter", {
+            buffer = buf,
+            group = inccommand_augroup,
+            callback = set_nosplit,
+          })
+          -- on_qf is just a filetype autocmd for the qf filetype. That event
+          -- isn't triggered the first time the quickfix list is opened, so we
+          -- have to run the callback here to get started (this event triggering
+          -- means that the quickfix list buffer was opened).
+          set_nosplit()
+
+          vim.api.nvim_create_autocmd("BufLeave", {
+            buffer = buf,
+            group = inccommand_augroup,
+            callback = function()
+              vim.o.inccommand = prev_inccommand
+            end,
+          })
+        end,
+      })
+    end,
+  },
 }
