@@ -100,10 +100,11 @@ vim.keymap.set("n", "<leader>L", ":Lazy<CR>")
 vim.keymap.set("n", ";", ":") -- convenient
 vim.keymap.set("n", "<leader>gw", function()
   if in_comment() then
+    -- this makes use of the mini.comment text object
     return "gwgc"
   end
   return "gwip"
-end, { desc = "[W]rap text under cursor smartly", expr = true })
+end, { desc = "[W]rap text under cursor smartly", expr = true, remap = true })
 
 -- document key chains
 require("which-key").add({
