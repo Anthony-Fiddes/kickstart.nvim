@@ -71,7 +71,8 @@ vim.keymap.set("n", "<leader>tq", function()
     return
   end
   if qf_win_id == 0 then
-    vim.cmd("cwindow")
+    -- botright is required to take up the full width of the screen
+    vim.cmd("botright cwindow")
   else
     vim.cmd("cclose")
   end
