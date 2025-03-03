@@ -271,6 +271,7 @@ return {
           local banned_filetypes = {
             gitcommit = true,
             checkhealth = true,
+            qf = true,
           }
           for _, buf in ipairs(vim.api.nvim_list_bufs()) do
             local filetype = vim.bo[buf].filetype
