@@ -18,6 +18,11 @@ return {
           ["ctrl-u"] = "preview-page-up",
         },
       },
+      oldfiles = {
+        -- allows me to go back to buffers I've visited recently in the same
+        -- session.
+        include_current_session = true,
+      },
     })
 
     local function fuzzy_find_motion(motion)
