@@ -69,9 +69,7 @@ return {
       end
       vim.keymap.set("n", "<Leader>tg", toggle_neogit, { silent = true, desc = "[T]oggle Neo[g]it", expr = true })
       vim.keymap.set("n", "<Leader>gg", toggle_neogit, { silent = true, desc = "Toggle Neo[g]it", expr = true })
-      vim.keymap.set("n", "<Leader>gc", function()
-        neogit.open({ "commit" })
-      end, { silent = true, desc = "Toggle Neo[g]it", expr = true })
+      vim.keymap.set("n", "<Leader>gcc", neogit.action("commit", "commit", nil), { desc = "Neo[g]it [C]ommit" })
 
       vim.api.nvim_create_autocmd("User", {
         group = git_augroup,
@@ -315,6 +313,7 @@ return {
         "gitattributes",
         "helm",
         "lua",
+        "make",
         "markdown",
         "markdown_inline",
         "python",
