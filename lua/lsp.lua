@@ -26,7 +26,7 @@ local on_attach = function(client, bufnr)
     return function()
       -- undocumented functionality of fzf-lua that I found from looking at
       -- LazyVim config.
-      func({ jump_to_single_result = true, ignore_current_line = true })
+      func({ jump1 = true, ignore_current_line = true })
     end
   end
   local fzf = require("fzf-lua")
