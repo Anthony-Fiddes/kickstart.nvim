@@ -341,8 +341,10 @@ return {
       },
       indent = {
         enable = true,
-        -- it never works well with SQL unfortunately
-        disable = { "sql" },
+        -- It never works well with SQL unfortunately.
+        -- With YAML it puts the cursor in very odd places when pressing one of
+        -- the `indentkeys`. I noticed it most with `:`
+        disable = { "sql", "yaml" },
       },
       incremental_selection = {
         enable = true,
