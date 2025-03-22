@@ -125,6 +125,7 @@ return {
       })
 
       require("mini.surround").setup({
+        n_lines = 100,
         mappings = {
           add = "<Leader>sa", -- Add surrounding in Normal and Visual modes
           delete = "<Leader>sd", -- Delete surrounding
