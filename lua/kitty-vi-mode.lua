@@ -13,8 +13,9 @@ local channel = vim.api.nvim_open_term(buf, {})
 vim.api.nvim_chan_send(channel, table.concat(lines, "\r\n"))
 vim.api.nvim_set_current_buf(buf)
 vim.keymap.set("n", "q", "<cmd>qa!<cr>", { silent = true, buffer = buf })
--- Using ZZ is a force of habit for closing windows now
+-- Using ZZ and ZQ is a force of habit for closing windows now
 vim.keymap.set("n", "ZZ", "q", { remap = true, silent = true, buffer = buf })
+vim.keymap.set("n", "ZQ", "q", { remap = true, silent = true, buffer = buf })
 vim.api.nvim_create_autocmd("TermEnter", { buffer = buf, command = "stopinsert" })
 vim.defer_fn(function()
   -- go to the end of the terminal buffer
