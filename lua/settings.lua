@@ -105,3 +105,7 @@ vim.filetype.add({
     ["docker-compose.yml"] = "yaml.docker-compose",
   },
 })
+
+vim.diagnostic.config({
+  virtual_lines = { current_line = true },
+})
