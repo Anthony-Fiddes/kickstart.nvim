@@ -5,7 +5,13 @@ vim.o.tabstop = 4
 vim.o.modelines = 0
 
 -- See whitespace when list is on
-vim.o.listchars = "tab:> ,trail:⋅,extends:>,precedes:<"
+vim.opt.listchars = {
+  nbsp = "󰚌",
+  precedes = "…",
+  extends = "…",
+  tab = "<->", -- usually overridden by `mini.indentscope`
+  trail = "⋅",
+}
 
 -- Hard wrap text at this col
 vim.o.textwidth = 80
