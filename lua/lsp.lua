@@ -138,6 +138,8 @@ local settings = {
     },
   },
   ruff = {},
+  -- you have to install this via the :LspInstall command for it to be properly
+  -- setup by mason-lspconfig! This may be something to improve upon.
   terraformls = {},
   ts_ls = {},
   yamlls = {
