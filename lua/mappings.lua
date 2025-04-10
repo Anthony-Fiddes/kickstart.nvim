@@ -97,7 +97,7 @@ vim.keymap.set({ "n", "v" }, "c", '"_c')
 -- selection
 vim.keymap.set("x", ".", ":norm .<CR>")
 vim.keymap.set("n", "<leader>L", ":Lazy<CR>")
-vim.keymap.set("n", ";", ":") -- convenient
+vim.keymap.set({ "n", "v" }, ";", ":") -- convenient
 vim.keymap.set("n", "<leader>gw", function()
   if in_comment() then
     -- this makes use of the mini.comment text object
