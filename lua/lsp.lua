@@ -138,6 +138,7 @@ local settings = {
     },
   },
   ruff = {},
+  terraform_ls = {},
   ts_ls = {},
   yamlls = {
     yaml = {

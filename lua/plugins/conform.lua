@@ -33,7 +33,11 @@ return { -- Autoformat
         fish = { "fish_indent" },
         -- the go formatters tend to time out a lot, so just run them asynchronously
         go = { "goimports", "golines", "gofumpt", format_after_save = true, timeout_ms = 1000 },
+        hcl = { "packer_fmt" },
         lua = { "stylua" },
+        terraform = { "terraform_fmt" },
+        ["terraform-vars"] = { "terraform_fmt" },
+        tf = { "terraform_fmt" },
         typescript = { "prettier" },
         typescriptreact = { "prettier" },
         javascript = { "prettier" },

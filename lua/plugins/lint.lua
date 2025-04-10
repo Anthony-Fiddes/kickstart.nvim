@@ -10,6 +10,8 @@ return {
         fish = { "fish" },
         gitcommit = { "gitlint" },
         go = { "golangcilint" },
+        terraform = { "terraform_validate" },
+        tf = { "terraform_validate" },
         typescript = { "eslint" },
         typescriptreact = { "eslint" },
         javascript = { "eslint" },

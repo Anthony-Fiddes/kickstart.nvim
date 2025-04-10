@@ -323,6 +323,8 @@ return {
         "json",
         "typescript",
         "tsx",
+        "terraform",
+        "hcl",
         "toml",
         "yaml",
         "vimdoc",
