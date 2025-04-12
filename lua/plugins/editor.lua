@@ -8,16 +8,20 @@ return {
       "ibhagwan/fzf-lua",
     },
     config = function()
-      local set_diffview_mappings = function(buf)
-        vim.keymap.set("n", "q", ":DiffviewClose<CR>", { desc = "Close Diffview", buffer = buf })
-        vim.keymap.set("n", "ZZ", "q", { remap = true, buffer = buf })
-      end
+      local diffview_mappings = {
+        { "n", "q", ":DiffviewClose<CR>", { desc = "Close Diffview" } },
+        { "n", "ZZ", "q", { remap = true } },
+      }
       require("diffview").setup({
-        hooks = {
-          view_opened = function()
-            set_diffview_mappings(0)
-          end,
-          diff_buf_read = set_diffview_mappings,
+        keymaps = {
+          view = diffview_mappings,
+          file_view = diffview_mappings,
+          file_history_panel = diffview_mappings,
+          file_panel = diffview_mappings,
+          diff1 = diffview_mappings,
+          diff2 = diffview_mappings,
+          diff3 = diffview_mappings,
+          diff4 = diffview_mappings,
         },
       })
       vim.keymap.set("n", "<Leader>gh", ":DiffviewFileHistory %<CR>", { desc = "View [G]it [H]istory for current file" })
