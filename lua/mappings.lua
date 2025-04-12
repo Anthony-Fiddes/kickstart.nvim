@@ -34,6 +34,7 @@ end, { desc = "DO NOT USE" })
 vim.keymap.set({ "n", "i" }, "<C-s>", windo("update", true), { desc = "[U]pdate files (:update)" })
 vim.keymap.set("n", "<leader>on", ":on<CR>", { desc = ":[on]ly (close all other windows)" })
 vim.keymap.set("n", "ZA", ":wqa<CR>", { desc = "Save and close all" })
+vim.keymap.set("n", "ZT", ":tabclose<CR>", { desc = "Save and close tab" })
 vim.keymap.set("n", "<C-t>", ":tabnew<CR>", { desc = "Open a new tab" })
 vim.keymap.set("n", "<leader>rf", ":checktime<CR>", { desc = "[R]eload [F]iles (:checktime)" })
 
