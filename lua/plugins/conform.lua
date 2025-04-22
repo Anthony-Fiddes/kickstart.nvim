@@ -1,6 +1,6 @@
 return { -- Autoformat
   "stevearc/conform.nvim",
-  event = { "BufRead", "BufWritePre" },
+  event = { "BufAdd", "BufRead", "BufWritePre" },
   cmd = { "ConformInfo" },
   keys = {
     {
@@ -49,7 +49,7 @@ return { -- Autoformat
     })
 
     local augroup = vim.api.nvim_create_augroup("format-on-save", { clear = true })
-    vim.api.nvim_create_autocmd("BufRead", {
+    vim.api.nvim_create_autocmd({ "BufAdd", "BufRead" }, {
       pattern = "*",
       group = augroup,
       callback = function(args)
