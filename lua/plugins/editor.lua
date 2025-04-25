@@ -9,7 +9,7 @@ return {
     },
     config = function()
       local diffview_mappings = {
-        { "n", "q", ":DiffviewClose<CR>", { desc = "Close Diffview" } },
+        { "n", "ZZ", ":DiffviewClose<CR>", { desc = "Close Diffview" } },
         { "n", "ZZ", "q", { remap = true } },
       }
       require("diffview").setup({
