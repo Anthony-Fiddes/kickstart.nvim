@@ -10,7 +10,6 @@ return {
     config = function()
       local diffview_mappings = {
         { "n", "ZZ", ":DiffviewClose<CR>", { desc = "Close Diffview" } },
-        { "n", "ZZ", "q", { remap = true } },
       }
       require("diffview").setup({
         keymaps = {
