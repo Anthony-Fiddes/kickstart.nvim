@@ -82,16 +82,6 @@ vim.o.completeopt = "menuone,noselect"
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
--- this is available on systems that use my fish config, so we can use it
--- to get rid of the flicker of dark background I see when in light mode.
-local system_theme = os.getenv("THEME")
-if system_theme ~= nil then
-  if system_theme == "dark" then
-    vim.o.background = "dark"
-  else
-    vim.o.background = "light"
-  end
-end
 
 -- mainly to make markdown prettier
 vim.o.conceallevel = 2
