@@ -128,24 +128,25 @@ return {
         ["<C-a>"] = cmp.mapping.complete({ config = { sources = { { name = "copilot" } } } }),
         ["<C-Space>"] = cmp.mapping.complete({}),
         ["<C-Esc>"] = cmp.mapping.abort(),
-        ["<Esc>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            -- this is useful when confirming the selection triggers some
-            -- behavior, like gopls importing a module
+        -- inspired by https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings
+        ["<CR>"] = cmp.mapping(function(fallback)
+          if not cmp.visible() then
+            fallback()
+            return
+          end
+
+          if luasnip.expandable() then
+            luasnip.expand()
+          elseif cmp.get_active_entry() then
             cmp.confirm({
               behavior = cmp.ConfirmBehavior.Insert,
               select = false,
             })
-            vim.schedule(fallback)
           else
             fallback()
           end
         end, { "i", "s" }),
         ["<C-y>"] = cmp.mapping.confirm({
-          behavior = cmp.ConfirmBehavior.Insert,
-          select = true,
-        }),
-        ["<C-CR>"] = cmp.mapping.confirm({
           behavior = cmp.ConfirmBehavior.Insert,
           select = true,
         }),
@@ -156,8 +157,8 @@ return {
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() and has_words_before() then
             cmp.select_next_item()
-          elseif luasnip.expand_or_locally_jumpable() then
-            luasnip.expand_or_jump()
+          elseif luasnip.locally_jumpable(1) then
+            luasnip.jump(1)
           else
             fallback()
           end
