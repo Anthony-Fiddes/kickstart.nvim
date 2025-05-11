@@ -63,7 +63,7 @@ return {
           reset = "`",
           reveal_cwd = "@",
           show_help = "g?",
-          synchronize = "=",
+          synchronize = "<C-s>",
           trim_left = "<",
           trim_right = ">",
         },
@@ -120,8 +120,10 @@ return {
           local buf_id = args.data.buf_id
           vim.keymap.set("n", "ZZ", sync_and_close, { buffer = buf_id })
           vim.keymap.set("n", "<esc>", sync_and_close, { buffer = buf_id })
-          map_split(buf_id, "<C-s>", "belowright horizontal")
+          map_split(buf_id, "<leader>s", "belowright horizontal")
+          map_split(buf_id, "<C-e>", "belowright horizontal")
           map_split(buf_id, "<C-v>", "belowright vertical")
+          map_split(buf_id, "<leader>v", "belowright vertical")
         end,
       })
 
