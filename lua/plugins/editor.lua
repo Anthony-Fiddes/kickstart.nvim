@@ -60,6 +60,9 @@ return {
             ["ZZ"] = "Submit",
             ["ZQ"] = "Abort",
           },
+          status = {
+            ["<Leader>rf"] = "RefreshBuffer",
+          },
         },
       })
 
