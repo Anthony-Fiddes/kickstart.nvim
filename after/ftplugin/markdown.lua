@@ -1,6 +1,7 @@
 -- Wrap text as I type
 vim.opt_local.formatoptions:append("t")
 vim.opt_local.spell = true
+vim.opt_local.expandtab = true
 
 -- below code is slightly modified from
 -- https://github.com/chrisgrieser/.config/blob/main/nvim/after/ftplugin/markdown.lua
