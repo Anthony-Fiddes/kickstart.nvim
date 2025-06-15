@@ -114,9 +114,9 @@ return {
           gs.blame_line({ full = true })
         end, "[hb] Show git blame for hunk")
         map("n", "hp", gs.preview_hunk, "[H]unk [P]review")
-        map("n", "<Leader>hs", gs.stage_hunk, "[hs] Stage Hunk")
+        map("n", "<Leader>hs", gs.stage_hunk, "[hs] Stage/Unstage Hunk")
         map("n", "<Leader>hS", gs.stage_buffer, "[hS] Stage Buffer")
-        map("n", "<Leader>hU", gs.reset_buffer_index, "[hU] unstage all hunks")
+        map("n", "<Leader>hU", gs.reset_buffer_index, "[hU] Unstage buffer")
         map("n", "<Leader>hr", gs.reset_hunk, "[hr] Reset Hunk")
         map("n", "<Leader>hR", gs.reset_buffer, "[hR] Reset Buffer")
         -- hunk text object
