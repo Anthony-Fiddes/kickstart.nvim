@@ -8,8 +8,16 @@ return { -- Autoformat
       function()
         require("conform").format({ async = true, lsp_format = "fallback" })
       end,
-      mode = { "n", "x" },
+      mode = { "n" },
       desc = "[F]ormat buffer",
+    },
+    {
+      "<leader>fo",
+      function()
+        require("conform").format({ async = false, lsp_format = "fallback" })
+      end,
+      mode = { "x" },
+      desc = "[F]ormat selection",
     },
     {
       "<leader>tf",
