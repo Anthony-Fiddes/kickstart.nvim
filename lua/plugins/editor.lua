@@ -407,8 +407,8 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = {
       -- Automatically install LSPs to stdpath for neovim
-      "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
+      { "williamboman/mason.nvim", version = "^1.0.0" },
+      { "williamboman/mason-lspconfig.nvim", version = "^1.0.0" },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       "folke/neodev.nvim",
