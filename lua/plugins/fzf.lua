@@ -4,6 +4,7 @@ return {
   dependencies = { "echasnovski/mini.nvim" },
   config = function()
     local fzf = require("fzf-lua")
+    fzf.register_ui_select()
     fzf.setup({
       -- generate a fzf colorscheme based off of current neovim colorscheme
       fzf_colors = true,
