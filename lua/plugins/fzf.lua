@@ -1,7 +1,10 @@
 return {
   "ibhagwan/fzf-lua",
   -- for mini.icons
-  dependencies = { "echasnovski/mini.nvim" },
+  dependencies = {
+    "echasnovski/mini.nvim",
+    "elanmed/fzf-lua-frecency.nvim",
+  },
   config = function()
     local fzf = require("fzf-lua")
     fzf.register_ui_select()
@@ -44,7 +47,9 @@ return {
     -- you've already selected the text that you want to search.
     local fuzzy_find_selection = fuzzy_find_motion("")
 
-    vim.keymap.set("n", "<leader>hh", fzf.oldfiles, { desc = "[hh] Find recently opened files" })
+    local frecency = require("fzf-lua-frecency").frecency
+
+    vim.keymap.set("n", "<leader>hh", frecency, { desc = "[hh] Find recently opened files" })
     vim.keymap.set("n", "<leader>/", fzf.blines, { desc = "[/] Fuzzily search in current buffer" })
     vim.keymap.set("n", "<C-f>", "<leader>/", { remap = true })
     vim.keymap.set("n", "<leader>fh", fzf.helptags, { desc = "[F]ind [H]elp" })
