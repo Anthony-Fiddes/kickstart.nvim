@@ -36,7 +36,7 @@ return {
         -- if I use this technique to restore registers more often, maybe it should
         -- be a decorator?
         vim.fn.setreg(dummy_register, old_content)
-        fzf.live_grep_glob({ search = selection })
+        fzf.live_grep({ search = selection })
       end
     end
 
@@ -54,7 +54,7 @@ return {
     vim.keymap.set("x", "<leader>ff", fuzzy_find_selection, { desc = "[F]ind selection" })
     vim.keymap.set("n", "<leader>p", fzf.files, { desc = "Find [P]roject Files" })
     vim.keymap.set("n", "<leader><space>", "<leader>p", { remap = true })
-    vim.keymap.set("n", "<leader>ff", fzf.live_grep_glob, { desc = "[F]ind in [f]iles (live_grep)" })
+    vim.keymap.set("n", "<leader>ff", fzf.live_grep, { desc = "[F]ind in [f]iles (live_grep)" })
     vim.keymap.set("n", "<leader>fd", fzf.diagnostics_workspace, { desc = "[F]ind [D]iagnostics" })
     vim.keymap.set("n", "<leader>fr", fzf.resume, { desc = "[F]ind [R]resume" })
     vim.keymap.set("n", "<leader>fk", fzf.keymaps, { desc = "[F]ind [k]eymaps" })
