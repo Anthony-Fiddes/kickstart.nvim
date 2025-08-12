@@ -2,6 +2,7 @@ local config = require("config")
 
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
+---@param client vim.lsp.Client
 local on_attach = function(client, bufnr)
   -- In this case, we create a function that lets us more easily define mappings specific
   -- for LSP related items. It sets the mode, buffer and description for us each time.
@@ -46,7 +47,7 @@ local on_attach = function(client, bufnr)
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, "[W]orkspace [L]ist Folders")
 
-  if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
+  if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
     nmap("<leader>ti", function()
       vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
     end, "[T]oggle [I]nlay Hints")
