@@ -67,6 +67,16 @@ end
 require("mason").setup()
 require("mason-lspconfig").setup()
 
+-- only works with Mason v1,
+local mason_registry = require("mason-registry")
+local vue_language_server_path = mason_registry.get_package("vue-language-server"):get_install_path() .. "/node_modules/@vue/language-server"
+local vue_plugin = {
+  name = "@vue/typescript-plugin",
+  location = vue_language_server_path,
+  languages = { "vue" },
+  configNamespace = "typescript",
+}
+
 --  NOTE: The contents of the following map will be passed to the `settings`
 --  field of the server config. You must look up that documentation yourself.
 
@@ -142,6 +152,7 @@ local settings = {
   -- setup by mason-lspconfig! This may be something to improve upon.
   terraformls = {},
   ts_ls = {},
+  vue_ls = {},
   yamlls = {
     yaml = {
       customTags = { "!reference sequence" },
@@ -150,7 +161,9 @@ local settings = {
   },
 }
 
-local filetypes = {}
+local filetypes = {
+  ts_ls = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+}
 
 local init_options = {
   ts_ls = {
@@ -164,6 +177,9 @@ local init_options = {
       includeInlayFunctionLikeReturnTypeHints = true,
       includeInlayEnumMemberValueHints = true,
       importModuleSpecifierPreference = "non-relative",
+    },
+    plugins = {
+      vue_plugin,
     },
   },
 }
