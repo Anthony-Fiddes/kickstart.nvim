@@ -61,6 +61,15 @@ local on_attach = function(client, bufnr)
   if client.name == "ruff" then
     client.server_capabilities.hoverProvider = false
   end
+
+  -- For some reason, vue_ls takes over these capabilities from ts_ls, causing
+  -- time outs on vue_ls when trying to go to definition and completely removing
+  -- hover support. I think it's a bug and will file a report if I find the
+  -- time.
+  if client.name == "volar" or client.name == "vue_ls" then
+    client.server_capabilities.definitionProvider = false
+    client.server_capabilities.hoverProvider = false
+  end
 end
 
 -- It's very important to do these steps in this order before setting up servers
