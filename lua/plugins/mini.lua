@@ -127,6 +127,7 @@ return {
         end,
       })
 
+      require("mini.align").setup()
       require("mini.surround").setup({
         n_lines = 100,
         mappings = {
