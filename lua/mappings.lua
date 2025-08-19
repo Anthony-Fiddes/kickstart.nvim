@@ -62,6 +62,7 @@ vim.keymap.set("n", "<leader>td", toggle_diagnostics, { desc = "[T]oggle [D]iagn
 vim.keymap.set("n", "<leader>th", ":set hlsearch!<CR>", { desc = "[T]oggle Search [H]ighlight" })
 vim.keymap.set("n", "<leader>tl", ":set list!<CR>", { desc = "[T]oggle [L]ist (show/hide white space)" })
 vim.keymap.set("n", "<leader>ts", ":set spell!<CR>", { desc = "[T]oggle [S]pellcheck" })
+vim.keymap.set("n", "<leader>tw", ":set wrap!<CR>", { desc = "[T]oggle [W]rap" })
 vim.keymap.set("n", "<leader>tq", function()
   -- somehow it seems like there would be a more straightforward way to do this?
   local qf_info = vim.fn.getqflist({ winid = 0, size = 0 })
