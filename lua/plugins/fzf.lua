@@ -48,8 +48,11 @@ return {
     local fuzzy_find_selection = fuzzy_find_motion("")
 
     local frecency = require("fzf-lua-frecency").frecency
+    local cwd_frecency = function()
+      frecency({ cwd_only = true })
+    end
 
-    vim.keymap.set("n", "<leader>hh", frecency, { desc = "[hh] Find recently opened files" })
+    vim.keymap.set("n", "<leader>hh", cwd_frecency, { desc = "[hh] Find recently opened files" })
     vim.keymap.set("n", "<leader>/", fzf.blines, { desc = "[/] Fuzzily search in current buffer" })
     vim.keymap.set("n", "<C-f>", "<leader>/", { remap = true })
     vim.keymap.set("n", "<leader>fh", fzf.helptags, { desc = "[F]ind [H]elp" })
