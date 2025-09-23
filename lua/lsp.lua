@@ -129,6 +129,7 @@ local settings = {
   gitlab_ci_ls = {},
   helm_ls = {},
   html = {},
+  jsonls = {},
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
