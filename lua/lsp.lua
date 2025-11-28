@@ -129,7 +129,9 @@ local settings = {
   gitlab_ci_ls = {},
   helm_ls = {},
   html = {},
-  jsonls = {},
+  jsonls = {
+    allowTrailingCommas = true,
+  },
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
