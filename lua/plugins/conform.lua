@@ -50,6 +50,7 @@ return { -- Autoformat
         typescriptreact = { "prettier" },
         javascript = { "prettier" },
         json = { "prettier" },
+        jsonc = { "prettier" },
         markdown = { "prettier" },
         python = { "isort", lsp_format = "last" },
         yaml = { "prettier" },
