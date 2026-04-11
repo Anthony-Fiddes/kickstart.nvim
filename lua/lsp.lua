@@ -1,5 +1,3 @@
-local config = require("config")
-
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
 ---@param client vim.lsp.Client
@@ -77,129 +75,12 @@ end
 require("mason").setup()
 require("mason-lspconfig").setup()
 
--- only works with Mason v1,
-local mason_registry = require("mason-registry")
-local vue_language_server_path = mason_registry.get_package("vue-language-server"):get_install_path() .. "/node_modules/@vue/language-server"
-local vue_plugin = {
-  name = "@vue/typescript-plugin",
-  location = vue_language_server_path,
-  languages = { "vue" },
-  configNamespace = "typescript",
-}
-
---  NOTE: The contents of the following map will be passed to the `settings`
---  field of the server config. You must look up that documentation yourself.
-
-local settings = {
-  bashls = {},
-  dockerls = {},
-  docker_compose_language_service = {},
-  gopls = {
-    gopls = {
-      codelenses = {
-        gc_details = false,
-        generate = true,
-        regenerate_cgo = true,
-        run_govulncheck = true,
-        test = true,
-        tidy = true,
-        upgrade_dependency = true,
-        vendor = true,
-      },
-      hints = {
-        assignVariableTypes = false,
-        compositeLiteralFields = true,
-        compositeLiteralTypes = false,
-        constantValues = true,
-        functionTypeParameters = true,
-        parameterNames = true,
-        rangeVariableTypes = true,
-      },
-      analyses = {
-        nilness = true,
-        unusedparams = true,
-        unusedwrite = true,
-        useany = true,
-      },
-      directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
-      gofumpt = true,
-      -- consider adding support for semantic tokens?
-    },
-  },
-  gitlab_ci_ls = {},
-  helm_ls = {},
-  html = {},
-  jsonls = {
-    allowTrailingCommas = true,
-  },
-  lua_ls = {
-    Lua = {
-      workspace = { checkThirdParty = false },
-      telemetry = { enable = false },
-      diagnostics = {
-        disable = { "missing-fields", "inject-field" },
-      },
-      hint = {
-        enable = true,
-        setType = "Disable",
-        paramType = true,
-        paramName = true,
-        semicolon = "Disable",
-        arrayIndex = "Disable",
-      },
-    },
-  },
-  marksman = {},
-  pylsp = {
-    pylsp = {
-      plugins = {
-        black = { enabled = false },
-        pyflakes = { enabled = false },
-        pycodestyle = { enabled = false },
-        pylsp_mypy = { enabled = true },
-      },
-    },
-  },
-  ruff = {},
-  -- you have to install this via the :LspInstall command for it to be properly
-  -- setup by mason-lspconfig! This may be something to improve upon.
-  terraformls = {},
-  ts_ls = {},
-  vue_ls = {},
-  yamlls = {
-    yaml = {
-      customTags = { "!reference sequence" },
-      schemas = config.yaml_schemas or nil,
-    },
-  },
-}
-
-local filetypes = {
-  ts_ls = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
-}
-
-local init_options = {
-  ts_ls = {
-    preferences = {
-      includeInlayParameterNameHints = "all",
-      includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-      includeInlayFunctionParameterTypeHints = true,
-      includeInlayVariableTypeHints = false,
-      includeInlayVariableTypeHintsWhenTypeMatchesName = false,
-      includeInlayPropertyDeclarationTypeHints = true,
-      includeInlayFunctionLikeReturnTypeHints = true,
-      includeInlayEnumMemberValueHints = true,
-      importModuleSpecifierPreference = "non-relative",
-    },
-    plugins = {
-      vue_plugin,
-    },
-  },
-}
-
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+vim.lsp.config("*", {
+  on_attach = on_attach,
+  capabilities = capabilities,
+})
 
 local mason_lspconfig = require("mason-lspconfig")
 -- ensure that the servers that don't scream at you are installed
@@ -208,14 +89,25 @@ mason_lspconfig.setup({
     "lua_ls",
   },
 })
-mason_lspconfig.setup_handlers({
-  function(server_name)
-    require("lspconfig")[server_name].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-      settings = settings[server_name],
-      filetypes = filetypes[server_name],
-      init_options = init_options[server_name],
-    })
-  end,
+
+-- TODO: ensure that on_attach and capabilities are correct
+vim.lsp.enable({
+  "bashls",
+  "dockerls",
+  "docker_compose_language_service",
+  "gitlab_ci_ls",
+  "gopls",
+  "helm_ls",
+  "html",
+  "jsonls",
+  "lua_ls",
+  "marksman",
+  "pylsp",
+  "ruff",
+  -- you have to install this via the :LspInstall command for it to be properly
+  -- setup by mason-lspconfig! This may be something to improve upon.
+  "terrformls",
+  "ts_ls",
+  "vue_ls",
+  "yamlls",
 })
