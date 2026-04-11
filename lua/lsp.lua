@@ -70,11 +70,6 @@ local on_attach = function(client, bufnr)
   end
 end
 
--- It's very important to do these steps in this order before setting up servers
--- using lspconfig.
-require("mason").setup()
-require("mason-lspconfig").setup()
-
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 vim.lsp.config("*", {
@@ -104,8 +99,6 @@ vim.lsp.enable({
   "marksman",
   "pylsp",
   "ruff",
-  -- you have to install this via the :LspInstall command for it to be properly
-  -- setup by mason-lspconfig! This may be something to improve upon.
   "terrformls",
   "ts_ls",
   "vue_ls",

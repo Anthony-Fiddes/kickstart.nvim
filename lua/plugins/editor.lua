@@ -402,18 +402,20 @@ return {
   -- Detect tabstop and shiftwidth automatically
   "tpope/vim-sleuth",
 
+  -- LSP Configuration & Plugins
   {
-    -- LSP Configuration & Plugins
-    "neovim/nvim-lspconfig",
+    "mason-org/mason-lspconfig.nvim",
+    -- TODO: do I actually value automatic enabling? Or is it just a
+    -- security/config drift risk?
+    opts = {},
     dependencies = {
-      -- Automatically install LSPs to stdpath for neovim
-      { "williamboman/mason.nvim", version = "^1.0.0" },
-      { "williamboman/mason-lspconfig.nvim", version = "^1.0.0" },
-
-      -- Additional lua configuration, makes nvim stuff amazing!
-      "folke/neodev.nvim",
+      { "mason-org/mason.nvim", opts = {} },
+      "neovim/nvim-lspconfig",
     },
   },
+  -- Additional lua configuration, makes nvim stuff amazing!
+  "folke/neodev.nvim",
+
   {
 
     "stevearc/quicker.nvim",
