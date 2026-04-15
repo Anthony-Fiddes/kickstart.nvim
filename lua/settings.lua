@@ -35,7 +35,11 @@ vim.o.sessionoptions = "curdir,folds,tabpages,winpos,winsize"
 -- welcome in comments.
 vim.opt.formatoptions:remove("t")
 -- Respect numbered list indentation
-vim.opt_local.formatoptions:append("n")
+vim.opt.formatoptions:append("n")
+
+-- Trying out smart and auto indent since I see them used in mini.max
+vim.o.smartindent = true
+vim.o.autoindent = true
 
 -- Preview substitutions as I type
 vim.opt.inccommand = "split"
@@ -61,6 +65,8 @@ vim.o.clipboard = "unnamedplus"
 
 -- Enable break indent
 vim.o.breakindent = true
+-- Add padding for lists (if 'wrap' is set)
+vim.o.breakindentopt = "list:-1"
 
 -- Save undo history
 vim.o.undofile = true
