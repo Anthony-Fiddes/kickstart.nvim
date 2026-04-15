@@ -300,10 +300,10 @@ return {
     "nvim-treesitter/nvim-treesitter",
     -- foldexpr doesn't work on files opened from a previous session if this is lazy loaded, so it's just not worth it...
     lazy = false,
-    main = "nvim-treesitter.configs",
-    opts = {
-      -- Add languages to be installed here that you want installed for treesitter
-      ensure_installed = {
+    branch = "main",
+    config = function()
+      local ts = require("nvim-treesitter")
+      local languages = {
         "bash",
         "dockerfile",
         "fish",
@@ -335,65 +335,34 @@ return {
         "yaml",
         "vimdoc",
         "vim",
-      },
+      }
 
-      -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
-      auto_install = false,
+      -- if we don't do this, we get a bunch of useless messages on startup
+      local isnt_installed = function(lang)
+        return #vim.api.nvim_get_runtime_file("parser/" .. lang .. ".*", false) == 0
+      end
+      local to_install = vim.tbl_filter(isnt_installed, languages)
+      if #to_install > 0 then
+        ts.install(to_install)
+      end
 
-      autotag = {
-        enable = true,
-      },
-      highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = false,
-      },
-      indent = {
-        enable = true,
-        -- It never works well with SQL unfortunately.
-        -- With YAML it puts the cursor in very odd places when pressing one of
-        -- the `indentkeys`. I noticed it most with `:`
-        disable = { "sql", "yaml" },
-      },
-      incremental_selection = {
-        enable = true,
-        lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-        keymaps = {
-          init_selection = "<c-space>",
-          scope_incremental = "<c-s>",
-          node_incremental = "v",
-          node_decremental = "V",
-        },
-      },
-      textobjects = {
-        move = {
-          enable = true,
-          set_jumps = true, -- whether to set jumps in the jumplist
-          goto_next_start = {
-            ["]f"] = "@function.outer",
-          },
-          goto_next_end = {
-            ["]F"] = "@function.outer",
-          },
-          goto_previous_start = {
-            ["[f"] = "@function.outer",
-          },
-          goto_previous_end = {
-            ["[F"] = "@function.outer",
-          },
-        },
-        swap = {
-          enable = true,
-          swap_next = {
-            ["<leader>a"] = "@parameter.inner",
-          },
-          swap_previous = {
-            ["<leader>A"] = "@parameter.inner",
-          },
-        },
-      },
-    },
+      -- Enable tree-sitter after opening a file for a target language
+      -- NOTE: Sometimes you get a weird error if the parser is not installed
+      -- yet, despite the above install step. In that case try to manually run
+      -- :TSInstall.
+      local filetypes = {}
+      for _, lang in ipairs(languages) do
+        for _, ft in ipairs(vim.treesitter.language.get_filetypes(lang)) do
+          table.insert(filetypes, ft)
+        end
+      end
+      local ts_start = function(ev)
+        vim.treesitter.start(ev.buf)
+      end
+      vim.api.nvim_create_autocmd("FileType", { callback = ts_start, pattern = filetypes, desc = "Start tree-sitter" })
+    end,
     dependencies = {
-      "nvim-treesitter/nvim-treesitter-textobjects",
+      { "nvim-treesitter/nvim-treesitter-textobjects", branch = "main" },
       "windwp/nvim-ts-autotag",
     },
     build = ":TSUpdate",
