@@ -358,6 +358,11 @@ return {
       end
       local ts_start = function(ev)
         vim.treesitter.start(ev.buf)
+
+        vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
+        vim.wo[0][0].foldmethod = "expr"
+
+        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
       end
       vim.api.nvim_create_autocmd("FileType", { callback = ts_start, pattern = filetypes, desc = "Start tree-sitter" })
     end,
