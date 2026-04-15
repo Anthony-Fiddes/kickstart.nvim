@@ -81,8 +81,7 @@ vim.keymap.set("n", "<leader>tq", function()
 end, { desc = "[T]oggle [Q]uickfix Window" })
 
 local in_comment = function()
-  local ts_utils = require("nvim-treesitter.ts_utils")
-  local node_at_cursor = ts_utils.get_node_at_cursor()
+  local node_at_cursor = vim.treesitter.get_node()
 
   if not node_at_cursor then
     return false
