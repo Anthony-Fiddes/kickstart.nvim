@@ -381,7 +381,9 @@ return {
     "mason-org/mason-lspconfig.nvim",
     -- TODO: do I actually value automatic enabling? Or is it just a
     -- security/config drift risk?
-    opts = {},
+    opts = {
+      automatic_enable = false,
+    },
     dependencies = {
       { "mason-org/mason.nvim", opts = {} },
       "neovim/nvim-lspconfig",
