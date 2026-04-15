@@ -155,7 +155,7 @@ return {
         -- Just cd to the parent folder if you can't find a root marker
         return vim.fn.fnamemodify(buf_path, ":h")
       end
-      mini_misc.setup_auto_root({ ".git", "package.json", "Makefile" }, fallback)
+      mini_misc.setup_auto_root({ ".git", "Makefile" }, fallback)
 
       require("mini.git").setup()
       vim.keymap.set("n", "<Leader>G", ":Git ", { desc = ":Git " })
