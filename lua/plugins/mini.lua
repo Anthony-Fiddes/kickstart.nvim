@@ -51,6 +51,12 @@ return {
             return { from = from, to = to }
           end,
         },
+        mappings = {
+          -- Don't override default mappings for incremental treesitter/lsp
+          -- selection
+          around_next = "",
+          inside_next = "",
+        },
       })
 
       require("mini.files").setup({

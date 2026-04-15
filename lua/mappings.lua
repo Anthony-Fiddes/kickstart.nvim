@@ -107,6 +107,8 @@ vim.keymap.set("n", "<leader>gw", function()
   end
   return "gwip"
 end, { desc = "[W]rap text under cursor smartly", expr = true, remap = true })
+vim.keymap.set("v", "v", "an", { remap = true, desc = "Increase Incremental Selection" })
+vim.keymap.set("v", "V", "in", { remap = true, desc = "Decrease Incremental Selection" })
 
 -- document key chains
 require("which-key").add({
