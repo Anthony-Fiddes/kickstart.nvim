@@ -99,6 +99,7 @@ vim.lsp.enable({
   "marksman",
   "pylsp",
   "ruff",
+  "stylua",
   "terrformls",
   "ts_ls",
   "vue_ls",

@@ -42,7 +42,8 @@ return { -- Autoformat
         -- the go formatters tend to time out a lot, so just run them asynchronously
         go = { "goimports", "golines", "gofumpt", format_after_save = true, timeout_ms = 1000 },
         hcl = { "packer_fmt" },
-        lua = { "stylua" },
+        -- recently discovered that stylua has an lsp that supports range formatting
+        lua = { lsp_format = "prefer", name = "stylua" },
         terraform = { "terraform_fmt" },
         ["terraform-vars"] = { "terraform_fmt" },
         tf = { "terraform_fmt" },
