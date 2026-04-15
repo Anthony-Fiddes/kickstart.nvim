@@ -323,6 +323,7 @@ return {
         "markdown",
         "markdown_inline",
         "python",
+        "regex",
         "sql",
         "javascript",
         "jsdoc",
