@@ -394,7 +394,6 @@ return {
   "folke/neodev.nvim",
 
   {
-
     "stevearc/quicker.nvim",
     event = "VeryLazy",
     config = function()
@@ -447,6 +446,28 @@ return {
           })
         end,
       })
+    end,
+  },
+
+  {
+    "vieitesss/miniharp.nvim",
+    version = "*", -- latest stable release
+    -- branch = 'main', -- latest nightly version
+    opts = {
+      autoload = true,
+      autosave = true,
+      show_on_autoload = false,
+      ui = {
+        position = "center", -- `top-left`, `top-right`, `bottom-left`, `bottom-right`.
+        show_hints = true,
+        enter = true, -- Whether to enter the floating window or not
+      },
+    },
+    config = function()
+      vim.keymap.set("n", "<leader>m", require("miniharp").toggle_file, { desc = "miniharp: toggle file mark" })
+      vim.keymap.set("n", "<C-n>", require("miniharp").next, { desc = "miniharp: next file mark" })
+      vim.keymap.set("n", "<C-p>", require("miniharp").prev, { desc = "miniharp: prev file mark" })
+      vim.keymap.set("n", "<leader>tm", require("miniharp").show_list, { desc = "miniharp: [t]oggle [m]arks list" })
     end,
   },
 }
