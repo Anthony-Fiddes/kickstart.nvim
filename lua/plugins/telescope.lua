@@ -42,7 +42,8 @@ return {
     -- Enable telescope fzf native, if installed
     pcall(telescope.load_extension, "fzf")
     pcall(telescope.load_extension, "undo")
-
-    vim.keymap.set("n", "<leader>fu", "<cmd>Telescope undo<CR>", { desc = "[F]ind [U]ndo" })
   end,
+  keys = {
+    { "<leader>fu", "<cmd>Telescope undo<CR>", desc = "[F]ind [U]ndo" },
+  },
 }
