@@ -461,17 +461,17 @@ return {
   {
     "vieitesss/miniharp.nvim",
     version = "*", -- latest stable release
-    opts = {
-      autoload = true,
-      autosave = true,
-      show_on_autoload = false,
-      ui = {
-        position = "center", -- `top-left`, `top-right`, `bottom-left`, `bottom-right`.
-        show_hints = true,
-        enter = true, -- Whether to enter the floating window or not
-      },
-    },
     config = function()
+      require("miniharp").setup({
+        autoload = true,
+        autosave = true,
+        show_on_autoload = false,
+        ui = {
+          position = "center", -- `top-left`, `top-right`, `bottom-left`, `bottom-right`.
+          show_hints = true,
+          enter = true, -- Whether to enter the floating window or not
+        },
+      })
       vim.keymap.set("n", "<leader>m", require("miniharp").toggle_file, { desc = "miniharp: toggle file mark" })
       vim.keymap.set("n", "]m", require("miniharp").next, { desc = "miniharp: next file mark" })
       vim.keymap.set("n", "[m", require("miniharp").prev, { desc = "miniharp: prev file mark" })
