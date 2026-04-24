@@ -33,6 +33,7 @@ require("lazy").setup({
   { import = "plugins" },
   { import = "plugins.languages" },
 })
+vim.keymap.set("n", "<leader>L", ":Lazy<CR>")
 
 require("lsp")
 require("settings")
