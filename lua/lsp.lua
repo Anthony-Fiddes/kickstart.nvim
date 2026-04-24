@@ -70,10 +70,26 @@ local on_attach = function(client, bufnr)
   end
 end
 
+-- if an nvim-lspconfig already has an on_attach, then vim.lsp.config won't
+-- reliably override it. To attach our settings we just run the function
+-- manually on the LspAttach event.
+local lsp_augroup = vim.api.nvim_create_augroup("lsp-user-attach", { clear = true })
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = lsp_augroup,
+  callback = function(opts)
+    local client = vim.lsp.get_client_by_id(opts.data.client_id)
+    if not client then
+      vim.notify("No client available on LspAttach")
+      return
+    end
+    on_attach(client, opts.buf)
+  end,
+  desc = "Add user settings on LSP Attach",
+})
+
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 vim.lsp.config("*", {
-  on_attach = on_attach,
   capabilities = capabilities,
 })
 
@@ -85,7 +101,6 @@ mason_lspconfig.setup({
   },
 })
 
--- TODO: ensure that on_attach and capabilities are correct
 vim.lsp.enable({
   "bashls",
   "dockerls",
