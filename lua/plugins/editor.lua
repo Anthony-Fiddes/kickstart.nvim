@@ -380,8 +380,6 @@ return {
   -- LSP Configuration & Plugins
   {
     "mason-org/mason-lspconfig.nvim",
-    -- TODO: do I actually value automatic enabling? Or is it just a
-    -- security/config drift risk?
     opts = {
       automatic_enable = false,
     },
