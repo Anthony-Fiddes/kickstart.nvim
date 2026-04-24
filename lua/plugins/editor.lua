@@ -389,6 +389,13 @@ return {
       { "mason-org/mason.nvim", opts = {} },
       "neovim/nvim-lspconfig",
     },
+    keys = {
+      {
+        "<Leader>M",
+        ":Mason<CR>",
+        desc = "Open [M]ason",
+      },
+    },
   },
   -- Additional lua configuration, makes nvim stuff amazing!
   "folke/neodev.nvim",
