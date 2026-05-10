@@ -63,6 +63,20 @@ vim.keymap.set("n", "<leader>th", ":set hlsearch!<CR>", { desc = "[T]oggle Searc
 vim.keymap.set("n", "<leader>tl", ":set list!<CR>", { desc = "[T]oggle [L]ist (show/hide white space)" })
 vim.keymap.set("n", "<leader>ts", ":set spell!<CR>", { desc = "[T]oggle [S]pellcheck" })
 vim.keymap.set("n", "<leader>tw", ":set wrap!<CR>", { desc = "[T]oggle [W]rap" })
+vim.keymap.set("n", "<leader>tr", ":set relativenumber!<CR>", { desc = "[T]oggle [R]elative Number Lines" })
+vim.keymap.set("n", "<leader>tz", function()
+  if vim.v.count ~= 0 then
+    vim.wo.foldcolumn = tostring(vim.v.count)
+    return
+  end
+
+  local current = vim.wo.foldcolumn
+  if current == "0" then
+    vim.wo.foldcolumn = "1"
+  else
+    vim.wo.foldcolumn = "0"
+  end
+end, { desc = "[T]oggle Fold Column" })
 vim.keymap.set("n", "<leader>tq", function()
   -- somehow it seems like there would be a more straightforward way to do this?
   local qf_info = vim.fn.getqflist({ winid = 0, size = 0 })

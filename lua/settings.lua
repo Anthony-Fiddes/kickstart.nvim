@@ -20,9 +20,9 @@ vim.o.textwidth = 80
 vim.o.linebreak = true
 
 -- Relative line numbers are fun
-vim.wo.relativenumber = true
+vim.o.relativenumber = true
 -- Highlight current line
-vim.wo.cursorline = true
+vim.o.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
@@ -50,7 +50,7 @@ vim.opt.spelllang:append("de_de")
 vim.o.hlsearch = false
 
 -- Make line numbers default
-vim.wo.number = true
+vim.o.number = true
 
 -- Enable mouse mode
 vim.o.mouse = "a"
@@ -77,7 +77,7 @@ vim.o.smartcase = true
 
 -- mainly for gitsigns, so I can see staged vs unstaged content. Taken from:
 -- https://github.com/lewis6991/gitsigns.nvim/issues/1102
-vim.wo.signcolumn = "auto:1-2"
+vim.o.signcolumn = "auto:1-2"
 
 -- Decrease update time
 vim.o.updatetime = 250
