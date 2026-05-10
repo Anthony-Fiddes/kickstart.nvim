@@ -159,6 +159,7 @@ return {
 
       require("mini.git").setup()
       vim.keymap.set("n", "<Leader>G", ":Git ", { desc = ":Git " })
+      vim.keymap.set("n", "<Leader>gpp", ":Git pull", { desc = "[G]it [P]ull" })
 
       require("mini.bracketed").setup()
       require("mini.icons").setup()
