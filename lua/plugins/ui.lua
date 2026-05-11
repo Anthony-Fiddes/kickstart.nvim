@@ -58,7 +58,7 @@ return {
     "folke/zen-mode.nvim",
     cmd = "ZenMode",
     init = function()
-      vim.keymap.set("n", "<leader>tz", ":ZenMode<CR>", { desc = "[T]oggle [Z]enMode" })
+      vim.keymap.set("n", "<leader>zm", ":ZenMode<CR>", { desc = "Toggle [Z]en[M]ode" })
     end,
     opts = {
       plugins = {
