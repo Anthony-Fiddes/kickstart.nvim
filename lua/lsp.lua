@@ -101,7 +101,7 @@ mason_lspconfig.setup({
   },
 })
 
-vim.lsp.enable({
+local servers = {
   "bashls",
   "dockerls",
   "docker_compose_language_service",
@@ -119,4 +119,18 @@ vim.lsp.enable({
   "ts_ls",
   "vue_ls",
   "yamlls",
-})
+}
+
+-- Don't enable servers that don't have their executable installed. It avoids
+-- annoying popups and performance issues.
+for _, server in ipairs(servers) do
+  local config = vim.lsp.config[server]
+  local cmd = config and config.cmd
+  if type(cmd) == "table" and vim.fn.executable(cmd[1]) == 0 then
+    vim.schedule(function()
+      vim.notify("Executable for " .. server .. " is not installed, disabling lsp...")
+    end)
+  else
+    vim.lsp.enable(server)
+  end
+end
