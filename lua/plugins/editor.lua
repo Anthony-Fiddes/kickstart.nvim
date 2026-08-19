@@ -76,6 +76,9 @@ return {
       vim.keymap.set("n", "<Leader>tg", toggle_neogit, { silent = true, desc = "[T]oggle Neo[g]it", expr = true })
       vim.keymap.set("n", "<Leader>gg", toggle_neogit, { silent = true, desc = "Toggle Neo[g]it", expr = true })
       vim.keymap.set("n", "<Leader>gcc", neogit.action("commit", "commit", nil), { desc = "Neo[g]it [C]ommit" })
+      vim.keymap.set("n", "<Leader>gca", neogit.action("commit", "commit", { "--verbose", "--amend" }), { desc = "Neo[g]it [C]ommit [A]mend" })
+      vim.keymap.set("n", "<Leader>gpp", neogit.action("pull", "from_pushremote", nil), { desc = "Neo[g]it [P]ull from [P]ush Remote" })
+      vim.keymap.set("n", "<Leader>gP", neogit.action("push", "to_pushremote", nil), { desc = "Neo[g]it [P]ush to [P]ush Remote" })
 
       vim.api.nvim_create_autocmd("User", {
         group = git_augroup,
