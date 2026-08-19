@@ -115,7 +115,7 @@ vim.lsp.enable({
   "pylsp",
   "ruff",
   "stylua",
-  "terrformls",
+  "terraformls",
   "ts_ls",
   "vue_ls",
   "yamlls",
